@@ -1,0 +1,753 @@
+﻿<!doctype html>
+<html lang="es-es">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="En este tema aprenderá cómo publicar un evento en vivo en Facebook mediante Brightcove Social.">
+  
+  <title>Publicación de un evento en vivo en Facebook</title>
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">  
+  <link data-react-helmet="true" rel="preload" as="font" href="https://files.brightcove.com/fonts/balto/baltoweb-ultra.eot" type="font/eot">
+  <link data-react-helmet="true" rel="preload" as="font" href="https://files.brightcove.com/fonts/balto/baltoweb-ultra.woff" type="font/woff">
+  <link data-react-helmet="true" rel="preload" as="font" href="https://files.brightcove.com/fonts/balto/baltoweb-super.eot" type="font/eot">
+  <link data-react-helmet="true" rel="preload" as="font" href="https://files.brightcove.com/fonts/balto/baltoweb-super.woff" type="font/woff">
+  <link data-react-helmet="true" rel="preload" as="font" href="https://files.brightcove.com/fonts/balto/baltoweb-black.eot" type="font/eot">
+  <link data-react-helmet="true" rel="preload" as="font" href="https://files.brightcove.com/fonts/balto/baltoweb-black.woff" type="font/woff">
+  <link data-react-helmet="true" rel="preload" as="font" href="https://files.brightcove.com/fonts/balto/baltoweb-bold.eot" type="font/eot">
+  <link data-react-helmet="true" rel="preload" as="font" href="https://files.brightcove.com/fonts/balto/baltoweb-bold.woff" type="font/woff">
+  <link data-react-helmet="true" rel="preload" as="font" href="https://files.brightcove.com/fonts/balto/baltoweb-medium.eot" type="font/eot">
+  <link data-react-helmet="true" rel="preload" as="font" href="https://files.brightcove.com/fonts/balto/baltoweb-medium.woff" type="font/woff">
+  <link data-react-helmet="true" rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500&amp;display=swap">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://support.brightcove.com/site-assets/css/site/prism.css">
+  <link rel="stylesheet" href="https://support.brightcove.com/site-assets/css/site/styles.css">
+  <link rel="stylesheet" href="https://support.brightcove.com/site-assets/css/site/landing-page.css">
+  <link rel="stylesheet" href="https://support.brightcove.com/site-assets/css/site/tabs.css">
+  <link rel="stylesheet" href="/assets/css/local.css">
+  <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/381443caa8.js" crossorigin="anonymous"></script>
+  <script src="https://support.brightcove.com/site-assets/js/site/google-analytics.js"></script>
+  <script src="/assets/js/sajari-head.js"></script>
+</head>
+
+<body class="body">
+
+<header>
+  <div class="div-header">
+    <a href="/"><img class="product-logo" src="https://support.brightcove.com/site-assets/images/site/product-logos/Live_Logo.svg" alt="logotipo del producto" style="max-height: 100px;max-width: 232px;"/></a>
+<!-- GTranslate: https://gtranslate.io/ -->
+<select onchange="doGTranslate(this);"><option value="">Seleccionar idioma</option><option value="en|en" translate="No">English</option><option value="en|zh-TW" translate="No">繁體中文</option><option value="en|fr" translate="No">Français</option><option value="en|de" translate="No">Deutsche</option><option value="en|ja" translate="No">日本語</option><option value="en|ko" translate="No">한국어</option><option value="en|es" translate="No">Español</option></select>
+
+<script>
+/* <![CDATA[ */
+function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;if(lang_pair=='')return;var lang=lang_pair.split('|')[1];var plang=location.hostname.split('.')[0];if(plang.length !=2 && plang.toLowerCase() != 'zh-cn' && plang.toLowerCase() != 'zh-tw')plang='en';location.href=location.protocol+'//'+(lang == 'en' ? '' : lang+'.')+location.hostname.replace('www.', '').replace(RegExp('^' + plang + '\\.'), '')+location.pathname+location.search;}
+/* ]]> */
+</script>
+
+    <select id="site_select" class="bcls-select" style="margin-right: 1rem;">
+      <option value="">Otros documentos de Brightcove</option>
+      
+        
+          <option value="https://support.brightcove.com">Documentación Inicio</option>
+        
+      
+        
+          <option value="https://audience.support.brightcove.com">Audiencia de Brightcove</option>
+        
+      
+        
+          <option value="https://beacon.support.brightcove.com">Baliza Brightcove</option>
+        
+      
+        
+          <option value="https://campaign.support.brightcove.com">Campaña de Brightcove</option>
+        
+      
+        
+          <option value="https://engage.support.brightcove.com">Brightcove Engage</option>
+        
+      
+        
+          <option value="https://live.support.brightcove.com">Brightcove Live</option>
+        
+      
+        
+          <option value="https://gallery.support.brightcove.com">Brightcove Gallery</option>
+        
+      
+        
+          <option value="https://ssai.support.brightcove.com">Brightcove SSAI</option>
+        
+      
+        
+          <option value="https://social.support.brightcove.com">Brightcove Social</option>
+        
+      
+        
+          <option value="https://studio.support.brightcove.com">Video Cloud Studio</option>
+        
+      
+        
+          <option value="https://player.support.brightcove.com">Desarrollo de jugadores de Brightcove</option>
+        
+      
+        
+          <option value="https://apis.support.brightcove.com">API para la plataforma de Video Cloud</option>
+        
+      
+        
+          <option value="https://sdks.support.brightcove.com">SDK de dispositivos de Video Cloud</option>
+        
+      
+        
+          <option value="https://integrations.support.brightcove.com">Integraciones y conectores CMS</option>
+        
+      
+        
+          <option value="https://general.support.brightcove.com">Información general de Video Cloud</option>
+        
+      
+        
+          <option value="https://zencoder.support.brightcove.com">Zencoder</option>
+        
+      
+    </select>
+
+
+    <span class="secondary-nav"><a href="https://supportportal.brightcove.com/s/login/?"><img src="https://support.brightcove.com/site-assets/images/site/support.png" alt="soporte"/> Contactar con Soporte</a> <span style="vertical-align: top;margin-left:1em;margin-right:1em;">|</span> <a href="https://status.brightcove.com/">Estado<img src="https://support.brightcove.com/site-assets/images/site/status.png" alt="estado del sistema"/> del sistema</a></span> <br/>
+    
+  </div>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb arr-right">
+      
+      <li class="breadcrumb-item"><a href="/">Inicio</a></li>
+      
+      
+      
+      <li class="breadcrumb-item">Módulo Live<a href="/live-module/"></a></li>
+      
+      <li class="breadcrumb-item active" aria-current="page">Publicación de un evento en vivo en Facebook</li>
+    </ol>
+  </nav>
+</header>
+<div class="container">
+    <div class="row">
+      <div class="col-sm-3 left-side-bar">
+        <nav class="sidenav" id="side_nav">
+          
+            
+            <h5><a href="/index.html">Inicio</a></h5>
+            
+          
+            
+              <h5 class="submenu-header"><a href="/get-started/index.html">Empezar <strong>+</strong></a></h5>
+              <ul class="sidenav-submenu" style="display:none;">
+                
+                  
+                    <li><a href="/get-started/brightcove-live-training-videos.html">Vídeos de formación en directo de Brightcove</a></li>
+                  
+                
+                  
+                    <li><a href="/get-started/delivering-live-streams.html">Entrega de transmisiones en directo</a></li>
+                  
+                
+                  
+                    <li>Pautas y prácticas recomendadas del módulo en vivo<a href="/get-started/live-module-guidelines-and-best-practices.html"></a></li>
+                  
+                
+                  
+                    <li>Paso a paso:<a href="/get-started/step-step-using-live-module-open-broadcaster-software-obs.html"> Uso del Módulo Live con OBS</a></li>
+                  
+                
+                  
+                    <li>Paso a paso:<a href="/get-started/step-step-using-live-module-telestream-wirecast.html"> Uso del Módulo Live con Wirecast</a></li>
+                  
+                
+              </ul>
+            
+          
+            
+              <h5 class="submenu-header"><a href="/general/index.html">Información general <strong>+</strong></a></h5>
+              <ul class="sidenav-submenu" style="display:none;">
+                
+                  
+                    <li>DRM en vivo<a href="/general/live-drm.html"></a></li>
+                  
+                
+                  
+                    <li>Matriz de comparación de plataformas activas<a href="/general/live-platforms-comparison-matrix.html"></a></li>
+                  
+                
+                  
+                    <li>Glosario de Vídeo en Vivo<a href="/general/live-video-glossary.html"></a></li>
+                  
+                
+                  
+                    <li>Reducción de la latencia para transmisiones en directo<a href="/general/reducing-latency-live-streams.html"></a></li>
+                  
+                
+                  
+                    <li>Codificadores compatibles para eventos en directo<a href="/general/supported-encoders-live-events.html"></a></li>
+                  
+                
+                  
+                    <li>Uso del empaquetado de Akamai Stream y Wirecast<a href="/general/creating-live-stream-using-akamai-stream-packaging-and-telestream-wirecast.html"></a></li>
+                  
+                
+              </ul>
+            
+          
+            
+              <h5 class="submenu-header">Uso del Módulo Live +<a href="/live-module/index.html"><strong></strong></a></h5>
+              <ul class="sidenav-submenu" style="display:none;">
+                
+                  
+                    <li><a href="/live-module/client-side-preroll-with-live-ssai.html">Anuncios previos del lado del cliente con SSAI en vivo</a></li>
+                  
+                
+                  
+                    <li><a href="/live-module/creating-and-managing-live-events-using-live-module.html">Creación y administración de eventos en directo</a></li>
+                  
+                
+                  
+                    <li><a href="/live-module/creating-video-clip-using-live-module.html">Creación de un clip de vídeo</a></li>
+                  
+                
+                  
+                    <li><a href="https://integrations.support.brightcove.com/web-conferencing/host-avaya-conference-brightcove-live.html">Anfitrión de la conferencia de Avaya en Brightcove Live</a></li>
+                  
+                
+                  
+                    <li><a href="https://integrations.support.brightcove.com/web-conferencing/host-cisco-webex-conference-brightcove-live.html">Hospedar Cisco Webex a Brightcove Live</a></li>
+                  
+                
+                  
+                    <li><a href="https://integrations.support.brightcove.com/web-conferencing/host-zoom-conference-brightcove-live.html">Zoom de host a Brightcove Live</a></li>
+                  
+                
+                  
+                    <li><a href="https://integrations.support.brightcove.com/web-conferencing/host-inxpo-live.html">Organiza un evento INXPO en Brightcove Live</a></li>
+                  
+                
+                  
+                    <li><a href="/live-module/implementing-server-side-ads-live-module.html">Implementación de anuncios del lado del servidor</a></li>
+                  
+                
+                  
+                    <li>Redundancia en vivo<a href="/live-module/live-redundancy.html"></a></li>
+                  
+                
+                  
+                    <li>Publicación de un evento en vivo en Facebook<a href="/live-module/publishing-live-event-facebook.html"></a></li>
+                  
+                
+                  
+                    <li>Publicar un evento en vivo en YouTube<a href="/live-module/publishing-live-event-youtube.html"></a></li>
+                  
+                
+                  
+                    <li>Revisión de Live Analytics<a href="/live-module/reviewing-live-analytics.html"></a></li>
+                  
+                
+                  
+                    <li>Uso de salidas RTMP en vivo<a href="/live-module/using-live-rtmp-outputs-stream-facebook-and-youtube.html"></a></li>
+                  
+                
+              </ul>
+            
+          
+            
+              <h5 class="submenu-header">Trabajar con Live API +<a href="/live-api/index.html"><strong></strong></a></h5>
+              <ul class="sidenav-submenu" style="display:none;">
+                
+                  
+                    <li class="submenu-header">
+                      API en vivo:<a href="/live-api/getting-started/index.html"> Empezar <strong>+</strong></a>
+                      <ul class="sidenav-subsubmenu" style="display:none;">
+                        
+                        <li>Visión general:<a href="/live-api/getting-started/overview-brightcove-live-api.html"> API en vivo</a></li>
+                        
+                        <li><a href="/live-api/getting-started/quick-start-create-live-stream-using-brightcove-live-api.html">Creación de una transmisión en vivo mediante la API</a></li>
+                        
+                      </ul>
+                    </li>
+                  
+                
+                  
+                    <li class="submenu-header">
+                      API en vivo:<a href="/live-api/code-samples/index.html"> Ejemplos de código <strong>+</strong></a>
+                      <ul class="sidenav-subsubmenu" style="display:none;">
+                        
+                        <li><a href="/live-api/code-samples/live-api-sample-create-live-job.html">Crear un trabajo activo</a></li>
+                        
+                        <li><a href="/live-api/code-samples/quick-start-create-live-job-mpeg2-ts-input.html">Crear un trabajo activo para la entrada MPEG2-TS</a></li>
+                        
+                        <li>Uso de salidas RTMP para eventos en directo<a href="/live-api/code-samples/quick-start-using-rtmp-outputs-live-events.html"></a></li>
+                        
+                        <li>Evento en vivo simulado<a href="/live-api/code-samples/simulated-live.html"></a></li>
+                        
+                      </ul>
+                    </li>
+                  
+                
+                  
+                    <li class="submenu-header">
+                      API en vivo:<a href="/live-api/references/index.html"> Referencias +<strong></strong></a>
+                      <ul class="sidenav-subsubmenu" style="display:none;">
+                        
+                        <li><a href="/live-api/references/live-api-error-messages.html">Mensajes de error</a></li>
+                        
+                        <li>Notas de versión<a href="/live-api/references/live-api-release-notes.html"></a></li>
+                        
+                        <li>Referencia de API en vivo<a href="/live-api/references/reference.html"></a></li>
+                        
+                      </ul>
+                    </li>
+                  
+                
+                  
+                    <li class="submenu-header">
+                      API en vivo:<a href="/live-api/ssai/index.html"> SSAI +<strong></strong></a>
+                      <ul class="sidenav-subsubmenu" style="display:none;">
+                        
+                        <li><a href="/live-api/ssai/live-api-cue-points-and-ad-beacons-ssai.html">Puntos de referencia y balizas de anuncio con SSAI</a></li>
+                        
+                        <li>Inserción de anuncios en el lado del servidor (SSAI)<a href="/live-api/ssai/live-api-server-side-ad-insertion-ssai.html"></a></li>
+                        
+                        <li>Visión general:<a href="/live-api/ssai/overview-player-enhancements-live-ssai.html"> Mejoras del jugador para SSAI en vivo</a></li>
+                        
+                      </ul>
+                    </li>
+                  
+                
+                  
+                    <li class="submenu-header">
+                      API en vivo:<a href="/live-api/guides/index.html"> Guías <strong>+</strong></a>
+                      <ul class="sidenav-subsubmenu" style="display:none;">
+                        
+                        <li><a href="/live-api/guides/brightcove-live-best-practices.html">Prácticas recomendadas de Brightcove Live</a></li>
+                        
+                        <li><a href="/live-api/guides/brightcove-live-program-ad-metadata-api.html">API de metadatos de anuncios del programa Brightcove Live</a></li>
+                        
+                        <li><a href="/live-api/guides/live-api-creating-frame-accurate-clip.html">Creación de un clip preciso de marco</a></li>
+                        
+                        <li><a href="/live-api/guides/live-api-creating-vod-clips.html">Creación de clips VOD</a></li>
+                        
+                        <li><a href="/live-api/guides/getting-list-live-or-vod-jobs.html">Obtención de una lista de trabajos en vivo o VOD</a></li>
+                        
+                        <li><a href="/live-api/guides/live-api-insert-id3-timed-metadata.html">Insertar metadatos temporizados ID3</a></li>
+                        
+                        <li>DRM en vivo a través de Live API<a href="/live-api/guides/live-drm-live-api.html"></a></li>
+                        
+                        <li>Administración de credenciales para Live API<a href="/live-api/guides/managing-credentials-live-api.html"></a></li>
+                        
+                        <li>Notificaciones<a href="/live-api/guides/live-api-notifications.html"></a></li>
+                        
+                        <li>Reducción de la latencia para transmisiones en directo<a href="/general/reducing-latency-live-streams.html"></a></li>
+                        
+                        <li>Salidas RTMP<a href="/live-api/guides/live-api-rtmp-outputs.html"></a></li>
+                        
+                        <li>Puntos de entrada estáticos<a href="/live-api/guides/live-api-static-entry-points.html"></a></li>
+                        
+                        <li>URL firmadas y autenticación de tokens con una transmisión en directo<a href="/live-api/guides/signed-urls-and-token-auth-live-stream.html"></a></li>
+                        
+                        <li>Uso de Redundancia en Vivo<a href="/live-api/guides/using-live-redundancy.html"></a></li>
+                        
+                        <li>VOD del Evento en Vivo<a href="/live-api/guides/live-api-vod-live-event.html"></a></li>
+                        
+                      </ul>
+                    </li>
+                  
+                
+              </ul>
+            
+          
+            
+              <h5 class="submenu-header"><a href="/admin/index.html">Administrar cuentas <strong>+</strong></a></h5>
+              <ul class="sidenav-submenu" style="display:none;">
+                
+                  
+                    <li><a href="/admin/creating-custom-live-ingest-profiles.html">Creación de perfiles de ingesta dinámica personalizados</a></li>
+                  
+                
+                  
+                    <li>Campos para perfiles personalizados de ingesta activa<a href="/admin/fields-custom-live-ingest-profiles.html"></a></li>
+                  
+                
+                  
+                    <li>Administrar la configuración de Live<a href="/admin/managing-live-settings.html"></a></li>
+                  
+                
+                  
+                    <li>Administración de credenciales de autenticación de API<a href="/admin/managing-api-authentication-credentials.html"></a></li>
+                  
+                
+                  
+                    <li>Perfiles de ingesta en vivo estándar<a href="/admin/standard-live-ingest-profiles.html"></a></li>
+                  
+                
+              </ul>
+            
+          
+            
+              <h5 class="submenu-header">Notas de la versión +<a href="/release-notes/index.html"><strong></strong></a></h5>
+              <ul class="sidenav-submenu" style="display:none;">
+                
+                  
+                    <li>Notas de versión en vivo<a href="/release-notes/live-api-release-notes.html"></a></li>
+                  
+                
+                  
+                    <li>Problemas conocidos<a href="/release-notes/known-issues.html"></a></li>
+                  
+                
+              </ul>
+            
+          
+            
+              <h5 class="submenu-header">Soporte +<a href="/support/index.html"><strong></strong></a></h5>
+              <ul class="sidenav-submenu" style="display:none;">
+                
+                  
+                    <li><a href="/support/brightcove-answer.html">Respuestas de Brightcove</a></li>
+                  
+                
+                  
+                    <li>Visualización de la página Estado del Sistema de Brightcove<a href="/support/viewing-brightcove-system-status-page.html"></a></li>
+                  
+                
+                  
+                    <li><a href="/support/contact-sales.html">Contacto con Ventas</a></li>
+                  
+                
+                  
+                    <li>Apertura de un caso de soporte<a href="/support/opening-case-with-brightcove-support.html"></a></li>
+                  
+                
+              </ul>
+            
+          
+      </nav>
+    </div>
+    <div class="col-lg-7" style="background-color: white;color: #333333;margin-top: -1em;margin-bottom: -1em;padding-bottom:1em;">
+  <!-- bootstrap layout -->
+
+<p id="bc_veggie_burger_wrapper" style="display: none;"><img id="bc_veggie_burger" src="/assets/images/feather/menu.svg" alt="Menú de navegación"/></p>
+
+<!-- search bar -->
+<div id="nav-search-box" style="margin-top: 1rem;"></div>
+<!-- in-page navigation for narrow screens -->
+<details class="centered-inpage-nav" id="centered_inpage_nav">
+  <summary><h6 class="toc">Contenido de la página</h6></summary>
+  <nav id="centered_toc"></nav>
+  <ul id="centered_in_page_toc" class="list-none"></ul>
+</details>
+<!-- open in new tab/window -->
+<a id="open_new_tab" href="#" target="_blank" style="display: none;"><img src="/assets/images/feather/external-link.svg" alt="abrir en una nueva pestaña" style="margin-top:4em;width: 1.5em;"/></a>
+
+
+
+  
+    
+
+
+<article class="bcls-article">
+  <h1>Publicación de un evento en vivo en Facebook</h1>
+  <summary>En este tema aprenderá cómo publicar un evento en vivo en Facebook mediante Brightcove Social.</summary>
+  <section class="bcls-section">
+    <div class="training-video-player-ipx" data-experience="5a73630f7afd7a00101bc1b5" data-video-ids="6030374410001">&nbsp;</div>
+    <script src="https://players.brightcove.net/20318290001/experience_5a73630f7afd7a00101bc1b5/live.js"></script>
+    <p>La función Brightcove Live to Social Media se puede utilizar para programar y luego transmitir un evento en vivo a Facebook desde el módulo Social. Para ello, se completarán las siguientes tareas:</p>
+    <ul>
+      <li><a href="#schedule">Programar un evento en vivo de Facebook</a></li>
+      <li><a href="#live_event">Crear un evento en vivo y asignarlo a un evento social programado</a></li>
+      <li>Previsualizar y transmitir la transmisión en vivo<a href="#preview"></a></li>
+      <li><a href="#end">Finalizar la transmisión en directo</a></li>
+    </ul>
+  </section>
+  <section class="bcls-section">
+    <h2 id="schedule">Programación de un evento en vivo de Facebook</h2>
+    <p>Programar un evento en vivo de Facebook con antelación le permite publicitar el evento a su audiencia de Facebook antes de que comience el evento. Antes de que se pueda programar un evento en vivo, se debe crear un destino de publicación para el sitio de Facebook al que va a transmitir el evento. Para obtener más información sobre la creación de destinos de publicación, consulte el documento <a href="https://social.support.brightcove.com/general/creating-social-media-publishing-destinations.html">Creación de destinos de publicación en redes sociales</a>.</p>
+    <p>Para programar un próximo vídeo en directo de Facebook, sigue estos pasos.</p>
+    <ol class="bcls-tasklist-restart">
+      <li>Abra el módulo Social.</li>
+      <li>En la página <strong>Publicada</strong> , haga clic en <strong>Crear evento directo</strong>.</li>
+      <li>Seleccione el destino al que se transmitirá el evento y, a continuación, haga clic en Continuar.<strong></strong>
+        <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/general/18749/node18749-select-dest.png"/></figure>
+      </li>
+      <li>En la página Programar un Evento Activo, de forma opcional, introduzca un <strong>Título</strong> y un <strong>Mensaje de Estado</strong>. Estos valores aparecerán en la publicación de Facebook anunciando la transmisión en vivo.
+        <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/general/18749/node18749-title-status.png"/></figure>
+      </li>
+      <li>En la sección <strong>PROGRAMACIÓN</strong> , utilice los controles de calendario y reloj para establecer la <strong>fecha y hora</strong> del evento.</li>
+      <li>Seleccione la zona horaria adecuada.<strong></strong>
+        <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/general/18749/node18749-schedule.png"/></figure>
+      </li>
+      <li>En la sección <strong>CONFIGURACIÓN EN VIVO</strong> , configure los ajustes de <strong>vídeo en vivo de Facebook</strong> según corresponda.
+        <ul>
+          <li><strong>Permitir incrustación</strong> : si está marcada, el vídeo se puede incrustar en sitios de terceros</li>
+          <li><strong>Anular la publicación después de que finalice el vídeo en directo</strong> : si está marcado, el vídeo no se publicará (no visible para el público) cuando finalice el evento</li>
+        </ul>
+        <figure class="bcls-figure"><img alt="" class="bcls-image--no-border" src="/assets/images/general/18749/node18749-live-settings.png"/></figure>
+      </li>
+      <li>Configure las secciones <strong>TARGET</strong> y <strong>RIGHTS</strong> según sea necesario. Tenga en cuenta que la sección DERECHOS sólo aparecerá si la cuenta conectada tiene acceso al <a href="https://www.facebook.com/facebookmedia/blog/introducing-rights-manager">Administrador de derechos de Facebook</a>.</li>
+      <li>Haga clic en el vínculo <strong>Agregar imagen personalizada</strong> en la parte superior de la página.</li>
+      <li>Haga clic en <strong>Seleccionar imagen</strong> para examinar y seleccionar una imagen o arrastre y suelte una imagen para utilizarla. Esta imagen aparecerá en la publicación de Facebook anunciando el evento en vivo. La imagen de vista previa se actualizará para mostrar la nueva imagen.
+        <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/general/18749/node18749-new-image.png"/></figure>
+      </li>
+      <li>Haga clic en <strong>Aceptar, Lo tengo</strong>.</li>
+      <li>Haga clic en <strong>Programar evento</strong> para programar el evento en Facebook.</li>
+      <li>Haga clic <strong>en el enlace Ver en Facebook</strong> en la parte superior de la página para ver la publicación en Facebook.
+        <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/general/18749/node18749-fb-event-scheduled.png"/></figure>
+      </li>
+    </ol>
+  </section>
+  <section class="bcls-section">
+    <h2 id="live_event">Creación de un evento en directo</h2>
+    <p>Antes de poder comenzar a transmitir un evento en vivo, se debe crear un evento en vivo mediante el módulo Live. Los eventos en directo creados en el módulo Live estarán disponibles para su difusión mediante el módulo Social.</p>
+    <p>Al crear un evento en el módulo Live, tenga en cuenta los siguientes puntos:</p>
+    <ul>
+      <li>Si crea un evento recurrente, puede crear el evento con anticipación y activarlo cuando esté listo para comenzar a transmitir a Facebook.</li>
+      <li>Si crea un evento regular (no recurrente), el evento en vivo debe iniciarse dentro de los 30 minutos siguientes a la creación del evento. Si está utilizando un evento regular, debe crearse justo antes de que esté listo para entrar en vivo en Facebook.</li>
+    </ul>
+    <p>Para obtener información detallada sobre la creación de eventos en directo mediante el módulo Live, consulte <a href="/live-module/creating-and-managing-live-events-using-live-module.html">Creación y administración de eventos en vivo mediante el módulo Live</a>.</p>
+    <p>Para crear un nuevo evento en vivo, siga estos pasos.</p>
+    <ol class="bcls-tasklist-restart">
+      <li>Abra el módulo Live.</li>
+      <li>Haga clic en <strong>Crear evento</strong>. Se abrirá la página Crear evento en vivo.</li>
+      <li>Introduzca el <strong>nombre del evento</strong> y los campos obligatorios.</li>
+      <li>Para la opción <strong>Transmisión a redes sociales</strong> , seleccione <strong>Permitido</strong>.</li>
+      <li>Seleccione un perfil de ingesta en vivo.<strong></strong></li>
+      <li>Haga clic en <strong>OPCIONES AVANZADAS</strong> y seleccione la <strong>región</strong> más cercana a donde se encuentra el codificador.</li>
+      <li>Si desea crear un evento recurrente, seleccione la opción Crear esto como un evento recurrente mediante un punto de entrada estático (SEP).<strong></strong></li>
+      <li>Haga clic en <strong>Crear evento</strong>. La página de Control Room se abrirá y mostrará un punto final de transmisión (URL RTMP) y el nombre de Stream que utilizaremos su codificador.<strong></strong><strong></strong></li>
+      <li>Para conectar un evento en directo a un evento social programado mediante el módulo Live, haga clic en Conectar a redes sociales en la navegación izquierda.<strong></strong> Tenga en cuenta que el evento en vivo también se puede asignar mediante el módulo Social.<a href="#social_assign"></a></li>
+      <li>Haga clic en un evento y, a continuación, haga clic en <strong>Conectar</strong>.
+        <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/general/18749/node18749-connect-social-media.png"/></figure>
+      </li>
+      <li>Haga clic en el vínculo Sala de control de la izquierda para volver a la sala de control.</li>
+    </ol>
+    <p>El codificador utilizará los valores de punto final de transmisión (URL RTMP) y Nombre de transmisión.<strong></strong><strong></strong> Inicie la transmisión en vivo y confirme que aparezca en la Sala de Control.</p>
+  </section>
+  <section class="bcls-section">
+    <h2 id="social_assign">Asignación de un evento en vivo a un evento social programado</h2>
+    <p>Si el evento en vivo no se asignó a un evento programado mediante el módulo Live, el evento en vivo que se va a utilizar debe seleccionarse en el módulo Social. Para asignar un evento en directo a un evento programado mediante el módulo Social, siga estos pasos.</p>
+    <aside class="bcls-aside bcls-aside--information">Nota: Estos pasos solo son necesarios si el evento en vivo no se asignó en el módulo Live.</aside>
+    <ol class="bcls-tasklist-restart">
+      <li>Vuelva al módulo Social y edite el evento programado.</li>
+      <li>Haga clic en el enlace <strong>Conectar fuente de vídeo</strong> en la parte superior de la página.</li>
+      <li>Seleccione el evento en directo en la lista desplegable Seleccionar fuente de vídeo.<strong></strong>
+        <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/general/18749/node18749-select-video-source.png"/></figure>
+      </li>
+      <li>Haga clic en <strong>Conectar origen</strong>.</li>
+    </ol>
+  </section>
+  <section class="bcls-section">
+    <h2 id="preview">Vista previa y difusión de la transmisión en vivo</h2>
+    <p>Antes de previsualizar el evento en el módulo Social, el evento en vivo debe iniciarse y estar visible en el módulo Live.</p>
+    <p>Para previsualizar y transmitir la transmisión en directo, siga estos pasos.</p>
+    <ol class="bcls-tasklist-restart">
+      <li>Si el evento se asignó mediante el módulo Live, vuelva al módulo Social y edite el evento programado.</li>
+      <li>Confirme que aparece la vista previa del flujo. Esta es una vista previa del módulo Live.
+        <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/general/18749/node18749-live-module-preview.png"/></figure>
+      </li>
+      <li>Haga clic en el enlace <strong>Vista previa de transmisión en directo </strong>en la parte superior de la página y, a continuación, haga clic en <strong>Vista previa</strong> Haga clic en el botón <strong>Reproducir</strong> para previsualizar la transmisión en vivo de Facebook. Esta es la transmisión que Facebook emitirá, así que confirme que es como se esperaba.
+        <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/general/18749/node18749-preview-fb-stream.png"/></figure>
+      </li>
+      <li>Para transmitir la transmisión en vivo a Facebook, haga clic en el enlace <strong>Transmitir a los espectadores</strong> y, a continuación, haga clic en <strong>Transmisión de transmisión</strong>. La vista previa se actualizará para mostrar el número de espectadores.
+        <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/general/18749/node18749-broadcast-facebook.png"/></figure>
+      </li>
+    </ol>
+    <p>Haga clic en el enlace <strong>Cambiar al reproductor de Facebook</strong> debajo del reproductor para ver el reproductor de Facebook.</p>
+    <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/general/18749/node18749-broadcast-facebook-fb-player.png"/></figure>
+    <p>La transmisión en vivo también será visible en su página de Facebook.</p>
+    <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/general/18749/node18749-live-on-facebook.png"/></figure>
+    <p>A medida que los espectadores añaden los comentarios de Facebook, se pueden ver dentro del módulo Social haciendo clic en la pestaña <strong>Feed de comentarios</strong> .</p>
+    <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/general/18749/node18749-comment-feed.png"/></figure>
+  </section>
+  <section class="bcls-section">
+    <h2 id="end">Finalización de la transmisión en directo</h2>
+    <p>Para finalizar la transmisión en directo, siga estos pasos.</p>
+    <ol class="bcls-tasklist-restart">
+      <li>Vuelva al módulo Social y edite su evento programado.</li>
+      <li>Haga clic en el enlace <strong>End Social Live Event</strong> en la parte superior de la página y, a continuación, haga clic en <strong>Finalizar evento en directo</strong>.</li>
+      <li>Vuelva al módulo Live para finalizar el evento y asegúrese de detener el codificador.</li>
+      <li>Si estaba utilizando un evento recurrente, vuelva al módulo Live y desactive el evento.</li>
+    </ol>
+    <aside class="bcls-aside bcls-aside--information">Nota: Asegúrese de que el codificador esté cerrado/detenido cuando la transmisión en vivo esté completa. Dejar abierta una conexión entre cualquier codificador y Brightcove, incluso aunque no se transmitan datos, puede generar gastos de conexión imprevistos.</aside>
+    <p>Los eventos completados aparecerán en el módulo Social de la página Publicada. Al hacer clic en el icono de eliminar (<img alt="" src="/assets/images/general/18749/node18749-delete-icon.png"/> ) se eliminará el evento de Facebook.</p>
+    <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/general/18749/node18749-event-complete.png"/></figure>
+  </section>
+</article>
+
+<!-- complete bootstrap layout -->
+    </div>
+    <div class="col-sm-2 right-side-bar">
+      
+      <nav class="right-side-nav" id="right_side_nav">
+        <h6 class="toc">Contenido de la página</h6>
+        <ul id="in_page_nav" class="list-none"></ul>
+      </nav>
+      
+    </div>
+  </div>
+</div>
+
+<hr>
+<div class="last-updated">
+  Última actualización de la página el 09 ago 2020
+</div>
+
+
+
+<footer class="bcls-footer" role="contentinfo">
+  <div class="row">
+    <div class="region region-footer-top-center col-md-12">
+      <nav role="navigation" aria-labelledby="block-brightcovesupport-menu" id="block-brightcovesupport" class="footer-menu">
+
+        <h2>Asistencia técnica de Brightcove</h2>
+
+        <ul class="menu">
+          <li>
+            Estado del sistema<a href="https://status.brightcove.com"></a>
+          </li>
+          <li>
+            <a href="https://supportportal.brightcove.com/s/login/?">Contactar soporte</a>
+          </li>
+          <li>
+            <a href="https://support.brightcove.com/">Documentación</a>
+          </li>
+        </ul>
+
+      </nav>
+      <nav role="navigation" aria-labelledby="block-training-menu" id="block-training" class="footer-menu">
+
+        <h2>Formación</h2>
+
+        <ul class="menu">
+          <li>
+            Cursos en línea<a href="https://studio.support.brightcove.com/training/online-training-courses.html"></a>
+          </li>
+          <li>
+            Inscríbete a un curso<a href="https://studio.support.brightcove.com/training/register-training.html"></a>
+          </li>
+          <li>
+            <a href="https://university.brightcove.com/">Universidad de Brightcove</a>
+          </li>
+        </ul>
+
+      </nav>
+      <nav role="navigation" aria-labelledby="block-brightcove-menu" class="footer-menu">
+
+        <h2>Brightcove</h2>
+
+        <ul class="menu">
+          <li>
+            <a href="https://www.brightcove.com">BrightCove.com</a>
+          </li>
+          <li>
+            <a href="https://supportportal.brightcove.com/s/login/?">Contáctanos</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+  <div class="row">
+    <div class="region region-footer-bottom-center col-md-12">
+      <div class="bcls-copyright footer-menu">
+        <table>
+          <tr>
+            <td>
+              <div id="bc_copyright" class="field field--name-field-copyright-year field--type-string field--label-hidden field--item" style="float: left;"> Brightcove Inc. All rights reserved.</div>
+            </td>
+            <td>Privacidad | Términos y Condiciones<a href="https://www.brightcove.com/en/legal/privacy"></a><a href="https://www.brightcove.com/en/terms-and-conditions"></a></td>
+            <td>
+              <div class="gf-links-cols footer-menu">
+                <div class="gf-social"><a href="https://www.linkedin.com/company/16439" title="LinkedIn" newtab="newtab" class="gf-social-linkedin"><i class="fab fa-linkedin-in" style="font-size: 1.5rem;"></i></a><a href="https://twitter.com/brightcove" title="Twitter" newtab="newtab" class="gf-social-twitter"><i class="fab fa-twitter" style="font-size: 1.5rem;"></i></a><a href="https://www.facebook.com/Brightcove" title="Facebook" newtab="newtab" class="gf-social-facebook"><i class="fab fa-facebook-f" style="font-size: 1.5rem;"></i></a>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</footer>
+<div id="talla_wrapper">
+  <p style="text-align: right;position: relative;"><button style="background:rgb(2, 28, 146);color:Snow;padding:.3rem;position:fixed;right:0;bottom:1em;z-index:9999999" onclick="javascript:displayChat()">¿Tiene alguna pregunta? </button> </p>
+  <div id="talla_chat">
+</div>
+</div>
+<script>
+      
+  var searchBox = sajari.init({
+    mode: "search-box",
+    project: "1588255093746585379", // Set this to your project.
+    collection: "brightcove-documenation", // Set this to your collection.
+    instantPipeline: "autocomplete", // Pipeline used as you type
+    inputPlaceholder: "Search", // Input element placeholder
+    maxSuggestions: 5, // Maximum number of suggestions to show
+    attachSearchBox: document.getElementById("nav-search-box") // DOM element to attach to
+  });
+  
+    searchBox("sub", "pipeline.search-sent", function (_, query) {
+      window.location = "/search.html?q=" + encodeURIComponent(query.q);
+    });
+  
+
+</script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script src="https://support.brightcove.com/site-assets/js/site/https-fix.js"></script>
+  <script src="https://support.brightcove.com/site-assets/js/site/setDate.js"></script>
+  
+  <script src="https://support.brightcove.com/site-assets/js/site/prism.js"></script>
+  
+  <script src="https://support.brightcove.com/site-assets/js/site/site.js"></script>
+  <script src="https://support.brightcove.com/site-assets/js/site/tabs.js"></script>
+  <script src="https://support.brightcove.com/site-assets/js/site/toc.js"></script>
+  <script src="/assets/js/sites_nav.js"></script>
+  <script src="https://support.brightcove.com/site-assets/js/site/bcls-utils.js"></script>
+  <script src="https://support.brightcove.com/site-assets/js/site/local-link-fix.js"></script>
+  <script src="/assets/js/feedback.js"></script>
+  
+  <script src="/assets/js/sajari-search-foot.js"></script>
+  
+  <!-- <script src="/assets/js/sajari-index.js"></script> -->
+  <script src="https://assets.talla.com/latest/embeddedjs/talla.js"></script>
+  <script src="/assets/js/talla-init.js"></script>
+  <style>
+    a.sj-paginator__page-number.sj-paginator__page-number--current.css-so0ov7 {
+      background-color: lightblue;
+    }
+    div.sj-tabs__tab {
+      margin-top: 3rem;
+      margin-left: .3rem;
+      border-top-left-radius: .4rem;
+      border-top-right-radius: .4rem;
+      background-color:#e8e8e8;
+    }
+
+    div.sj-tabs__tab.sj-tabs__tab--selected {
+      border-bottom-color: crimson;
+      background-color: #f8f8f8;
+    }
+
+    p.sj-results__result__description.css-p9jvyt {
+      font-size: 1rem;
+    }
+
+    .sj-result__text.css-31l7gp h3 {
+      color: navy;
+      font-size: 1.4rem;
+    }
+    </style>
+
+</body>
+
+</html>
