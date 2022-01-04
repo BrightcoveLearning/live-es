@@ -1,464 +1,20 @@
-﻿<!doctype html>
-<html lang="es-es">
-
-<head>
-  <meta charset="utf-8">
-  <meta name="robots" content="noindex,nofollow"> 
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="En este tema se explica cómo crear un trabajo activo con recuperación mediante la API Live Catch-up (TimeShift).">
-  
-  <title>API de puesta al día en vivo</title>
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-  <link rel="manifest" href="/site.webmanifest">  
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://support.brightcove.com/site-assets/css/site/prism.css">
-  <link rel="stylesheet" href="https://support.brightcove.com/site-assets/css/site/styles.css">
-  <link rel="stylesheet" href="https://support.brightcove.com/site-assets/css/site/landing-page.css">
-  <link rel="stylesheet" href="https://support.brightcove.com/site-assets/css/site/tabs.css">
-  <link rel="stylesheet" href="/assets/css/local.css">
-  <link data-react-helmet="true" rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500&display=swap">
-  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro&display=swap" rel="stylesheet">
-  <script src="https://kit.fontawesome.com/381443caa8.js" crossorigin="anonymous"></script>
-  <script src="https://support.brightcove.com/site-assets/js/site/google-analytics.js"></script>
-  <script src="/assets/js/sajari-head.js"></script>
-</head>
-
-<body class="body">
-
-<header>
-  <div class="div-header">
-    <a href="/"><img class="product-logo" src="https://support.brightcove.com/site-assets/images/site/product-logos/Live_Logo.svg" alt="logotipo del producto" style="max-height: 100px;max-width: 232px;"/></a>
-<!-- GTranslate: https://gtranslate.io/ -->
-<select onchange="doGTranslate(this);"><option value="">Seleccionar idioma</option><option value="en|en" translate="No">English</option><option value="en|zh-TW" translate="No">繁體中文</option><option value="en|fr" translate="No">Français</option><option value="en|de" translate="No">Deutsche</option><option value="en|ja" translate="No">日本語</option><option value="en|ko" translate="No">한국어</option><option value="en|es" translate="No">Español</option></select>
-
-<script>
-/* <![CDATA[ */
-function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;if(lang_pair=='')return;var lang=lang_pair.split('|')[1];var plang=location.hostname.split('.')[0];if(plang.length !=2 && plang.toLowerCase() != 'zh-cn' && plang.toLowerCase() != 'zh-tw')plang='en';location.href=location.protocol+'//'+(lang == 'en' ? '' : lang+'.')+location.hostname.replace('www.', '').replace(RegExp('^' + plang + '\\.'), '')+location.pathname+location.search;}
-/* ]]> */
-</script>
-
-    
-
-
-    <span class="secondary-nav"><a href="https://supportportal.brightcove.com/s/login/?"><img src="https://support.brightcove.com/site-assets/images/site/support.png" alt="soporte"/> Contactar con Soporte</a> <span style="vertical-align: top;margin-left:1em;margin-right:1em;">|</span> <a href="https://status.brightcove.com/">Estado<img src="https://support.brightcove.com/site-assets/images/site/status.png" alt="estado del sistema"/> del sistema</a></span> <br/>
-    
-  </div>
-  <nav aria-label="breadcrumb">
-    <ol class="breadcrumb arr-right">
-      
-      <li class="breadcrumb-item"><a href="/">Inicio</a></li>
-      
-      
-      
-      <li class="breadcrumb-item"><a href="/live-api/guides/">Guías</a></li>
-      
-      <li class="breadcrumb-item active" aria-current="page">API de puesta al día en vivo</li>
-    </ol>
-  </nav>
-</header>
-<div class="container">
-    <div class="row">
-            <div class="col-sm-3 left-side-bar">
-        <select id="site_select" class="bcls-select" style="margin-right: 1rem;">
-          <option value="">Otros documentos de Brightcove</option>
-          
-            
-              <option value="https://support.brightcove.com">Documentación Inicio</option>
-            
-          
-            
-              <option value="https://audience.support.brightcove.com">Audiencia de Brightcove</option>
-            
-          
-            
-              <option value="https://beacon.support.brightcove.com">Baliza Brightcove</option>
-            
-          
-            
-              <option value="https://campaign.support.brightcove.com">Campaña de Brightcove</option>
-            
-          
-            
-              <option value="https://engage.support.brightcove.com">Brightcove Engage</option>
-            
-          
-            
-              <option value="https://live.support.brightcove.com">Brightcove Live</option>
-            
-          
-            
-              <option value="https://gallery.support.brightcove.com">Brightcove Gallery</option>
-            
-          
-            
-              <option value="https://ssai.support.brightcove.com">Brightcove SSAI</option>
-            
-          
-            
-              <option value="https://social.support.brightcove.com">Brightcove Social</option>
-            
-          
-            
-              <option value="https://studio.support.brightcove.com">Video Cloud Studio</option>
-            
-          
-            
-              <option value="https://player.support.brightcove.com">Desarrollo de jugadores de Brightcove</option>
-            
-          
-            
-              <option value="https://apis.support.brightcove.com">API para la plataforma de Video Cloud</option>
-            
-          
-            
-              <option value="https://sdks.support.brightcove.com">SDK de dispositivos de Video Cloud</option>
-            
-          
-            
-              <option value="https://integrations.support.brightcove.com">Integraciones y conectores CMS</option>
-            
-          
-            
-              <option value="https://general.support.brightcove.com">Información general de Video Cloud</option>
-            
-          
-            
-              <option value="https://zencoder.support.brightcove.com">Zencoder</option>
-            
-          
-        </select>
-
-        <nav class="sidenav" id="side_nav">
-          
-            
-            <h5><a href="/index.html">Inicio</a></h5>
-            
-          
-            
-              <h5 class="submenu-header"><a href="/get-started/index.html">Empezar <strong>+</strong></a></h5>
-              <ul class="sidenav-submenu" style="display:none;">
-                
-                  
-                    <li><a href="/get-started/brightcove-live-training-videos.html">Vídeos de formación en directo de Brightcove</a></li>
-                  
-                
-                  
-                    <li><a href="/get-started/delivering-live-streams.html">Entrega de transmisiones en directo</a></li>
-                  
-                
-                  
-                    <li>Pautas y prácticas recomendadas del módulo en vivo<a href="/get-started/live-module-guidelines-and-best-practices.html"></a></li>
-                  
-                
-                  
-                    <li>Paso a paso:<a href="/get-started/step-step-using-live-module-open-broadcaster-software-obs.html"> Uso del Módulo Live con OBS</a></li>
-                  
-                
-                  
-                    <li>Paso a paso:<a href="/get-started/step-step-using-live-module-telestream-wirecast.html"> Uso del Módulo Live con Wirecast</a></li>
-                  
-                
-              </ul>
-            
-          
-            
-              <h5 class="submenu-header"><a href="/general/index.html">Información general <strong>+</strong></a></h5>
-              <ul class="sidenav-submenu" style="display:none;">
-                
-                  
-                    <li>DRM en vivo<a href="/general/live-drm.html"></a></li>
-                  
-                
-                  
-                    <li>Matriz de comparación de plataformas activas<a href="/general/live-platforms-comparison-matrix.html"></a></li>
-                  
-                
-                  
-                    <li>Glosario de Vídeo en Vivo<a href="/general/live-video-glossary.html"></a></li>
-                  
-                
-                  
-                    <li>Reducción de la latencia para transmisiones en directo<a href="/general/reducing-latency-live-streams.html"></a></li>
-                  
-                
-                  
-                    <li>Codificadores compatibles para eventos en directo<a href="/general/supported-encoders-live-events.html"></a></li>
-                  
-                
-                  
-                    <li>Uso del empaquetado de Akamai Stream y Wirecast<a href="/general/creating-live-stream-using-akamai-stream-packaging-and-telestream-wirecast.html"></a></li>
-                  
-                
-              </ul>
-            
-          
-            
-              <h5 class="submenu-header">Uso del Módulo Live +<a href="/live-module/index.html"><strong></strong></a></h5>
-              <ul class="sidenav-submenu" style="display:none;">
-                
-                  
-                    <li><a href="/live-module/client-side-preroll-with-live-ssai.html">Anuncios previos del lado del cliente con SSAI en vivo</a></li>
-                  
-                
-                  
-                    <li><a href="/live-module/creating-and-managing-live-events-using-live-module.html">Creación y administración de eventos en directo</a></li>
-                  
-                
-                  
-                    <li><a href="/live-module/creating-video-clip-using-live-module.html">Creación de un clip de vídeo</a></li>
-                  
-                
-                  
-                    <li><a href="https://integrations.support.brightcove.com/web-conferencing/host-avaya-conference-brightcove-live.html">Anfitrión de la conferencia de Avaya en Brightcove Live</a></li>
-                  
-                
-                  
-                    <li><a href="https://integrations.support.brightcove.com/web-conferencing/host-cisco-webex-conference-brightcove-live.html">Hospedar Cisco Webex a Brightcove Live</a></li>
-                  
-                
-                  
-                    <li><a href="https://integrations.support.brightcove.com/web-conferencing/host-zoom-conference-brightcove-live.html">Zoom de host a Brightcove Live</a></li>
-                  
-                
-                  
-                    <li><a href="https://integrations.support.brightcove.com/web-conferencing/host-inxpo-live.html">Organiza un evento INXPO en Brightcove Live</a></li>
-                  
-                
-                  
-                    <li><a href="/live-module/implementing-server-side-ads-live-module.html">Implementación de anuncios del lado del servidor</a></li>
-                  
-                
-                  
-                    <li>Redundancia en vivo<a href="/live-module/live-redundancy.html"></a></li>
-                  
-                
-                  
-                    <li>Publicación de un evento en vivo en Facebook<a href="/live-module/publishing-live-event-facebook.html"></a></li>
-                  
-                
-                  
-                    <li>Publicar un evento en vivo en YouTube<a href="/live-module/publishing-live-event-youtube.html"></a></li>
-                  
-                
-                  
-                    <li>Revisión de Live Analytics<a href="/live-module/reviewing-live-analytics.html"></a></li>
-                  
-                
-                  
-                    <li>Uso de salidas RTMP en vivo<a href="/live-module/using-live-rtmp-outputs-stream-facebook-and-youtube.html"></a></li>
-                  
-                
-              </ul>
-            
-          
-            
-              <h5 class="submenu-header">Trabajar con Live API +<a href="/live-api/index.html"><strong></strong></a></h5>
-              <ul class="sidenav-submenu" style="display:none;">
-                
-                  
-                    <li class="submenu-header">
-                      API en vivo:<a href="/live-api/getting-started/index.html"> Empezar <strong>+</strong></a>
-                      <ul class="sidenav-subsubmenu" style="display:none;">
-                        
-                        <li>Visión general:<a href="/live-api/getting-started/overview-brightcove-live-api.html"> API en vivo</a></li>
-                        
-                        <li><a href="/live-api/getting-started/quick-start-create-live-stream-using-brightcove-live-api.html">Creación de una transmisión en vivo mediante la API</a></li>
-                        
-                      </ul>
-                    </li>
-                  
-                
-                  
-                    <li class="submenu-header">
-                      API en vivo:<a href="/live-api/code-samples/index.html"> Ejemplos de código <strong>+</strong></a>
-                      <ul class="sidenav-subsubmenu" style="display:none;">
-                        
-                        <li><a href="/live-api/code-samples/live-api-sample-create-live-job.html">Crear un trabajo activo</a></li>
-                        
-                        <li><a href="/live-api/code-samples/quick-start-create-live-job-mpeg2-ts-input.html">Crear un trabajo activo para la entrada MPEG2-TS</a></li>
-                        
-                        <li>Uso de salidas RTMP para eventos en directo<a href="/live-api/code-samples/quick-start-using-rtmp-outputs-live-events.html"></a></li>
-                        
-                        <li>Evento en vivo simulado<a href="/live-api/code-samples/simulated-live.html"></a></li>
-                        
-                      </ul>
-                    </li>
-                  
-                
-                  
-                    <li class="submenu-header">
-                      API en vivo:<a href="/live-api/references/index.html"> Referencias +<strong></strong></a>
-                      <ul class="sidenav-subsubmenu" style="display:none;">
-                        
-                        <li><a href="/live-api/references/live-api-error-messages.html">Mensajes de error</a></li>
-                        
-                        <li>Notas de versión<a href="/live-api/references/live-api-release-notes.html"></a></li>
-                        
-                        <li>Referencia de API en vivo<a href="/live-api/references/reference.html"></a></li>
-                        
-                      </ul>
-                    </li>
-                  
-                
-                  
-                    <li class="submenu-header">
-                      API en vivo:<a href="/live-api/ssai/index.html"> SSAI +<strong></strong></a>
-                      <ul class="sidenav-subsubmenu" style="display:none;">
-                        
-                        <li><a href="/live-api/ssai/live-api-cue-points-and-ad-beacons-ssai.html">Puntos de referencia y balizas de anuncio con SSAI</a></li>
-                        
-                        <li>Inserción de anuncios en el lado del servidor (SSAI)<a href="/live-api/ssai/live-api-server-side-ad-insertion-ssai.html"></a></li>
-                        
-                        <li>Visión general:<a href="/live-api/ssai/overview-player-enhancements-live-ssai.html"> Mejoras del jugador para SSAI en vivo</a></li>
-                        
-                      </ul>
-                    </li>
-                  
-                
-                  
-                    <li class="submenu-header">
-                      API en vivo:<a href="/live-api/guides/index.html"> Guías <strong>+</strong></a>
-                      <ul class="sidenav-subsubmenu" style="display:none;">
-                        
-                        <li><a href="/live-api/guides/brightcove-live-best-practices.html">Prácticas recomendadas de Brightcove Live</a></li>
-                        
-                        <li><a href="/live-api/guides/brightcove-live-program-ad-metadata-api.html">API de metadatos de anuncios del programa Brightcove Live</a></li>
-                        
-                        <li><a href="/live-api/guides/live-api-creating-frame-accurate-clip.html">Creación de un clip preciso de marco</a></li>
-                        
-                        <li><a href="/live-api/guides/live-api-creating-vod-clips.html">Creación de clips VOD</a></li>
-                        
-                        <li><a href="/live-api/guides/getting-list-live-or-vod-jobs.html">Obtención de una lista de trabajos en vivo o VOD</a></li>
-                        
-                        <li><a href="/live-api/guides/live-api-insert-id3-timed-metadata.html">Insertar metadatos temporizados ID3</a></li>
-                        
-                        <li>DRM en vivo a través de Live API<a href="/live-api/guides/live-drm-live-api.html"></a></li>
-                        
-                        <li>Administración de credenciales para Live API<a href="/live-api/guides/managing-credentials-live-api.html"></a></li>
-                        
-                        <li>Notificaciones<a href="/live-api/guides/live-api-notifications.html"></a></li>
-                        
-                        <li>Reducción de la latencia para transmisiones en directo<a href="/general/reducing-latency-live-streams.html"></a></li>
-                        
-                        <li>Salidas RTMP<a href="/live-api/guides/live-api-rtmp-outputs.html"></a></li>
-                        
-                        <li>Puntos de entrada estáticos<a href="/live-api/guides/live-api-static-entry-points.html"></a></li>
-                        
-                        <li>URL firmadas y autenticación de tokens con una transmisión en directo<a href="/live-api/guides/signed-urls-and-token-auth-live-stream.html"></a></li>
-                        
-                        <li>Uso de Redundancia en Vivo<a href="/live-api/guides/using-live-redundancy.html"></a></li>
-                        
-                        <li>VOD del Evento en Vivo<a href="/live-api/guides/live-api-vod-live-event.html"></a></li>
-                        
-                      </ul>
-                    </li>
-                  
-                
-              </ul>
-            
-          
-            
-              <h5 class="submenu-header"><a href="/admin/index.html">Administrar cuentas <strong>+</strong></a></h5>
-              <ul class="sidenav-submenu" style="display:none;">
-                
-                  
-                    <li><a href="/admin/creating-custom-live-ingest-profiles.html">Creación de perfiles de ingesta dinámica personalizados</a></li>
-                  
-                
-                  
-                    <li>Campos para perfiles personalizados de ingesta activa<a href="/admin/fields-custom-live-ingest-profiles.html"></a></li>
-                  
-                
-                  
-                    <li>Administrar la configuración de Live<a href="/admin/managing-live-settings.html"></a></li>
-                  
-                
-                  
-                    <li>Administración de credenciales de autenticación de API<a href="/admin/managing-api-authentication-credentials.html"></a></li>
-                  
-                
-                  
-                    <li>Perfiles de ingesta en vivo estándar<a href="/admin/standard-live-ingest-profiles.html"></a></li>
-                  
-                
-              </ul>
-            
-          
-            
-              <h5 class="submenu-header">Notas de la versión +<a href="/release-notes/index.html"><strong></strong></a></h5>
-              <ul class="sidenav-submenu" style="display:none;">
-                
-                  
-                    <li>Notas de versión en vivo<a href="/release-notes/live-api-release-notes.html"></a></li>
-                  
-                
-                  
-                    <li>Problemas conocidos<a href="/release-notes/known-issues.html"></a></li>
-                  
-                
-              </ul>
-            
-          
-            
-              <h5 class="submenu-header">Soporte +<a href="/support/index.html"><strong></strong></a></h5>
-              <ul class="sidenav-submenu" style="display:none;">
-                
-                  
-                    
-                  
-                
-                  
-                    <li>Visualización de la página Estado del Sistema de Brightcove<a href="/support/viewing-brightcove-system-status-page.html"></a></li>
-                  
-                
-                  
-                    <li><a href="/support/contact-sales.html">Contacto con Ventas</a></li>
-                  
-                
-                  
-                    <li>Apertura de un caso de soporte<a href="/support/opening-case-with-brightcove-support.html"></a></li>
-                  
-                
-              </ul>
-            
-          
-      </nav>
-    </div>
-    <div class="col-lg-7" style="background-color: white;color: #333333;margin-top: -1em;margin-bottom: -1em;padding-bottom:1em;">
-  <!-- bootstrap layout -->
-
-<p id="bc_veggie_burger_wrapper" style="display: none;"><img id="bc_veggie_burger" src="/assets/images/feather/menu.svg" alt="Menú de navegación"/></p>
-
-<!-- search bar -->
-<div id="nav-search-box" style="margin-top: 1rem;"></div>
-<!-- in-page navigation for narrow screens -->
-<details class="centered-inpage-nav" id="centered_inpage_nav">
-  <summary><h6 class="toc">Contenido de la página</h6></summary>
-  <nav id="centered_toc"></nav>
-  <ul id="centered_in_page_toc" class="list-none"></ul>
-</details>
-<!-- open in new tab/window -->
-<a id="open_new_tab" href="#" target="_blank" style="display: none;"><img src="/assets/images/feather/external-link.svg" alt="abrir en una nueva pestaña" style="margin-top:4em;width: 1.5em;"/></a>
-
-
-
-  
-    
-
-
-<h1>API de puesta al día en vivo</h1>
+---
+title: Descripción de la API de actualización en vivo: Este tema explica cómo crear un trabajo en vivo con la puesta al día usando la API de actualización en vivo (TimeShift).
+parent: Guides 
+grandparent: Live API
+layout: staging
+---
+ <h1>{{ page.title }}</h1>
 <article class="bcls-article">
-  <summary>En este tema se explica cómo crear un trabajo activo con recuperación mediante la API Live Catch-up (TimeShift).</summary>
+  <summary>{{ page.description }}</summary>
   <section class="bcls-section">
     <h2 id="Introduction">Introducción</h2>
-    <p>La API Live Catch-up es una adición a la API Live que proporciona capacidad de reproducción para el inicio o parte de una transmisión en vivo para permitir que los espectadores tardíos se «pongan al día».</p>
-    <p>La capacidad de recuperación se agrega a un trabajo activo a través de un nuevo campo de <code translate="No">timeshift</code> objeto utilizado al crear un trabajo activo. Los detalles de los campos de <code translate="No">timeshift</code> objeto se detallan en las secciones siguientes.</p>
+    <p>La API Live Catch-up es una adición a la API Live que proporciona la capacidad de reproducción para el inicio o una parte de una transmisión en vivo para permitir que los espectadores tardíos "se pongan al día".</p>
+    <p>La capacidad de ponerse al día se agrega a un trabajo en vivo a través de un nuevo <code translate="No">timeshift</code> campo de objeto utilizado cuando crea un trabajo en vivo. Los detalles del <code translate="No">timeshift</code> Los campos de objeto se detallan en las secciones siguientes.</p>
   </section>
   <section class="bcls-section">
-    <h2 id="timeshift_fields">Campos TimeShift</h2>
-    <p>El <code translate="No">timeshift</code> objeto es un objeto de nivel superior en el cuerpo de la solicitud para crear una solicitud de trabajo Live. En la siguiente tabla se detallan los campos de este objeto.</p>
+    <h2 id="timeshift_fields">Campos de TimeShift</h2>
+    <p>La <code translate="No">timeshift</code> object es un objeto de nivel superior en el cuerpo de la solicitud para crear una solicitud de trabajo en vivo. La siguiente tabla detalla los campos de este objeto.</p>
     <table class="bcls-table">
       <caption class="bcls-caption--table"><code translate="No">timeshift</code> Campos</caption>
       <thead class="bcls-table__head">
@@ -472,52 +28,52 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
               <td><code translate="No">startover_duration</code></td>
               <td>
                 Tamaño de la ventana de inicio en segundos, hasta 604800 (7 días).
-                <p>Si <code translate="No">timeshift.startover_duration</code> se especifica en la solicitud, se creará una URL de reproducción habilitada para el cambio de tiempo para cada lista de reproducción. Estas URL admitirán la reproducción en vivo del borde (con un tamaño DVR según lo especificado por el <code translate="No">live_duration</code> parámetro).</p>
-                <p>También admitirán la reproducción de porciones arbitrarias dentro del período definido por startover_duration añadiendo parámetros:</p>
+                <p>Si <code translate="No">timeshift.startover_duration</code> se especifica en la solicitud, se creará una URL de reproducción habilitada con time-shift para cada lista de reproducción. Estas URL admitirán la reproducción de borde en vivo (con un tamaño de DVR según lo especificado por el <code translate="No">live_duration</code> parámetro).</p>
+                <p>También admitirán la reproducción de porciones arbitrarias dentro del período definido por startover_duration agregando parámetros:</p>
                 <ul style="padding: 0;margin-left: 1rem;">
-                  <li><code translate="No">start=ts</code> - Marca de tiempo de época Unix del inicio de la reproducción</li>
-                  <li><code translate="No">end=ts</code> - Marca de tiempo Unix época del final de reproducción</li>
+                  <li><code translate="No">start=ts</code>- Marca de tiempo de época Unix de inicio de reproducción</li>
+                  <li><code translate="No">end=ts</code>- Marca de tiempo de época Unix del final de la reproducción</li>
                 </ul>
               </td>
           </tr>
           <tr>
               <td><code translate="No">live_duration</code></td>
-              <td>Tamaño de la ventana activa en segundos hasta 300. El valor predeterminado es 4 x duración del segmento.</td>
+              <td>Tamaño de la ventana en vivo en segundos hasta 300. El valor predeterminado es 4 veces la duración del segmento.</td>
           </tr>
           <tr>
               <td><code translate="No">live_delay</code></td>
-              <td>Número de segundos para retrasar la salida en vivo. El mínimo y el valor predeterminado es de 5 segundos.</td>
+              <td>Número de segundos para retrasar la salida en vivo. El mínimo y predeterminado es de 5 segundos.</td>
           </tr>
           <tr>
               <td><code translate="No">type</code></td>
               <td>
                 <ul style="padding: 0;margin-left: 1rem;">
-                  <li>single - para un trabajo de turno de tiempo independiente (predeterminado)</li>
-                  <li>primario: para el trabajo de turno de tiempo primario (debe ser un <a href="/live-api/guides/live-api-static-entry-points.html">trabajo SEP</a>)</li>
-                  <li>copia de seguridad: para un trabajo de cambio de tiempo de respaldo</li>
+                  <li>simple: para un trabajo de turno de tiempo independiente (predeterminado)</li>
+                  <li>primario - para el trabajo de turno de tiempo primario (debe ser un <a href="/live-api/guides/live-api-static-entry-points.html">Trabajo SEP</a>)</li>
+                  <li>respaldo - para un trabajo de turno de tiempo de respaldo</li>
                 </ul>
               </td>
           </tr>
           <tr>
               <td><code translate="No">primary_job_id</code></td>
-              <td>Hace referencia al identificador de trabajo de turno de tiempo principal (necesario si el tipo es copia de seguridad).</td>
+              <td>Hace referencia al ID del trabajo de turno de tiempo principal (obligatorio si el tipo es de respaldo)</td>
           </tr>
           <tr>
               <td><code translate="No">skip_live_output</code></td>
-              <td>No generar listas de reproducción normales en vivo o dvr (el valor predeterminado es falso)</td>
+              <td>No genere listas de reproducción normales en vivo o dvr (el valor predeterminado es falso)</td>
           </tr>
       </tbody>
   </table>
   <h3>Notas</h3>
   <ul>
-    <li>Tenga en cuenta que las URL de timeshift no se incluyen en la respuesta de la API si timeshift.type es «backup». Utilice las direcciones URL de oculto de horas indicadas para el trabajo principal.</li>
-    <li>Si se requiere DRM para una salida de cambio de tiempo, incluya un <code translate="No">drm</code> campo en la solicitud de trabajo como de costumbre. Este atributo sólo debe especificarse para el trabajo principal para proteger la salida del cambio de tiempo; sin embargo, puede ser conveniente establecer skip_live_output en true para cualquier trabajo de copia de seguridad para evitar la reproducción sin protección.</li>
-    <li>El recorte está limitado a las últimas 24 horas, y al igual que la redundancia en vivo, solo incluirá la entrada del trabajo seleccionado</li>
+    <li>Tenga en cuenta que las URL de timeshift no se incluyen en la respuesta de la API si timeshift.type es "backup". Utilice las URL de Timeshift informadas para el trabajo principal.</li>
+    <li>Si se requiere DRM para una salida de time shift, incluya un <code translate="No">drm</code> campo en la solicitud de trabajo como de costumbre. Este atributo solo debe especificarse para el trabajo principal para proteger la salida del turno de tiempo; sin embargo, puede ser conveniente establecer skip_live_output en verdadero para cualquier trabajo de respaldo para evitar la reproducción desprotegida.</li>
+    <li>El recorte está limitado a las últimas 24 horas y, al igual que la redundancia en vivo, solo incluirá la entrada del trabajo seleccionado</li>
   </ul>
   </section>
   <section class="bcls-section">
-    <h2 id="Sample_request_body">Ejemplo</h2>
-    <h3>Cuerpo de solicitud</h3>
+    <h2 id="Sample_request_body">Muestra</h2>
+    <h3>Cuerpo de la solicitud</h3>
 <pre class="line-numbers"><code class="language-json" translate="No">{
   "live_stream": true,
   "region": "us-west-2",
@@ -589,14 +145,14 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
     </details>
   </section>
   <section class="bcls-section">
-    <h2 id="Getting_job_info">Obtener detalles de trabajo</h2>
-    <p>Ya sea que solicite una lista de trabajos o detalles para uno específico, se <code translate="No">timeshift_url</code> incluirán para cualquier lista de reproducción en un trabajo habilitado para el timeshift. La persona que llama puede agregar parámetros a esta URL para especificar las horas de inicio y parada como marcas de tiempo Unix Epoch. Por ejemplo:</p>
+    <h2 id="Getting_job_info">Obtener detalles del trabajo</h2>
+    <p>Ya sea que solicite una lista de trabajos o detalles para uno específico, <code translate="No">timeshift_url</code> se incluirá para cualquier lista de reproducción en un trabajo habilitado para Timeshift. La persona que llama puede agregar parámetros a esta URL para especificar las horas de inicio y finalización como marcas de tiempo de Unix Epoch. Por ejemplo:</p>
 <pre><code class="language-http" translate="No">https://bcovlive-a.akamaihd.net/8d64308aafe34d17adb98af69e9eac13/us-east-1/6021289116001/ts-cf98fa7b2ee4450e-5df3aae6cb724fe1a4a932b4964d3e17/playlist_ts.m3u8?start=1593457200&end=1593460800</code></pre>
     <p>Si el <code translate="No">start</code> y <code translate="No">end</code> los parámetros no están incluidos, la reproducción será en el borde en vivo.</p>
   </section>
   <section class="bcls-section">
     <h2 id="Create_Playback_Token">Crear token de reproducción</h2>
-    <p>Se han agregado nuevos campos al token de reproducción para permitir que la API Get Job Sources devuelva URL de desplazamiento de tiempo. Actualmente SSAI no es compatible con trabajos con cambio de tiempo habilitado, por lo que no se debe especificar un <code translate="No">application_id</code> atributo.</p>
+    <p>Se han agregado nuevos campos al token de reproducción para permitir que la API Obtener fuentes de trabajo devuelva las URL de cambio de tiempo. Actualmente, SSAI no es compatible con trabajos con time-shift habilitado, por lo que <code translate="No">application_id</code> El atributo no debe especificarse.</p>
     <p>Si <code translate="No">ts_start</code> y <code translate="No">ts_end</code> se especifican, se agregarán a la URL de reproducción como parámetros de consulta como se describe en la sección anterior.</p>
     <h3>Nuevos campos</h3>
     <table class="bcls-table">
@@ -610,172 +166,17 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
       <tbody class="bcls-table__body">
           <tr>
               <td><code translate="No">ts</code></td>
-              <td>Seleccione la URL de reproducción de cambio de tiempo (true|false, opcional, el valor predeterminado es falso)</td>
+              <td>Seleccione la URL de reproducción de time-shift (verdadero | falso, opcional, el predeterminado es falso)</td>
           </tr>
           <tr>
               <td><code translate="No">ts_start</code></td>
-              <td>Marca de tiempo de época Unix para el inicio de la ventana de inicio (número, opcional)</td>
+              <td>Marca de tiempo de época de Unix para el inicio de la ventana de inicio de nuevo (número, opcional)</td>
           </tr>
           <tr>
               <td><code translate="No">ts_end</code></td>
-              <td>Marca de tiempo de época Unix para el final de la ventana de inicio (número, opcional)</td>
+              <td>Marca de tiempo de época de Unix para el final de la ventana de inicio de nuevo (número, opcional)</td>
           </tr>
       </tbody>
   </table>
   </section>
 </article>
-
-<!-- complete bootstrap layout -->
-    </div>
-    <div class="col-sm-2 right-side-bar">
-      
-      <nav class="right-side-nav" id="right_side_nav">
-        <h6 class="toc">Contenido de la página</h6>
-        <ul id="in_page_nav" class="list-none"></ul>
-      </nav>
-      
-    </div>
-  </div>
-</div>
-
-<hr>
-<footer class="bcls-footer" role="contentinfo">  <div class="row">
-    <div class="region region-footer-top-center col-md-12">
-      <nav role="navigation" aria-labelledby="block-brightcovesupport-menu" id="block-brightcovesupport" class="footer-menu">
-
-        <h2>Asistencia técnica de Brightcove</h2>
-
-        <ul class="menu">
-          <li>
-            Estado del sistema<a href="https://status.brightcove.com"></a>
-          </li>
-          <li>
-            <a href="https://supportportal.brightcove.com/s/login/?">Contactar soporte</a>
-          </li>
-          <li>
-            <a href="https://support.brightcove.com/">Documentación</a>
-          </li>
-        </ul>
-
-      </nav>
-      <nav role="navigation" aria-labelledby="block-training-menu" id="block-training" class="footer-menu">
-
-        <h2>Formación</h2>
-
-        <ul class="menu">
-          <li>
-            Cursos en línea<a href="https://studio.support.brightcove.com/training/online-training-courses.html"></a>
-          </li>
-          <li>
-            Inscríbete a un curso<a href="https://studio.support.brightcove.com/training/register-training.html"></a>
-          </li>
-          <li>
-            <a href="https://university.brightcove.com/">Universidad de Brightcove</a>
-          </li>
-        </ul>
-
-      </nav>
-      <nav role="navigation" aria-labelledby="block-brightcove-menu" class="footer-menu">
-
-        <h2>Brightcove</h2>
-
-        <ul class="menu">
-          <li>
-            <a href="https://www.brightcove.com">BrightCove.com</a>
-          </li>
-          <li>
-            <a href="https://supportportal.brightcove.com/s/login/?">Contáctanos</a>
-          </li>
-        </ul>
-      </nav>
-    </div>
-  </div>
-  <div class="row">
-    <div class="region region-footer-bottom-center col-md-12">
-      <div class="bcls-copyright footer-menu">
-        <table>
-          <tr>
-            <td>
-              <div id="bc_copyright" class="field field--name-field-copyright-year field--type-string field--label-hidden field--item" style="float: left;"> Brightcove Inc. All rights reserved.</div>
-            </td>
-            <td>Privacidad | Términos y Condiciones<a href="https://www.brightcove.com/en/legal/privacy"></a><a href="https://www.brightcove.com/en/terms-and-conditions"></a></td>
-            <td>
-              <div class="gf-links-cols footer-menu">
-                <div class="gf-social"><a href="https://www.linkedin.com/company/16439" title="LinkedIn" newtab="newtab" class="gf-social-linkedin"><i class="fab fa-linkedin-in" style="font-size: 1.5rem;"></i></a><a href="https://twitter.com/brightcove" title="Twitter" newtab="newtab" class="gf-social-twitter"><i class="fab fa-twitter" style="font-size: 1.5rem;"></i></a><a href="https://www.facebook.com/Brightcove" title="Facebook" newtab="newtab" class="gf-social-facebook"><i class="fab fa-facebook-f" style="font-size: 1.5rem;"></i></a>
-                </div>
-              </div>
-            </td>
-          </tr>
-        </table>
-      </div>
-    </div>
-  </div>
-</footer>
-
-<script>
-      
-  var searchBox = sajari.init({
-    mode: "search-box",
-    project: "1588255093746585379", // Set this to your project.
-    collection: "brightcove-documenation", // Set this to your collection.
-    instantPipeline: "autocomplete", // Pipeline used as you type
-    inputPlaceholder: "Search", // Input element placeholder
-    maxSuggestions: 5, // Maximum number of suggestions to show
-    attachSearchBox: document.getElementById("nav-search-box") // DOM element to attach to
-  });
-  
-    searchBox("sub", "pipeline.search-sent", function (_, query) {
-      window.location = "/search.html?q=" + encodeURIComponent(query.q);
-    });
-  
-
-</script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  <script src="https://support.brightcove.com/site-assets/js/site/https-fix.js"></script>
-  <script src="https://support.brightcove.com/site-assets/js/site/setDate.js"></script>
-  
-  <script src="https://support.brightcove.com/site-assets/js/site/prism.js"></script>
-  
-  <script src="https://support.brightcove.com/site-assets/js/site/site.js"></script>
-  <script src="https://support.brightcove.com/site-assets/js/site/tabs.js"></script>
-  <script src="https://support.brightcove.com/site-assets/js/site/toc.js"></script>
-  <script src="/assets/js/sites_nav.js"></script>
-  <script src="https://support.brightcove.com/site-assets/js/site/bcls-utils.js"></script>
-  <script src="https://support.brightcove.com/site-assets/js/site/local-link-fix.js"></script>
-  <script src="/assets/js/feedback.js"></script>
-  
-  <script src="/assets/js/sajari-search-foot.js"></script>
-  
-  <!-- <script src="/assets/js/sajari-index.js"></script> -->
-  <style>
-    a.sj-paginator__page-number.sj-paginator__page-number--current.css-so0ov7 {
-      background-color: lightblue;
-    }
-    div.sj-tabs__tab {
-      margin-top: 3rem;
-      margin-left: .3rem;
-      border-top-left-radius: .4rem;
-      border-top-right-radius: .4rem;
-      background-color:#e8e8e8;
-    }
-
-    div.sj-tabs__tab.sj-tabs__tab--selected {
-      border-bottom-color: crimson;
-      background-color: #f8f8f8;
-    }
-
-    p.sj-results__result__description.css-p9jvyt {
-      font-size: 1rem;
-    }
-
-    .sj-result__text.css-31l7gp h3 {
-      color: navy;
-      font-size: 1.4rem;
-    }
-    </style>
-
-</body>
-
-</html>

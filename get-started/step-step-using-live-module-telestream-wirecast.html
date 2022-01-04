@@ -1,482 +1,39 @@
-﻿<!doctype html>
-<html lang="es-es">
-
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  
-  <title>Paso a paso: Uso del Módulo Live con Telestream Wirecast</title>
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-  <link rel="manifest" href="/site.webmanifest">  
-  <link data-react-helmet="true" rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500&amp;display=swap">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://support.brightcove.com/site-assets/css/site/prism.css">
-  <link rel="stylesheet" href="https://support.brightcove.com/site-assets/css/site/styles.css">
-  <link rel="stylesheet" href="https://support.brightcove.com/site-assets/css/site/landing-page.css">
-  <link rel="stylesheet" href="https://support.brightcove.com/site-assets/css/site/tabs.css">
-  <link rel="stylesheet" href="/assets/css/local.css">
-  <link data-react-helmet="true" rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500&display=swap">
-  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro&display=swap" rel="stylesheet">
-  <script src="https://kit.fontawesome.com/381443caa8.js" crossorigin="anonymous"></script>
-  <script src="https://support.brightcove.com/site-assets/js/site/google-analytics.js"></script>
-  <script src="/assets/js/sajari-head.js"></script>
-</head>
-
-<body class="body">
-
-<header>
-  <div class="div-header">
-    <a href="/"><img class="product-logo" src="https://support.brightcove.com/site-assets/images/site/product-logos/Live_Logo.svg" alt="logotipo del producto" style="max-height: 100px;max-width: 232px;"/></a>
-<!-- GTranslate: https://gtranslate.io/ -->
-<select onchange="doGTranslate(this);"><option value="">Seleccionar idioma</option><option value="en|en" translate="No">English</option><option value="en|zh-TW" translate="No">繁體中文</option><option value="en|fr" translate="No">Français</option><option value="en|de" translate="No">Deutsche</option><option value="en|ja" translate="No">日本語</option><option value="en|ko" translate="No">한국어</option><option value="en|es" translate="No">Español</option></select>
-
-<script>
-/* <![CDATA[ */
-function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;if(lang_pair=='')return;var lang=lang_pair.split('|')[1];var plang=location.hostname.split('.')[0];if(plang.length !=2 && plang.toLowerCase() != 'zh-cn' && plang.toLowerCase() != 'zh-tw')plang='en';location.href=location.protocol+'//'+(lang == 'en' ? '' : lang+'.')+location.hostname.replace('www.', '').replace(RegExp('^' + plang + '\\.'), '')+location.pathname+location.search;}
-/* ]]> */
-</script>
-
-    
-
-
-    <span class="secondary-nav"><a href="https://supportportal.brightcove.com/s/login/?"><img src="https://support.brightcove.com/site-assets/images/site/support.png" alt="soporte"/> Contactar con Soporte</a> <span style="vertical-align: top;margin-left:1em;margin-right:1em;">|</span> <a href="https://status.brightcove.com/">Estado<img src="https://support.brightcove.com/site-assets/images/site/status.png" alt="estado del sistema"/> del sistema</a></span> <br/>
-    
-  </div>
-  <nav aria-label="breadcrumb">
-    <ol class="breadcrumb arr-right">
-      
-      <li class="breadcrumb-item"><a href="/">Inicio</a></li>
-      
-      
-      
-      <li class="breadcrumb-item"><a href="/get-started/">Introducción</a></li>
-      
-      <li class="breadcrumb-item active" aria-current="page">Paso a paso: Uso del Módulo Live con Telestream Wirecast</li>
-    </ol>
-  </nav>
-</header>
-<div class="container">
-    <div class="row">
-            <div class="col-sm-3 left-side-bar">
-        <select id="site_select" class="bcls-select" style="margin-right: 1rem;">
-          <option value="">Otros documentos de Brightcove</option>
-          
-            
-              <option value="https://support.brightcove.com">Documentación Inicio</option>
-            
-          
-            
-              <option value="https://audience.support.brightcove.com">Audiencia de Brightcove</option>
-            
-          
-            
-              <option value="https://beacon.support.brightcove.com">Baliza Brightcove</option>
-            
-          
-            
-              <option value="https://campaign.support.brightcove.com">Campaña de Brightcove</option>
-            
-          
-            
-              <option value="https://engage.support.brightcove.com">Brightcove Engage</option>
-            
-          
-            
-              <option value="https://live.support.brightcove.com">Brightcove Live</option>
-            
-          
-            
-              <option value="https://gallery.support.brightcove.com">Brightcove Gallery</option>
-            
-          
-            
-              <option value="https://ssai.support.brightcove.com">Brightcove SSAI</option>
-            
-          
-            
-              <option value="https://social.support.brightcove.com">Brightcove Social</option>
-            
-          
-            
-              <option value="https://studio.support.brightcove.com">Video Cloud Studio</option>
-            
-          
-            
-              <option value="https://player.support.brightcove.com">Desarrollo de jugadores de Brightcove</option>
-            
-          
-            
-              <option value="https://apis.support.brightcove.com">API para la plataforma de Video Cloud</option>
-            
-          
-            
-              <option value="https://sdks.support.brightcove.com">SDK de dispositivos de Video Cloud</option>
-            
-          
-            
-              <option value="https://integrations.support.brightcove.com">Integraciones y conectores CMS</option>
-            
-          
-            
-              <option value="https://general.support.brightcove.com">Información general de Video Cloud</option>
-            
-          
-            
-              <option value="https://zencoder.support.brightcove.com">Zencoder</option>
-            
-          
-        </select>
-
-        <nav class="sidenav" id="side_nav">
-          
-            
-            <h5><a href="/index.html">Inicio</a></h5>
-            
-          
-            
-              <h5 class="submenu-header"><a href="/get-started/index.html">Empezar <strong>+</strong></a></h5>
-              <ul class="sidenav-submenu" style="display:none;">
-                
-                  
-                    <li><a href="/get-started/brightcove-live-training-videos.html">Vídeos de formación en directo de Brightcove</a></li>
-                  
-                
-                  
-                    <li><a href="/get-started/delivering-live-streams.html">Entrega de transmisiones en directo</a></li>
-                  
-                
-                  
-                    <li>Pautas y prácticas recomendadas del módulo en vivo<a href="/get-started/live-module-guidelines-and-best-practices.html"></a></li>
-                  
-                
-                  
-                    <li>Paso a paso:<a href="/get-started/step-step-using-live-module-open-broadcaster-software-obs.html"> Uso del Módulo Live con OBS</a></li>
-                  
-                
-                  
-                    <li>Paso a paso:<a href="/get-started/step-step-using-live-module-telestream-wirecast.html"> Uso del Módulo Live con Wirecast</a></li>
-                  
-                
-              </ul>
-            
-          
-            
-              <h5 class="submenu-header"><a href="/general/index.html">Información general <strong>+</strong></a></h5>
-              <ul class="sidenav-submenu" style="display:none;">
-                
-                  
-                    <li>DRM en vivo<a href="/general/live-drm.html"></a></li>
-                  
-                
-                  
-                    <li>Matriz de comparación de plataformas activas<a href="/general/live-platforms-comparison-matrix.html"></a></li>
-                  
-                
-                  
-                    <li>Glosario de Vídeo en Vivo<a href="/general/live-video-glossary.html"></a></li>
-                  
-                
-                  
-                    <li>Reducción de la latencia para transmisiones en directo<a href="/general/reducing-latency-live-streams.html"></a></li>
-                  
-                
-                  
-                    <li>Codificadores compatibles para eventos en directo<a href="/general/supported-encoders-live-events.html"></a></li>
-                  
-                
-                  
-                    <li>Uso del empaquetado de Akamai Stream y Wirecast<a href="/general/creating-live-stream-using-akamai-stream-packaging-and-telestream-wirecast.html"></a></li>
-                  
-                
-              </ul>
-            
-          
-            
-              <h5 class="submenu-header">Uso del Módulo Live +<a href="/live-module/index.html"><strong></strong></a></h5>
-              <ul class="sidenav-submenu" style="display:none;">
-                
-                  
-                    <li><a href="/live-module/client-side-preroll-with-live-ssai.html">Anuncios previos del lado del cliente con SSAI en vivo</a></li>
-                  
-                
-                  
-                    <li><a href="/live-module/creating-and-managing-live-events-using-live-module.html">Creación y administración de eventos en directo</a></li>
-                  
-                
-                  
-                    <li><a href="/live-module/creating-video-clip-using-live-module.html">Creación de un clip de vídeo</a></li>
-                  
-                
-                  
-                    <li><a href="https://integrations.support.brightcove.com/web-conferencing/host-avaya-conference-brightcove-live.html">Anfitrión de la conferencia de Avaya en Brightcove Live</a></li>
-                  
-                
-                  
-                    <li><a href="https://integrations.support.brightcove.com/web-conferencing/host-cisco-webex-conference-brightcove-live.html">Hospedar Cisco Webex a Brightcove Live</a></li>
-                  
-                
-                  
-                    <li><a href="https://integrations.support.brightcove.com/web-conferencing/host-zoom-conference-brightcove-live.html">Zoom de host a Brightcove Live</a></li>
-                  
-                
-                  
-                    <li><a href="https://integrations.support.brightcove.com/web-conferencing/host-inxpo-live.html">Organiza un evento INXPO en Brightcove Live</a></li>
-                  
-                
-                  
-                    <li><a href="/live-module/implementing-server-side-ads-live-module.html">Implementación de anuncios del lado del servidor</a></li>
-                  
-                
-                  
-                    <li>Redundancia en vivo<a href="/live-module/live-redundancy.html"></a></li>
-                  
-                
-                  
-                    <li>Publicación de un evento en vivo en Facebook<a href="/live-module/publishing-live-event-facebook.html"></a></li>
-                  
-                
-                  
-                    <li>Publicar un evento en vivo en YouTube<a href="/live-module/publishing-live-event-youtube.html"></a></li>
-                  
-                
-                  
-                    <li>Revisión de Live Analytics<a href="/live-module/reviewing-live-analytics.html"></a></li>
-                  
-                
-                  
-                    <li>Uso de salidas RTMP en vivo<a href="/live-module/using-live-rtmp-outputs-stream-facebook-and-youtube.html"></a></li>
-                  
-                
-              </ul>
-            
-          
-            
-              <h5 class="submenu-header">Trabajar con Live API +<a href="/live-api/index.html"><strong></strong></a></h5>
-              <ul class="sidenav-submenu" style="display:none;">
-                
-                  
-                    <li class="submenu-header">
-                      API en vivo:<a href="/live-api/getting-started/index.html"> Empezar <strong>+</strong></a>
-                      <ul class="sidenav-subsubmenu" style="display:none;">
-                        
-                        <li>Visión general:<a href="/live-api/getting-started/overview-brightcove-live-api.html"> API en vivo</a></li>
-                        
-                        <li><a href="/live-api/getting-started/quick-start-create-live-stream-using-brightcove-live-api.html">Creación de una transmisión en vivo mediante la API</a></li>
-                        
-                      </ul>
-                    </li>
-                  
-                
-                  
-                    <li class="submenu-header">
-                      API en vivo:<a href="/live-api/code-samples/index.html"> Ejemplos de código <strong>+</strong></a>
-                      <ul class="sidenav-subsubmenu" style="display:none;">
-                        
-                        <li><a href="/live-api/code-samples/live-api-sample-create-live-job.html">Crear un trabajo activo</a></li>
-                        
-                        <li><a href="/live-api/code-samples/quick-start-create-live-job-mpeg2-ts-input.html">Crear un trabajo activo para la entrada MPEG2-TS</a></li>
-                        
-                        <li>Uso de salidas RTMP para eventos en directo<a href="/live-api/code-samples/quick-start-using-rtmp-outputs-live-events.html"></a></li>
-                        
-                        <li>Evento en vivo simulado<a href="/live-api/code-samples/simulated-live.html"></a></li>
-                        
-                      </ul>
-                    </li>
-                  
-                
-                  
-                    <li class="submenu-header">
-                      API en vivo:<a href="/live-api/references/index.html"> Referencias +<strong></strong></a>
-                      <ul class="sidenav-subsubmenu" style="display:none;">
-                        
-                        <li><a href="/live-api/references/live-api-error-messages.html">Mensajes de error</a></li>
-                        
-                        <li>Notas de versión<a href="/live-api/references/live-api-release-notes.html"></a></li>
-                        
-                        <li>Referencia de API en vivo<a href="/live-api/references/reference.html"></a></li>
-                        
-                      </ul>
-                    </li>
-                  
-                
-                  
-                    <li class="submenu-header">
-                      API en vivo:<a href="/live-api/ssai/index.html"> SSAI +<strong></strong></a>
-                      <ul class="sidenav-subsubmenu" style="display:none;">
-                        
-                        <li><a href="/live-api/ssai/live-api-cue-points-and-ad-beacons-ssai.html">Puntos de referencia y balizas de anuncio con SSAI</a></li>
-                        
-                        <li>Inserción de anuncios en el lado del servidor (SSAI)<a href="/live-api/ssai/live-api-server-side-ad-insertion-ssai.html"></a></li>
-                        
-                        <li>Visión general:<a href="/live-api/ssai/overview-player-enhancements-live-ssai.html"> Mejoras del jugador para SSAI en vivo</a></li>
-                        
-                      </ul>
-                    </li>
-                  
-                
-                  
-                    <li class="submenu-header">
-                      API en vivo:<a href="/live-api/guides/index.html"> Guías <strong>+</strong></a>
-                      <ul class="sidenav-subsubmenu" style="display:none;">
-                        
-                        <li><a href="/live-api/guides/brightcove-live-best-practices.html">Prácticas recomendadas de Brightcove Live</a></li>
-                        
-                        <li><a href="/live-api/guides/brightcove-live-program-ad-metadata-api.html">API de metadatos de anuncios del programa Brightcove Live</a></li>
-                        
-                        <li><a href="/live-api/guides/live-api-creating-frame-accurate-clip.html">Creación de un clip preciso de marco</a></li>
-                        
-                        <li><a href="/live-api/guides/live-api-creating-vod-clips.html">Creación de clips VOD</a></li>
-                        
-                        <li><a href="/live-api/guides/getting-list-live-or-vod-jobs.html">Obtención de una lista de trabajos en vivo o VOD</a></li>
-                        
-                        <li><a href="/live-api/guides/live-api-insert-id3-timed-metadata.html">Insertar metadatos temporizados ID3</a></li>
-                        
-                        <li>DRM en vivo a través de Live API<a href="/live-api/guides/live-drm-live-api.html"></a></li>
-                        
-                        <li>Administración de credenciales para Live API<a href="/live-api/guides/managing-credentials-live-api.html"></a></li>
-                        
-                        <li>Notificaciones<a href="/live-api/guides/live-api-notifications.html"></a></li>
-                        
-                        <li>Reducción de la latencia para transmisiones en directo<a href="/general/reducing-latency-live-streams.html"></a></li>
-                        
-                        <li>Salidas RTMP<a href="/live-api/guides/live-api-rtmp-outputs.html"></a></li>
-                        
-                        <li>Puntos de entrada estáticos<a href="/live-api/guides/live-api-static-entry-points.html"></a></li>
-                        
-                        <li>URL firmadas y autenticación de tokens con una transmisión en directo<a href="/live-api/guides/signed-urls-and-token-auth-live-stream.html"></a></li>
-                        
-                        <li>Uso de Redundancia en Vivo<a href="/live-api/guides/using-live-redundancy.html"></a></li>
-                        
-                        <li>VOD del Evento en Vivo<a href="/live-api/guides/live-api-vod-live-event.html"></a></li>
-                        
-                      </ul>
-                    </li>
-                  
-                
-              </ul>
-            
-          
-            
-              <h5 class="submenu-header"><a href="/admin/index.html">Administrar cuentas <strong>+</strong></a></h5>
-              <ul class="sidenav-submenu" style="display:none;">
-                
-                  
-                    <li><a href="/admin/creating-custom-live-ingest-profiles.html">Creación de perfiles de ingesta dinámica personalizados</a></li>
-                  
-                
-                  
-                    <li>Campos para perfiles personalizados de ingesta activa<a href="/admin/fields-custom-live-ingest-profiles.html"></a></li>
-                  
-                
-                  
-                    <li>Administrar la configuración de Live<a href="/admin/managing-live-settings.html"></a></li>
-                  
-                
-                  
-                    <li>Administración de credenciales de autenticación de API<a href="/admin/managing-api-authentication-credentials.html"></a></li>
-                  
-                
-                  
-                    <li>Perfiles de ingesta en vivo estándar<a href="/admin/standard-live-ingest-profiles.html"></a></li>
-                  
-                
-              </ul>
-            
-          
-            
-              <h5 class="submenu-header">Notas de la versión +<a href="/release-notes/index.html"><strong></strong></a></h5>
-              <ul class="sidenav-submenu" style="display:none;">
-                
-                  
-                    <li>Notas de versión en vivo<a href="/release-notes/live-api-release-notes.html"></a></li>
-                  
-                
-                  
-                    <li>Problemas conocidos<a href="/release-notes/known-issues.html"></a></li>
-                  
-                
-              </ul>
-            
-          
-            
-              <h5 class="submenu-header">Soporte +<a href="/support/index.html"><strong></strong></a></h5>
-              <ul class="sidenav-submenu" style="display:none;">
-                
-                  
-                    
-                  
-                
-                  
-                    <li>Visualización de la página Estado del Sistema de Brightcove<a href="/support/viewing-brightcove-system-status-page.html"></a></li>
-                  
-                
-                  
-                    <li><a href="/support/contact-sales.html">Contacto con Ventas</a></li>
-                  
-                
-                  
-                    <li>Apertura de un caso de soporte<a href="/support/opening-case-with-brightcove-support.html"></a></li>
-                  
-                
-              </ul>
-            
-          
-      </nav>
-    </div>
-    <div class="col-lg-7" style="background-color: white;color: #333333;margin-top: -1em;margin-bottom: -1em;padding-bottom:1em;">
-  <!-- bootstrap layout -->
-
-<p id="bc_veggie_burger_wrapper" style="display: none;"><img id="bc_veggie_burger" src="/assets/images/feather/menu.svg" alt="Menú de navegación"/></p>
-
-<!-- search bar -->
-<div id="nav-search-box" style="margin-top: 1rem;"></div>
-<!-- in-page navigation for narrow screens -->
-<details class="centered-inpage-nav" id="centered_inpage_nav">
-  <summary><h6 class="toc">Contenido de la página</h6></summary>
-  <nav id="centered_toc"></nav>
-  <ul id="centered_in_page_toc" class="list-none"></ul>
-</details>
-<!-- open in new tab/window -->
-<a id="open_new_tab" href="#" target="_blank" style="display: none;"><img src="/assets/images/feather/external-link.svg" alt="abrir en una nueva pestaña" style="margin-top:4em;width: 1.5em;"/></a>
-
-
-
-  
-    
-
-
+---
+title: 'Paso a paso: Uso del módulo en directo con Telestream Wirecast'
+parent: Getting Started —
 <article class="bcls-article">
-  <h1>Paso a paso: Uso del Módulo Live con Telestream Wirecast</h1>
-  <summary>El propósito de este inicio rápido es mostrarle cómo utilizar el módulo Live de Video Cloud y Telestream Wirecast para crear un evento en directo.</summary>
+  <h1>Paso a paso: Uso del módulo en vivo con Telestream Wirecast</h1>
+  <summary>El propósito de este Inicio rápido es mostrarle cómo usar el módulo Video Cloud Live y Telestream Wirecast para crear un evento en vivo.</summary>
   <section class="bcls-section">
 
     <div class="training-video-player-ipx" data-experience="5a73630f7afd7a00101bc1b5" data-video-ids="2403492012001">&nbsp;</div>
     <script src="https://players.brightcove.net/20318290001/experience_5a73630f7afd7a00101bc1b5/live.js"></script>
 
 
-    <p>Para obtener más información sobre todas las funciones y funcionalidades disponibles en el módulo Live, consulte Creación y administración de eventos en directo mediante el módulo Live.<a href="/live-module/creating-and-managing-live-events-using-live-module.html"></a> Para obtener una serie de recomendaciones y mejores prácticas que le permitirán garantizar retransmisiones en directo estables y de alta calidad, consulte <a href="/get-started/live-module-guidelines-and-best-practices.html">Directrices y prácticas recomendadas relacionadas con el módulo Live</a>. Para obtener una lista de todas las opciones disponibles en Brightcove para la retransmisión de vídeo en directo, consulte <a href="/get-started/delivering-live-streams.html">Retransmisión de secuencias en directo</a>.</p>
-    <aside class="bcls-aside bcls-aside--information"> Nota: Para obtener una versión de este documento que utiliza el codificador OBS, consulte <a href="/get-started/step-step-using-live-module-open-broadcaster-software-obs.html">Paso a paso: Uso del Módulo Live con Open Broadcaster Software (OBS).</a></aside>
-    <aside class="bcls-aside bcls-aside--information"> Nota: La compatibilidad con secuencias en directo solo existe para los editores de Video Cloud Pro y Enterprise.</aside>
-    <p>Una vez completada esta guía de inicio rápido, usted podrá:</p>
+    <p>Para conocer todas las características y funcionalidades disponibles en el módulo Live, consulte <a href="/live-module/creating-and-managing-live-events-using-live-module.html">Creación y administración de eventos en vivo usando el módulo en vivo</a>. Para obtener una serie de mejores prácticas y recomendaciones que ayuden a garantizar una experiencia de transmisión en vivo estable y de alta calidad, consulte <a href="/get-started/live-module-guidelines-and-best-practices.html">Directrices y mejores prácticas del módulo en vivo</a>. Para obtener una lista de todas las opciones disponibles de Brightcove para la transmisión de video en vivo, consulte <a href="/get-started/delivering-live-streams.html">Entrega de transmisiones en vivo</a>.</p>
+    <aside class="bcls-aside bcls-aside--information"> Notas: 
+      <ul>
+      <li>Para obtener una versión de este documento que utiliza el codificador OBS, consulte <a href="/get-started/step-step-using-live-module-open-broadcaster-software-obs.html">Paso a paso: Uso del módulo en vivo con Open Broadcaster Software (OBS)</a>.</li>
+      <li>Nota: El soporte de transmisión en vivo está disponible solo para editores de Video Cloud Enterprise.</li>
+      </ul>
+    </aside>
+    <p>Después de completar este inicio rápido, debería poder:</p>
     <ul>
-      <li>Usar el módulo Live de Video Cloud para crear eventos en directo.</li>
-      <li>Configurar el codificador para eventos en directo.</li>
-      <li>Recortar su evento y guardarlo en su cuenta de Video Cloud como activo VOD.</li>
+      <li>Utilice el módulo Video Cloud Live para crear un evento en vivo</li>
+      <li>Configura tu codificador para un evento en vivo</li>
+      <li>Recorte su evento y guárdelo como un activo de VOD en su cuenta de Video Cloud</li>
     </ul>
     </aside>
-    <p>Este inicio rápido te ayudará a transmitir un evento en vivo a diferentes dispositivos usando Telestream Wirecast. Una prueba gratuita está disponible en el <a href="https://www.telestream.net/controls/wirecast/download-wirecast.htm">sitio de Telestream</a>. El módulo Live también permite utilizar otros codificadores.</p>
+    <p>Este Quick Start lo ayudará a transmitir un evento en vivo a diferentes dispositivos usando Telestream Wirecast. Una prueba gratuita está disponible en el <a href="https://www.telestream.net/controls/wirecast/download-wirecast.htm">Sitio de telestream</a>. También se pueden utilizar otros codificadores con el módulo Live.</p>
   </section>
   <section class="bcls-section">
     <h2 id="audience">Audiencia</h2>
-    <p>Cualquier editor de Video Cloud que necesite retransmitir en directo en evento a través del módulo Live de Video Cloud.</p>
+    <p>Cualquier editor de Video Cloud que necesite transmitir un evento de transmisión en vivo utilizando el módulo Video Cloud Live.</p>
   </section>
   <section class="bcls-section">
-    <h2 id="prereq">Requisitos</h2>
+    <h2 id="prereq">Prerrequisitos</h2>
     <ul>
-      <li>Una cuenta de Video Cloud Pro o Enterprise con acceso al módulo Live</li>
+      <li>Una cuenta de Video Cloud Enterprise con acceso al módulo Live</li>
       <li>Una cámara para retransmitir el evento</li>
       <li>Debe tener su propio software de codificación; este Quick Start utiliza <a href="https://www.telestream.net/controls/wirecast/download-wirecast.htm">Telestream Wirecast</a> que se puede descargar de forma gratuita (ver una lista de <a href="/general/supported-encoders-live-events.html">codificadores compatibles</a>)</li>
     </ul>
@@ -484,294 +41,140 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
   <section class="bcls-section">
     <h2 id="limitations">Limitaciones</h2>
     <ul>
-      <li>Su codificador debe poder emitir una secuencia RTMP.</li>
-      <li>Las retransmisiones en directo experimentarán un retardo de 20 a 30 segundos.</li>
-      <li>La transmisión debe comenzar dentro de los 30 minutos del inicio del evento (configuración predeterminada de la cuenta de nivel)</li>
-      <li>Los usuarios que deseen utilizar Internet Explorer deberán tener instalada la versión 10 o posterior.</li>
+      <li>Su codificador debe generar una transmisión RTMP</li>
+      <li>Las transmisiones en vivo experimentarán un retraso de 20 a 30 segundos</li>
+      <li>La transmisión debe comenzar dentro de los 30 minutos posteriores al inicio del evento (configuración de cuenta de nivel predeterminado)</li>
     </ul>
   </section>
   <section class="bcls-section">
     <h2 id="steps">Pasos para transmitir un evento en vivo</h2>
-    <p>Para retransmitir su evento en directo mediante el módulo Live, deberá completar las siguientes tareas:</p>
+    <p>Para transmitir su evento en vivo usando el módulo Live, completará las siguientes tareas:</p>
     <ul>
-      <li><a href="#newevent">Crear un nuevo evento con el módulo Live de Video Cloud</a></li>
-      <li><a href="#encoder">Configurar el codificador</a></li>
-      <li>Publicar la transmisión en directo<a href="#publish"></a></li>
-      <li><a href="#clip">Crear un clip a partir del evento en directo</a></li>
+      <li><a href="#newevent">Cree un nuevo evento utilizando el módulo Video Cloud Live</a></li>
+      <li><a href="#encoder">Configura tu codificador</a></li>
+      <li><a href="#publish">Publica la transmisión en vivo</a></li>
+      <li><a href="#clip">Crea un clip del evento en vivo</a></li>
     </ul>
   </section>
   <section class="bcls-section">
-    <h2 id="newevent">Creación de un nuevo evento en vivo</h2>
+    <h2 id="newevent">Creando un nuevo evento en vivo</h2>
     <ol class="bcls-tasklist-restart">
-      <li>En una ventana del navegador, acceda a <a href="https://studio.brightcove.com">Video Cloud Studio</a>.</li>
-      <li>Introduzca sus credenciales de inicio de sesión en Video Cloud y haga clic en <strong>Iniciar sesión</strong>.</li>
-      <li>En la esquina superior derecha de la página aparecerá el nombre de su cuenta de Video Cloud en la que haya iniciado sesión. Si tiene varias cuentas, haga clic en la lista desplegable de selección de cuentas y elija aquella en la que desee guardar el activo en directo. Si la cuenta seleccionada todavía no ha sido habilitada para retransmisiones en directo, el módulo Live se abrirá en modo de prueba.
-        <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/get-started/10820/node10820-account-selector.png"/></figure>
+      <li>En una ventana del navegador, navegue hasta <a href="https://studio.brightcove.com">Estudio de Video Cloud</a>.</li>
+      <li>Ingrese sus credenciales de inicio de sesión de Video Cloud y haga clic en<strong> Iniciar sesión.</strong></li>
+      <li>El nombre de la cuenta de Video Cloud actual aparecerá en la esquina superior derecha de la página. Si tienes varias cuentas, haz clic en el menú desplegable del selector de cuentas y selecciona la cuenta en la que quieres guardar el activo activo activo. Si selecciona una cuenta que no ha sido habilitada para Live, el módulo Live se abrirá en modo de prueba.
+        <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" width="400" height="600"  src="/assets/images/get-started/10820/node10820-account-selector.png" /></figure>
       </li>
-      <li>En el encabezado de navegación, haga clic en <strong>Live</strong>.</li>
-      <li>Haga clic en el botón <strong>Crear evento</strong> para crear un nuevo evento.</li>
-      <li>Introduzca un <strong>nombre de evento</strong>.</li>
-      <li>Introduzca algunas <strong>etiquetas</strong> para el evento.</li>
-      <li>Si su cuenta se ha configurado con campos personalizados requeridos, asegúrese de que los campos personalizados tengan valores asignados.</li>
-      <li>Seleccione un perfil de ingesta en vivo en la lista desplegable.<strong></strong> El perfil de ingesta activa controla el número y la calidad de las copias activas que se crean.</li>
-      <li>Seleccione Convertir evento en activo de vídeo una vez finalizado.<strong></strong> Esto guardará el evento como un vídeo en el módulo Media.
-        <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/get-started/10820/node10820-create-live-event.png"/></figure>
+      <li>Hacer clic <strong> Vivir</strong> en el encabezado de navegación.</li>
+      <li>Haga clic en el <strong>Crear evento</strong> botón para crear un nuevo evento.</li>
+      <li>Ingrese un <strong>Nombre del evento</strong>.</li>
+      <li>Ingrese algunos <strong>Etiquetas</strong> Para el evento.</li>
+      <li>Si su cuenta se ha configurado con campos personalizados obligatorios, asegúrese de que los campos personalizados tengan valores asignados.</li>
+      <li>Seleccione un <strong>Perfil de ingesta en vivo</strong> de la lista desplegable. El perfil de ingesta en vivo controla el número y la calidad de las interpretaciones en vivo que se crean.</li>
+      <li>Seleccione <strong>Convierta el evento en un recurso de video cuando esté completo</strong>. Esto guardará el evento como un video en el módulo de Medios.
+        <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/get-started/10820/node10820-create-live-event.png" /></figure>
       </li>
-      <li>Haga clic en el enlace <strong>OPCIONES AVANZADAS</strong> para expandir las opciones avanzadas.</li>
-      <li>Ajuste el tiempo de reconexión en 1 minuto.<strong></strong></li>
-      <li>Selecciona la región más cercana a tu ubicación.<strong></strong>
-        <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/get-started/10820/node10820-adv-options.png"/></figure>
+      <li>Selecciona el <strong>Región</strong> más cercano a su ubicación.</li>
+      <li>Haga clic en el <strong>OPCIONES AVANZADAS</strong> enlace para expandir las opciones avanzadas.</li>
+      <li>Selecciona el <strong>Hora de reconexión</strong> a 10 minutos (predeterminado).
+        <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/get-started/10820/node10820-adv-options.png" /></figure>
       </li>
-      <li>Haga clic en <strong>Crear evento</strong>. El módulo Live devolverá un extremo de transmisión (URL RTMP) y un nombre de transmisión.<strong></strong><strong></strong> Estos valores se utilizarán en los ajustes del codificador.
-        <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/get-started/10820/node10820-encoder-settings1.png"/></figure>
+      <li>Hacer clic <strong>Crear evento</strong>. El módulo Live devolverá un <strong>Punto final de transmisión (URL de RTMP) </strong> y <strong>Nombre de la secuencia</strong>. Estos valores se utilizarán en la configuración del codificador.
+        <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/get-started/10820/node10820-encoder-settings1.png" /></figure>
       </li>
     </ol>
   </section>
   <section class="bcls-section">
-    <h2 id="encoder">Configuración del codificador</h2>
-    <p>En este apartado configuraremos y utilizaremos Telestream Wirecast para poder retransmitir secuencias en directo. El software Telestream Wirecast es una aplicación para equipos de escritorio que captura la entrada de la cámara y genera una secuencia que puede subirse a una CDN. Tenga en cuenta que existen otras soluciones de codificación tanto de hardware como de software que pueden resultarle más adecuadas para retransmitir secuencias en directo. Puede descargar una versión de prueba del software Wirecast en el <a href="https://www.telestream.net/controls/wirecast/download-wirecast.htm">sitio web de Telestream</a>.</p>
-    <aside class="bcls-aside bcls-aside--information">Nota: Debe tener instalado el software Wirecast y una cámara conectada a su computadora antes de continuar</aside>
-    <aside class="bcls-aside bcls-aside--information">Nota: En este ejemplo se utiliza una cámara réflex digital conectada a un portátil mediante la grabadora Blackmagic Design UltraStudio Mini Recorder.</aside>
-    <aside class="bcls-aside bcls-aside--information">Nota: Wirecast ofrece la posibilidad de grabar una copia local de la transmisión. Al elegir hacerlo, tendrá una copia local de la transmisión a partir de la cual podrá crear clips en caso de que se produzcan problemas de red durante la difusión del evento. Para obtener información sobre cómo registrar un archivo local, consulte la <a href="http://telestream.force.com/kb/articles/Knowledge_Article/Record-to-Disk">documentación de Wirecast</a>.</aside>
-    <p>En este ejemplo se utiliza una cámara réflex digital conectada a un portátil mediante la grabadora Blackmagic Design UltraStudio Mini Recorder.</p>
+    <h2 id="encoder">Configurando tu codificador</h2>
+    <p>En esta sección, configuraremos y usaremos el codificador Telestream Wirecast para admitir un evento de transmisión en vivo. El software Telestream Wirecast es una aplicación de escritorio que captura la entrada de su cámara y produce una transmisión que puede ser entregada por un CDN. Tenga en cuenta que existen soluciones de codificación basadas en hardware y otro software disponibles que pueden ser más adecuadas para ofrecer su evento de transmisión en vivo. Puede descargar una versión de prueba del software Wirecast desde el <a href="https://www.telestream.net/controls/wirecast/download-wirecast.htm">Sitio web de Telestream</a>.</p>
+    <aside class="bcls-aside bcls-aside--information"> Notas: 
+      <ul>
+      <li>Debe tener el software Wirecast instalado y una cámara conectada a su computadora antes de continuar.</li>
+      <li>Este ejemplo utiliza una cámara réflex digital conectada a una computadora portátil mediante la mini grabadora Blackmagic Design UltraStudio.</li>
+      <li>Wirecast ofrece la posibilidad de grabar una copia local de la transmisión. Al elegir hacer esto, tendrá una copia local de la transmisión desde la que puede crear clips en caso de que ocurra algún problema de red durante la transmisión del evento. Para obtener información sobre cómo grabar un archivo local, consulte la <a href="http://telestream.force.com/kb/articles/Knowledge_Article/Record-to-Disk">Documentación de Wirecast</a>.</li>
+      </aside>
+      </ul>
+    <p>Este ejemplo utiliza una cámara réflex digital conectada a una computadora portátil mediante la mini grabadora Blackmagic Design UltraStudio.</p>
     <ol class="bcls-tasklist-restart">
       <li>Abra Wirecast.</li>
-      <li>Haga clic en <strong>+</strong> y seleccione <strong>Captura de vídeo</strong>.</li>
-      <li>Seleccione su cámara de la lista. Haga clic en <strong>Añadir</strong>.
-        <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/get-started/10820/node10820-add-camera.png"/></figure>
+      <li>Hacer clic <strong>+</strong> y seleccione <strong>Captura de video</strong>.</li>
+      <li>Seleccione su cámara de la lista. Haz clic en <strong>Agregar</strong>.
+        <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/get-started/10820/node10820-add-camera.png" /></figure>
       </li>
-      <li>Confirme que la fuente de vídeo seleccionada aparece en el panel de vista previa.
-        <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/get-started/10820/node10820-live-shot.png"/></figure>
+      <li>Confirme que la fuente de video seleccionada aparece en el panel de vista previa.
+        <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/get-started/10820/node10820-live-shot.png" /></figure>
       </li>
-      <li>Haga clic en el botón de flecha (<img alt="" src="/assets/images/get-started/10820/node10820-arrow-button.png"/>) para que la cámara capture la imagen en directo.</li>
-      <li>Haga clic en el botón de transmisión (<img alt="" src="/assets/images/get-started/10820/node10820-stream-button.png"/>). Se le pedirá que indique los ajustes de salida.</li>
-      <li>Establezca el <strong>destino de salida</strong> en <strong>Servidor RTMP</strong>. Haga clic en <strong>Aceptar</strong>.</li>
-      <li>Para la <strong>dirección</strong>, utilice la <strong>URL de transmisión</strong> proporcionada por el módulo Live.</li>
-      <li>Para el <strong>Stream</strong>, usa <strong>vivo</strong>.
-        <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/get-started/10820/node10820-output-settings.png"/></figure>
+      <li>Haga clic en el botón de flecha (<img alt="" src="/assets/images/get-started/10820/node10820-arrow-button.png" />) para hacer que la cámara tome la toma en vivo.</li>
+      <li>Haga clic en el botón de transmisión (<img alt="" src="/assets/images/get-started/10820/node10820-stream-button.png" />). Se le pedirá que ingrese la Configuración de salida.</li>
+      <li>Selecciona el <strong>Destino de salida</strong> a <strong>Servidor RTMP</strong>. Hacer clic <strong>OK</strong>.</li>
+      <li>Para la <strong>dirección</strong>, utilice la URL de <strong>transmisión</strong> proporcionada por el módulo Live.</li>
+      <li>Para el <strong>Stream</strong>, úsalo <strong>vivo</strong>.
+        <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/get-started/10820/node10820-output-settings.png" /></figure>
       </li>
-      <li>Haga clic en el botón de transmisión (<img alt="" src="/assets/images/get-started/10820/node10820-stream-button.png"/>). La retransmisión en directo debería comenzar.</li>
+      <li>Haga clic en el botón de transmisión (<img alt="" src="/assets/images/get-started/10820/node10820-stream-button.png" />). La transmisión en vivo debería comenzar.</li>
     </ol>
-    <aside class="bcls-aside bcls-aside--information">Nota: El procesamiento de sus secuencias tardará aproximadamente un minuto.</aside>
+    <aside class="bcls-aside bcls-aside--information">Nota: Llevará aproximadamente un minuto procesar sus transmisiones.</aside>
   </section>
   <section class="bcls-section">
-    <h2 id="publish">Publicación del evento en directo</h2>
+    <h2 id="publish">Publicando el evento en vivo</h2>
     <p>Para generar el código de inserción para el evento en vivo, siga estos pasos:</p>
     <ol class="bcls-tasklist-restart">
-      <li>Vuelva al módulo Live.</li>
-      <li>Si no se muestra la página Sala de control del evento, haga clic en la ficha <strong>Live</strong> para mostrar una lista de eventos en directo. Haga clic en el nombre del evento para abrir la página Control Room.</li>
-      <li>Compruebe si se puede ver la secuencia en directo. Tenga en cuenta que después de iniciar el codificador, la transmisión en vivo puede tardar un minuto en aparecer.
-        <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/get-started/10820/node10820-control-room.png"/></figure>
+      <li>Regrese al módulo Live.</li>
+      <li>Si no se muestra la página de la sala de control para el evento, haga clic en el <strong>Vivir</strong> pestaña para mostrar una lista de eventos en vivo. Haga clic en el nombre del evento para abrir el Sala de control página.</li>
+      <li>Confirma que puedes ver la transmisión en vivo. Tenga en cuenta que después de iniciar el codificador, es posible que la transmisión en vivo tarde un minuto en aparecer.
+        <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/get-started/10820/node10820-control-room.png" /></figure>
       </li>
-      <li>Haga clic en <strong>Publicar e incrustar</strong>.</li>
-      <li>Seleccione un reproductor y, a continuación, haga clic en la URL del reproductor para ver la transmisión en directo.<strong></strong><strong></strong>
-        <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/get-started/10820/node10820-embed-code.png"/></figure>
+      <li>Hacer clic <strong>Publicar e incrustar</strong>.</li>
+      <li>Seleccione un <strong>Jugador</strong> y luego haga clic en el <strong>URL del jugador</strong> para ver la transmisión en vivo.
+        <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/get-started/10820/node10820-embed-code.png" /></figure>
       </li>
-      <li>Cuando haya terminado con la transmisión en vivo, haga clic en el botón Detener transmisión en el módulo Live.<strong></strong> Además, vuelva a Wirecast y haga clic en el botón de transmisión para detener la transmisión del codificador.
-        <aside class="bcls-aside bcls-aside--information">Nota: Es importante asegurarse de cerrar/detener el codificador al finalizar la retransmisión en directo. Dejar abierta una conexión entre cualquier codificador y Brightcove, incluso aunque no se transmitan datos, puede generar gastos de conexión imprevistos.</aside>
+      <li>Cuando haya terminado con la transmisión en vivo, haga clic en el <strong>Detener transmisión</strong> en el módulo Live. Además, regrese a Wirecast y haga clic en el botón de transmisión para detener la transmisión del codificador. <aside class="bcls-aside bcls-aside--information">Nota: Es importante asegurarse de cerrar / detener su codificador cuando se complete la transmisión en vivo. Dejar abierta una conexión entre cualquier codificador y Brightcove, incluso cuando no se envían datos, puede generar cargos de conexión inesperados.</aside>
       </li>
     </ol>
   </section>
   <section class="bcls-section">
-    <h2 id="clip">Creación de un clip</h2>
-    <p>El módulo Live proporciona la capacidad de crear clips de vídeo a partir de eventos completados. También se pueden crear clips mientras un evento en directo está en curso. Hay varias razones por las que puede querer crear un clip:</p>
+    <h2 id="clip">Creando un clip</h2>
+    <p>El módulo Live brinda la capacidad de crear videoclips a partir de eventos completados. También se pueden crear clips mientras se está realizando un evento en vivo. Hay varias razones por las que puede querer crear un clip:</p>
     <ul>
-      <li>Para crear un clip corto y teaser que se pueda publicar en las redes sociales</li>
-      <li>Para limitar la duración de un vídeo que desea publicar (la mayoría de las plataformas limitan la duración de los vídeos)</li>
-      <li>Usted ha descubierto que los videos más cortos funcionan mejor en las redes sociales</li>
+      <li>Para crear un clip teaser corto que se pueda publicar en las redes sociales</li>
+      <li>Para limitar la duración de un video que desea publicar (la mayoría de las plataformas limitan la duración de los videos)</li>
+      <li>Descubrió que los videos más cortos funcionan mejor en las redes sociales</li>
     </ul>
-    <p>Los clips solo se pueden crear dentro de los 7 días posteriores al final del evento. Después, se desactivará el botón <strong>Crear clip</strong> . Si el evento es superior a 24 horas, solo las últimas 24 horas son recortables.</p>
-    <aside class="bcls-aside bcls-aside--information">Nota: Para obtener detalles completos sobre el uso de la interfaz de recorte, consulte <a href="/live-module/creating-video-clip-using-live-module.html">Creación de un clip de vídeo mediante el módulo Live</a>.</aside>
+    <p>Los clips solo se pueden crear dentro de los 7 días posteriores al final del evento. Posteriormente, el <strong>Crear clip</strong> El botón se desactivará. Si el evento dura más de 24 horas, solo se pueden recortar las últimas 24 horas.</p>
+    <aside class="bcls-aside bcls-aside--information">Nota: Para obtener información completa sobre el uso de la interfaz de recorte, consulte <a href="/live-module/creating-video-clip-using-live-module.html">Creación de un clip de vídeo mediante el módulo Live</a>.</aside>
     <p>Para crear un clip, siga estos pasos:</p>
     <ol class="bcls-tasklist-restart">
-      <li>Vuelva al módulo Live.</li>
-      <li>Haga clic en la ficha <strong>Completado</strong> .</li>
+      <li>Regrese al módulo Live.</li>
+      <li>Haga clic en el <strong>Terminado</strong> pestaña.</li>
       <li>Busque el evento y haga clic en el nombre del evento para abrir la Sala de control.</li>
-      <li>Haga clic en <strong>Crear clip</strong>. Se abrirá el editor de recortes.</li>
-      <li>Haga clic y arrastre los controladores de recorte (<img alt="" src="/assets/images/get-started/10820/node10820-clip-handle.png"/>) en la línea de tiempo de enfoque para definir los puntos inicial y final del clip.
-        <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/get-started/10820/node10820-clip-start-end.png"/></figure>
+      <li>Hacer clic <strong>Crear clip</strong>. Se abrirá el editor de recortes.</li>
+      <li>Haga clic y arrastre los controladores de recorte (<img alt="" width="5" height="20" src="/assets/images/get-started/10820/node10820-clip-handle.png" />) en la línea de tiempo de enfoque para establecer los puntos de inicio y finalización del clip.
+        <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" width="400" height="300"  src="/assets/images/get-started/10820/node10820-clip-start-end.png" /></figure>
       </li>
-      <li>Haga clic en <strong>Vista previa del clip</strong> para previsualizar el clip. Los puntos inicial y final se pueden ajustar según sea necesario.</li>
-      <li>Haga clic en <strong>Guardar clip</strong>.</li>
-      <li>Introduzca un <strong>nombre de clip</strong> y otros valores de metadatos. Todos los campos obligatorios para la cuenta también aparecerán y deben tener valores asignados.
-        <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/get-started/10820/node10820-clip-metadata.png"/></figure>
+      <li>Hacer clic <strong>Vista previa del clip</strong> para obtener una vista previa del clip. Los puntos de inicio y finalización se pueden ajustar según sea necesario.</li>
+      <li>Hacer clic <strong>Guardar clip</strong>.</li>
+      <li>Entrar a <strong>Nombre del clip</strong> y otros valores de metadatos. Todos los campos obligatorios para la cuenta también aparecerán y se les deben asignar valores.
+        <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/get-started/10820/node10820-clip-metadata.png" /></figure>
       </li>
-      <li>Haga clic en <strong>Crear clip</strong>. El proceso de ingestión comenzará y el clip se guardará en su cuenta de Video Cloud.</li>
-      <li>Los clips aparecerán debajo del editor de clips. Haga clic en <strong>Publicar en Social</strong> para publicar el clip en uno de sus destinos sociales mediante Brightcove Social. Para obtener información sobre cómo publicar vídeos mediante el módulo Social, consulte <a href="https://social.support.brightcove.com/general/publishing-videos-social-media-platforms.html">Publicación de vídeos en plataformas de medios sociales</a>.</li>
-      <li>Haga clic en <strong>Volver a la sala de control: Completada</strong> miga de pan. Todos los clips también aparecerán en la Sala de Control del evento.
-        <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/get-started/10820/node10820-clips-section.png"/></figure>
-        &nbsp;
-        <aside class="bcls-aside bcls-aside--information">Nota: Para crear varios videoclips de su retransmisión, haga clic varias veces en el botón Crear videoclip. Esta función permite recortar y guardar tantas veces como se desee por cada retransmisión, guardando los videoclips como activos a la carta independientes en la biblioteca de medios.</aside>
+      <li>Hacer clic <strong>Crear clip</strong>. El proceso de ingestión comenzará y el clip se guardará en su cuenta de Video Cloud.</li>
+      <li>Los clips aparecerán debajo del editor de clips. Hacer clic <strong>Publicar en redes sociales</strong> para publicar el clip en uno de sus destinos sociales mediante Brightcove Social. Para obtener información sobre la publicación de videos con el módulo Social, consulte <a href="https://social.support.brightcove.com/general/publishing-videos-social-media-platforms.html">Publicación de videos en plataformas de redes sociales</a>.</li>
+      <li>Haga clic en el <strong>Volver a la sala de control: Terminado</strong> migaja de pan. Todos los clips también aparecerán en la Sala de control del evento.
+        <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/get-started/10820/node10820-clips-section.png" /></figure>
+        &nbsp; <aside class="bcls-aside bcls-aside--information">Nota: Puede hacer clic en el botón Crear clip varias veces para crear varios clips de su transmisión. Esto le permite recortar y guardar tantas veces como desee para cada transmisión, guardando los clips como activos VOD independientes en su biblioteca multimedia.</aside>
       </li>
     </ol>
   </section>
   </section>
   <section class="bcls-section">
-    <h2 id="troubleshoot">Resolución de problemas relacionados con secuencias en directo</h2>
-    <p>Si necesita más ayuda para conseguir que funcione su evento en directo, <a href="https://supportportal.brightcove.com/create">póngase en contacto con nosotros</a>. Para que podamos darle una solución lo antes posible, le rogamos que tenga preparada la siguiente lista de requisitos.</p>
+    <h2 id="troubleshoot">Solución de problemas de transmisión en vivo</h2>
+    <p>Si necesita más ayuda para que su evento en vivo funcione, puede <a href="https://supportportal.brightcove.com/create">Contáctenos</a>. Para asegurarse de obtener la respuesta más rápida posible, a continuación se muestra una lista de la asistencia que necesitará para resolver el problema.</p>
     <ul>
-      <li>Los síntomas que tenga la secuencia. Por ejemplo, ¿no se reproduce en absoluto, o se reproduce con interrupciones y "cuelgues"?</li>
-      <li>Indique si esta secuencia ha llegado a funcionar correctamente en algún momento</li>
-      <li>La dirección URL de acceso que esté utilizando su codificador</li>
-      <li>El software y el hardware de codificación que esté utilizando</li>
-      <li>La dirección URL del reproductor en el que está publicado el evento en directo</li>
-      <li>El ID del vídeo de su activo en directo en Video Cloud Studio</li>
-      <li>Los resultados de una traza de la ruta ("trace-route") desde su codificador al equipo del punto de publicación</li>
+      <li>Los síntomas específicos que tiene la corriente. Por ejemplo, ¿no se reproduce en absoluto o tartamudea o se congela?</li>
+      <li>Si esta transmisión funcionó correctamente en el pasado</li>
+      <li>La URL del punto de entrada que está utilizando en su codificador.</li>
+      <li>El software y hardware de codificación que está utilizando</li>
+      <li>La URL del jugador en el que ha publicado el evento en directo.</li>
+      <li>La identificación de video de su activo en vivo en Video Cloud Studio</li>
+      <li>Los resultados de una ruta de seguimiento desde su codificador hasta el host del punto de publicación</li>
     </ul>
   </section>
 </article>
-
-<!-- complete bootstrap layout -->
-    </div>
-    <div class="col-sm-2 right-side-bar">
-      
-      <nav class="right-side-nav" id="right_side_nav">
-        <h6 class="toc">Contenido de la página</h6>
-        <ul id="in_page_nav" class="list-none"></ul>
-      </nav>
-      
-    </div>
-  </div>
-</div>
-
-<hr>
-<footer class="bcls-footer" role="contentinfo">  <div class="row">
-    <div class="region region-footer-top-center col-md-12">
-      <nav role="navigation" aria-labelledby="block-brightcovesupport-menu" id="block-brightcovesupport" class="footer-menu">
-
-        <h2>Asistencia técnica de Brightcove</h2>
-
-        <ul class="menu">
-          <li>
-            Estado del sistema<a href="https://status.brightcove.com"></a>
-          </li>
-          <li>
-            <a href="https://supportportal.brightcove.com/s/login/?">Contactar soporte</a>
-          </li>
-          <li>
-            <a href="https://support.brightcove.com/">Documentación</a>
-          </li>
-        </ul>
-
-      </nav>
-      <nav role="navigation" aria-labelledby="block-training-menu" id="block-training" class="footer-menu">
-
-        <h2>Formación</h2>
-
-        <ul class="menu">
-          <li>
-            Cursos en línea<a href="https://studio.support.brightcove.com/training/online-training-courses.html"></a>
-          </li>
-          <li>
-            Inscríbete a un curso<a href="https://studio.support.brightcove.com/training/register-training.html"></a>
-          </li>
-          <li>
-            <a href="https://university.brightcove.com/">Universidad de Brightcove</a>
-          </li>
-        </ul>
-
-      </nav>
-      <nav role="navigation" aria-labelledby="block-brightcove-menu" class="footer-menu">
-
-        <h2>Brightcove</h2>
-
-        <ul class="menu">
-          <li>
-            <a href="https://www.brightcove.com">BrightCove.com</a>
-          </li>
-          <li>
-            <a href="https://supportportal.brightcove.com/s/login/?">Contáctanos</a>
-          </li>
-        </ul>
-      </nav>
-    </div>
-  </div>
-  <div class="row">
-    <div class="region region-footer-bottom-center col-md-12">
-      <div class="bcls-copyright footer-menu">
-        <table>
-          <tr>
-            <td>
-              <div id="bc_copyright" class="field field--name-field-copyright-year field--type-string field--label-hidden field--item" style="float: left;"> Brightcove Inc. All rights reserved.</div>
-            </td>
-            <td>Privacidad | Términos y Condiciones<a href="https://www.brightcove.com/en/legal/privacy"></a><a href="https://www.brightcove.com/en/terms-and-conditions"></a></td>
-            <td>
-              <div class="gf-links-cols footer-menu">
-                <div class="gf-social"><a href="https://www.linkedin.com/company/16439" title="LinkedIn" newtab="newtab" class="gf-social-linkedin"><i class="fab fa-linkedin-in" style="font-size: 1.5rem;"></i></a><a href="https://twitter.com/brightcove" title="Twitter" newtab="newtab" class="gf-social-twitter"><i class="fab fa-twitter" style="font-size: 1.5rem;"></i></a><a href="https://www.facebook.com/Brightcove" title="Facebook" newtab="newtab" class="gf-social-facebook"><i class="fab fa-facebook-f" style="font-size: 1.5rem;"></i></a>
-                </div>
-              </div>
-            </td>
-          </tr>
-        </table>
-      </div>
-    </div>
-  </div>
-</footer>
-
-<script>
-      
-  var searchBox = sajari.init({
-    mode: "search-box",
-    project: "1588255093746585379", // Set this to your project.
-    collection: "brightcove-documenation", // Set this to your collection.
-    instantPipeline: "autocomplete", // Pipeline used as you type
-    inputPlaceholder: "Search", // Input element placeholder
-    maxSuggestions: 5, // Maximum number of suggestions to show
-    attachSearchBox: document.getElementById("nav-search-box") // DOM element to attach to
-  });
-  
-    searchBox("sub", "pipeline.search-sent", function (_, query) {
-      window.location = "/search.html?q=" + encodeURIComponent(query.q);
-    });
-  
-
-</script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  <script src="https://support.brightcove.com/site-assets/js/site/https-fix.js"></script>
-  <script src="https://support.brightcove.com/site-assets/js/site/setDate.js"></script>
-  
-  <script src="https://support.brightcove.com/site-assets/js/site/prism.js"></script>
-  
-  <script src="https://support.brightcove.com/site-assets/js/site/site.js"></script>
-  <script src="https://support.brightcove.com/site-assets/js/site/tabs.js"></script>
-  <script src="https://support.brightcove.com/site-assets/js/site/toc.js"></script>
-  <script src="/assets/js/sites_nav.js"></script>
-  <script src="https://support.brightcove.com/site-assets/js/site/bcls-utils.js"></script>
-  <script src="https://support.brightcove.com/site-assets/js/site/local-link-fix.js"></script>
-  <script src="/assets/js/feedback.js"></script>
-  
-  <script src="/assets/js/sajari-search-foot.js"></script>
-  
-  <!-- <script src="/assets/js/sajari-index.js"></script> -->
-  <style>
-    a.sj-paginator__page-number.sj-paginator__page-number--current.css-so0ov7 {
-      background-color: lightblue;
-    }
-    div.sj-tabs__tab {
-      margin-top: 3rem;
-      margin-left: .3rem;
-      border-top-left-radius: .4rem;
-      border-top-right-radius: .4rem;
-      background-color:#e8e8e8;
-    }
-
-    div.sj-tabs__tab.sj-tabs__tab--selected {
-      border-bottom-color: crimson;
-      background-color: #f8f8f8;
-    }
-
-    p.sj-results__result__description.css-p9jvyt {
-      font-size: 1rem;
-    }
-
-    .sj-result__text.css-31l7gp h3 {
-      color: navy;
-      font-size: 1.4rem;
-    }
-    </style>
-
-</body>
-
-</html>

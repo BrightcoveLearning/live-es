@@ -1,527 +1,85 @@
-﻿<!doctype html>
-<html lang="es-es">
-
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  
-  <title>API en vivo: Creación de clips VOD</title>
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-  <link rel="manifest" href="/site.webmanifest">  
-  <link data-react-helmet="true" rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500&amp;display=swap">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://support.brightcove.com/site-assets/css/site/prism.css">
-  <link rel="stylesheet" href="https://support.brightcove.com/site-assets/css/site/styles.css">
-  <link rel="stylesheet" href="https://support.brightcove.com/site-assets/css/site/landing-page.css">
-  <link rel="stylesheet" href="https://support.brightcove.com/site-assets/css/site/tabs.css">
-  <link rel="stylesheet" href="/assets/css/local.css">
-  <link data-react-helmet="true" rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500&display=swap">
-  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro&display=swap" rel="stylesheet">
-  <script src="https://kit.fontawesome.com/381443caa8.js" crossorigin="anonymous"></script>
-  <script src="https://support.brightcove.com/site-assets/js/site/google-analytics.js"></script>
-  <script src="/assets/js/sajari-head.js"></script>
-</head>
-
-<body class="body">
-
-<header>
-  <div class="div-header">
-    <a href="/"><img class="product-logo" src="https://support.brightcove.com/site-assets/images/site/product-logos/Live_Logo.svg" alt="logotipo del producto" style="max-height: 100px;max-width: 232px;"/></a>
-<!-- GTranslate: https://gtranslate.io/ -->
-<select onchange="doGTranslate(this);"><option value="">Seleccionar idioma</option><option value="en|en" translate="No">English</option><option value="en|zh-TW" translate="No">繁體中文</option><option value="en|fr" translate="No">Français</option><option value="en|de" translate="No">Deutsche</option><option value="en|ja" translate="No">日本語</option><option value="en|ko" translate="No">한국어</option><option value="en|es" translate="No">Español</option></select>
-
-<script>
-/* <![CDATA[ */
-function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;if(lang_pair=='')return;var lang=lang_pair.split('|')[1];var plang=location.hostname.split('.')[0];if(plang.length !=2 && plang.toLowerCase() != 'zh-cn' && plang.toLowerCase() != 'zh-tw')plang='en';location.href=location.protocol+'//'+(lang == 'en' ? '' : lang+'.')+location.hostname.replace('www.', '').replace(RegExp('^' + plang + '\\.'), '')+location.pathname+location.search;}
-/* ]]> */
+---
+title: 'API en vivo: Creación de clips VOD'
+parent: Guides 
+grandparent: Live API
+---
+ <h1>Esta página se ha movido; se le dirigirá a la <a href="https://apis.support.brightcove.com/live-api/guides/live-api-creating-vod-clips.html">nueva ubicación</a> en 3 segundos. ¡Actualiza tus marcadores!</h1>
+<script type="text/javascript">
+var t = setTimeout (function () { window.location.href = 'https://apis.support.brightcove.com/live-api/guides/live-api-creating-vod-clips.html'; }, 3000);
 </script>
-
-    
-
-
-    <span class="secondary-nav"><a href="https://supportportal.brightcove.com/s/login/?"><img src="https://support.brightcove.com/site-assets/images/site/support.png" alt="soporte"/> Contactar con Soporte</a> <span style="vertical-align: top;margin-left:1em;margin-right:1em;">|</span> <a href="https://status.brightcove.com/">Estado<img src="https://support.brightcove.com/site-assets/images/site/status.png" alt="estado del sistema"/> del sistema</a></span> <br/>
-    
-  </div>
-  <nav aria-label="breadcrumb">
-    <ol class="breadcrumb arr-right">
-      
-      <li class="breadcrumb-item"><a href="/">Inicio</a></li>
-      
-      
-      
-      <li class="breadcrumb-item"><a href="/live-api/guides/">Guías</a></li>
-      
-      <li class="breadcrumb-item active" aria-current="page">API en vivo: Creación de clips VOD</li>
-    </ol>
-  </nav>
-</header>
-<div class="container">
-    <div class="row">
-            <div class="col-sm-3 left-side-bar">
-        <select id="site_select" class="bcls-select" style="margin-right: 1rem;">
-          <option value="">Otros documentos de Brightcove</option>
-          
-            
-              <option value="https://support.brightcove.com">Documentación Inicio</option>
-            
-          
-            
-              <option value="https://audience.support.brightcove.com">Audiencia de Brightcove</option>
-            
-          
-            
-              <option value="https://beacon.support.brightcove.com">Baliza Brightcove</option>
-            
-          
-            
-              <option value="https://campaign.support.brightcove.com">Campaña de Brightcove</option>
-            
-          
-            
-              <option value="https://engage.support.brightcove.com">Brightcove Engage</option>
-            
-          
-            
-              <option value="https://live.support.brightcove.com">Brightcove Live</option>
-            
-          
-            
-              <option value="https://gallery.support.brightcove.com">Brightcove Gallery</option>
-            
-          
-            
-              <option value="https://ssai.support.brightcove.com">Brightcove SSAI</option>
-            
-          
-            
-              <option value="https://social.support.brightcove.com">Brightcove Social</option>
-            
-          
-            
-              <option value="https://studio.support.brightcove.com">Video Cloud Studio</option>
-            
-          
-            
-              <option value="https://player.support.brightcove.com">Desarrollo de jugadores de Brightcove</option>
-            
-          
-            
-              <option value="https://apis.support.brightcove.com">API para la plataforma de Video Cloud</option>
-            
-          
-            
-              <option value="https://sdks.support.brightcove.com">SDK de dispositivos de Video Cloud</option>
-            
-          
-            
-              <option value="https://integrations.support.brightcove.com">Integraciones y conectores CMS</option>
-            
-          
-            
-              <option value="https://general.support.brightcove.com">Información general de Video Cloud</option>
-            
-          
-            
-              <option value="https://zencoder.support.brightcove.com">Zencoder</option>
-            
-          
-        </select>
-
-        <nav class="sidenav" id="side_nav">
-          
-            
-            <h5><a href="/index.html">Inicio</a></h5>
-            
-          
-            
-              <h5 class="submenu-header"><a href="/get-started/index.html">Empezar <strong>+</strong></a></h5>
-              <ul class="sidenav-submenu" style="display:none;">
-                
-                  
-                    <li><a href="/get-started/brightcove-live-training-videos.html">Vídeos de formación en directo de Brightcove</a></li>
-                  
-                
-                  
-                    <li><a href="/get-started/delivering-live-streams.html">Entrega de transmisiones en directo</a></li>
-                  
-                
-                  
-                    <li>Pautas y prácticas recomendadas del módulo en vivo<a href="/get-started/live-module-guidelines-and-best-practices.html"></a></li>
-                  
-                
-                  
-                    <li>Paso a paso:<a href="/get-started/step-step-using-live-module-open-broadcaster-software-obs.html"> Uso del Módulo Live con OBS</a></li>
-                  
-                
-                  
-                    <li>Paso a paso:<a href="/get-started/step-step-using-live-module-telestream-wirecast.html"> Uso del Módulo Live con Wirecast</a></li>
-                  
-                
-              </ul>
-            
-          
-            
-              <h5 class="submenu-header"><a href="/general/index.html">Información general <strong>+</strong></a></h5>
-              <ul class="sidenav-submenu" style="display:none;">
-                
-                  
-                    <li>DRM en vivo<a href="/general/live-drm.html"></a></li>
-                  
-                
-                  
-                    <li>Matriz de comparación de plataformas activas<a href="/general/live-platforms-comparison-matrix.html"></a></li>
-                  
-                
-                  
-                    <li>Glosario de Vídeo en Vivo<a href="/general/live-video-glossary.html"></a></li>
-                  
-                
-                  
-                    <li>Reducción de la latencia para transmisiones en directo<a href="/general/reducing-latency-live-streams.html"></a></li>
-                  
-                
-                  
-                    <li>Codificadores compatibles para eventos en directo<a href="/general/supported-encoders-live-events.html"></a></li>
-                  
-                
-                  
-                    <li>Uso del empaquetado de Akamai Stream y Wirecast<a href="/general/creating-live-stream-using-akamai-stream-packaging-and-telestream-wirecast.html"></a></li>
-                  
-                
-              </ul>
-            
-          
-            
-              <h5 class="submenu-header">Uso del Módulo Live +<a href="/live-module/index.html"><strong></strong></a></h5>
-              <ul class="sidenav-submenu" style="display:none;">
-                
-                  
-                    <li><a href="/live-module/client-side-preroll-with-live-ssai.html">Anuncios previos del lado del cliente con SSAI en vivo</a></li>
-                  
-                
-                  
-                    <li><a href="/live-module/creating-and-managing-live-events-using-live-module.html">Creación y administración de eventos en directo</a></li>
-                  
-                
-                  
-                    <li><a href="/live-module/creating-video-clip-using-live-module.html">Creación de un clip de vídeo</a></li>
-                  
-                
-                  
-                    <li><a href="https://integrations.support.brightcove.com/web-conferencing/host-avaya-conference-brightcove-live.html">Anfitrión de la conferencia de Avaya en Brightcove Live</a></li>
-                  
-                
-                  
-                    <li><a href="https://integrations.support.brightcove.com/web-conferencing/host-cisco-webex-conference-brightcove-live.html">Hospedar Cisco Webex a Brightcove Live</a></li>
-                  
-                
-                  
-                    <li><a href="https://integrations.support.brightcove.com/web-conferencing/host-zoom-conference-brightcove-live.html">Zoom de host a Brightcove Live</a></li>
-                  
-                
-                  
-                    <li><a href="https://integrations.support.brightcove.com/web-conferencing/host-inxpo-live.html">Organiza un evento INXPO en Brightcove Live</a></li>
-                  
-                
-                  
-                    <li><a href="/live-module/implementing-server-side-ads-live-module.html">Implementación de anuncios del lado del servidor</a></li>
-                  
-                
-                  
-                    <li>Redundancia en vivo<a href="/live-module/live-redundancy.html"></a></li>
-                  
-                
-                  
-                    <li>Publicación de un evento en vivo en Facebook<a href="/live-module/publishing-live-event-facebook.html"></a></li>
-                  
-                
-                  
-                    <li>Publicar un evento en vivo en YouTube<a href="/live-module/publishing-live-event-youtube.html"></a></li>
-                  
-                
-                  
-                    <li>Revisión de Live Analytics<a href="/live-module/reviewing-live-analytics.html"></a></li>
-                  
-                
-                  
-                    <li>Uso de salidas RTMP en vivo<a href="/live-module/using-live-rtmp-outputs-stream-facebook-and-youtube.html"></a></li>
-                  
-                
-              </ul>
-            
-          
-            
-              <h5 class="submenu-header">Trabajar con Live API +<a href="/live-api/index.html"><strong></strong></a></h5>
-              <ul class="sidenav-submenu" style="display:none;">
-                
-                  
-                    <li class="submenu-header">
-                      API en vivo:<a href="/live-api/getting-started/index.html"> Empezar <strong>+</strong></a>
-                      <ul class="sidenav-subsubmenu" style="display:none;">
-                        
-                        <li>Visión general:<a href="/live-api/getting-started/overview-brightcove-live-api.html"> API en vivo</a></li>
-                        
-                        <li><a href="/live-api/getting-started/quick-start-create-live-stream-using-brightcove-live-api.html">Creación de una transmisión en vivo mediante la API</a></li>
-                        
-                      </ul>
-                    </li>
-                  
-                
-                  
-                    <li class="submenu-header">
-                      API en vivo:<a href="/live-api/code-samples/index.html"> Ejemplos de código <strong>+</strong></a>
-                      <ul class="sidenav-subsubmenu" style="display:none;">
-                        
-                        <li><a href="/live-api/code-samples/live-api-sample-create-live-job.html">Crear un trabajo activo</a></li>
-                        
-                        <li><a href="/live-api/code-samples/quick-start-create-live-job-mpeg2-ts-input.html">Crear un trabajo activo para la entrada MPEG2-TS</a></li>
-                        
-                        <li>Uso de salidas RTMP para eventos en directo<a href="/live-api/code-samples/quick-start-using-rtmp-outputs-live-events.html"></a></li>
-                        
-                        <li>Evento en vivo simulado<a href="/live-api/code-samples/simulated-live.html"></a></li>
-                        
-                      </ul>
-                    </li>
-                  
-                
-                  
-                    <li class="submenu-header">
-                      API en vivo:<a href="/live-api/references/index.html"> Referencias +<strong></strong></a>
-                      <ul class="sidenav-subsubmenu" style="display:none;">
-                        
-                        <li><a href="/live-api/references/live-api-error-messages.html">Mensajes de error</a></li>
-                        
-                        <li>Notas de versión<a href="/live-api/references/live-api-release-notes.html"></a></li>
-                        
-                        <li>Referencia de API en vivo<a href="/live-api/references/reference.html"></a></li>
-                        
-                      </ul>
-                    </li>
-                  
-                
-                  
-                    <li class="submenu-header">
-                      API en vivo:<a href="/live-api/ssai/index.html"> SSAI +<strong></strong></a>
-                      <ul class="sidenav-subsubmenu" style="display:none;">
-                        
-                        <li><a href="/live-api/ssai/live-api-cue-points-and-ad-beacons-ssai.html">Puntos de referencia y balizas de anuncio con SSAI</a></li>
-                        
-                        <li>Inserción de anuncios en el lado del servidor (SSAI)<a href="/live-api/ssai/live-api-server-side-ad-insertion-ssai.html"></a></li>
-                        
-                        <li>Visión general:<a href="/live-api/ssai/overview-player-enhancements-live-ssai.html"> Mejoras del jugador para SSAI en vivo</a></li>
-                        
-                      </ul>
-                    </li>
-                  
-                
-                  
-                    <li class="submenu-header">
-                      API en vivo:<a href="/live-api/guides/index.html"> Guías <strong>+</strong></a>
-                      <ul class="sidenav-subsubmenu" style="display:none;">
-                        
-                        <li><a href="/live-api/guides/brightcove-live-best-practices.html">Prácticas recomendadas de Brightcove Live</a></li>
-                        
-                        <li><a href="/live-api/guides/brightcove-live-program-ad-metadata-api.html">API de metadatos de anuncios del programa Brightcove Live</a></li>
-                        
-                        <li><a href="/live-api/guides/live-api-creating-frame-accurate-clip.html">Creación de un clip preciso de marco</a></li>
-                        
-                        <li><a href="/live-api/guides/live-api-creating-vod-clips.html">Creación de clips VOD</a></li>
-                        
-                        <li><a href="/live-api/guides/getting-list-live-or-vod-jobs.html">Obtención de una lista de trabajos en vivo o VOD</a></li>
-                        
-                        <li><a href="/live-api/guides/live-api-insert-id3-timed-metadata.html">Insertar metadatos temporizados ID3</a></li>
-                        
-                        <li>DRM en vivo a través de Live API<a href="/live-api/guides/live-drm-live-api.html"></a></li>
-                        
-                        <li>Administración de credenciales para Live API<a href="/live-api/guides/managing-credentials-live-api.html"></a></li>
-                        
-                        <li>Notificaciones<a href="/live-api/guides/live-api-notifications.html"></a></li>
-                        
-                        <li>Reducción de la latencia para transmisiones en directo<a href="/general/reducing-latency-live-streams.html"></a></li>
-                        
-                        <li>Salidas RTMP<a href="/live-api/guides/live-api-rtmp-outputs.html"></a></li>
-                        
-                        <li>Puntos de entrada estáticos<a href="/live-api/guides/live-api-static-entry-points.html"></a></li>
-                        
-                        <li>URL firmadas y autenticación de tokens con una transmisión en directo<a href="/live-api/guides/signed-urls-and-token-auth-live-stream.html"></a></li>
-                        
-                        <li>Uso de Redundancia en Vivo<a href="/live-api/guides/using-live-redundancy.html"></a></li>
-                        
-                        <li>VOD del Evento en Vivo<a href="/live-api/guides/live-api-vod-live-event.html"></a></li>
-                        
-                      </ul>
-                    </li>
-                  
-                
-              </ul>
-            
-          
-            
-              <h5 class="submenu-header"><a href="/admin/index.html">Administrar cuentas <strong>+</strong></a></h5>
-              <ul class="sidenav-submenu" style="display:none;">
-                
-                  
-                    <li><a href="/admin/creating-custom-live-ingest-profiles.html">Creación de perfiles de ingesta dinámica personalizados</a></li>
-                  
-                
-                  
-                    <li>Campos para perfiles personalizados de ingesta activa<a href="/admin/fields-custom-live-ingest-profiles.html"></a></li>
-                  
-                
-                  
-                    <li>Administrar la configuración de Live<a href="/admin/managing-live-settings.html"></a></li>
-                  
-                
-                  
-                    <li>Administración de credenciales de autenticación de API<a href="/admin/managing-api-authentication-credentials.html"></a></li>
-                  
-                
-                  
-                    <li>Perfiles de ingesta en vivo estándar<a href="/admin/standard-live-ingest-profiles.html"></a></li>
-                  
-                
-              </ul>
-            
-          
-            
-              <h5 class="submenu-header">Notas de la versión +<a href="/release-notes/index.html"><strong></strong></a></h5>
-              <ul class="sidenav-submenu" style="display:none;">
-                
-                  
-                    <li>Notas de versión en vivo<a href="/release-notes/live-api-release-notes.html"></a></li>
-                  
-                
-                  
-                    <li>Problemas conocidos<a href="/release-notes/known-issues.html"></a></li>
-                  
-                
-              </ul>
-            
-          
-            
-              <h5 class="submenu-header">Soporte +<a href="/support/index.html"><strong></strong></a></h5>
-              <ul class="sidenav-submenu" style="display:none;">
-                
-                  
-                    
-                  
-                
-                  
-                    <li>Visualización de la página Estado del Sistema de Brightcove<a href="/support/viewing-brightcove-system-status-page.html"></a></li>
-                  
-                
-                  
-                    <li><a href="/support/contact-sales.html">Contacto con Ventas</a></li>
-                  
-                
-                  
-                    <li>Apertura de un caso de soporte<a href="/support/opening-case-with-brightcove-support.html"></a></li>
-                  
-                
-              </ul>
-            
-          
-      </nav>
-    </div>
-    <div class="col-lg-7" style="background-color: white;color: #333333;margin-top: -1em;margin-bottom: -1em;padding-bottom:1em;">
-  <!-- bootstrap layout -->
-
-<p id="bc_veggie_burger_wrapper" style="display: none;"><img id="bc_veggie_burger" src="/assets/images/feather/menu.svg" alt="Menú de navegación"/></p>
-
-<!-- search bar -->
-<div id="nav-search-box" style="margin-top: 1rem;"></div>
-<!-- in-page navigation for narrow screens -->
-<details class="centered-inpage-nav" id="centered_inpage_nav">
-  <summary><h6 class="toc">Contenido de la página</h6></summary>
-  <nav id="centered_toc"></nav>
-  <ul id="centered_in_page_toc" class="list-none"></ul>
-</details>
-<!-- open in new tab/window -->
-<a id="open_new_tab" href="#" target="_blank" style="display: none;"><img src="/assets/images/feather/external-link.svg" alt="abrir en una nueva pestaña" style="margin-top:4em;width: 1.5em;"/></a>
-
-
-
-  
-    
-
-
 <article class="bcls-article">
   <h1>API en vivo: Creación de clips VOD</h1>
-  <summary>En este tema se muestra cómo crear clips de vídeo bajo demanda (VOD) a partir de sus transmisiones en directo.</summary>
+  <summary>Este tema le muestra cómo crear clips de video a pedido (VOD) a partir de sus transmisiones en vivo.</summary>
 
 
 
 
 
 <section class="bcls-section">
-<h2 id="Overview">Resumen</h2>
+<h2 id="Overview">Descripción general</h2>
 
-<p>Los clips son vídeos extraídos de una transmisión en directo. Se pueden enviar a un depósito de S3, a un sitio FTP o a una <span translate="No">Video Cloud</span> cuenta. El clip se crea como un vídeo MP4, y eso es lo que se envía al destino en todos los casos. En el caso de <span translate="No">Video Cloud</span>, el MP4 será transcodificado por el sistema de ingesta, y qué tipos de copias se crean para el video dependerá del perfil de ingesta utilizado.</p>
+<p>Los clips son videos extraídos de una transmisión en vivo. Se pueden enviar a un bucket de S3, un sitio FTP o un <span translate="No">Video Cloud</span> cuenta. El clip se crea como un video MP4, y eso es lo que se envía al destino en todos los casos. En el caso de <span translate="No">Video Cloud</span>, el sistema de ingesta transcodificará el MP4 y el tipo de copias que se crean para el vídeo dependerá del perfil de ingesta utilizado.</p>
 
 <p>Las definiciones de los clips se crean utilizando el <code translate="No">/vods</code> punto final.</p>
 
-<p>Los clips se pueden crear de varias maneras:</p>
+<p>Los clips se pueden crear de varias formas:</p>
 
 <ul>
-	<li>Con <code translate="No">stream_start_timecode</code> y/o <code translate="No">stream_end_timecode</code> definidos en códigos de tiempo SMPTE para el evento de transmisión en vivo - <strong>tenga en cuenta que esto requiere que el codificador envíe información de código de tiempo</strong></li>
-	<li>Con <code translate="No">start_time</code> y/o <code translate="No">end_time</code> definido en relación con la hora de inicio ( <code translate="No">stream_start_time</code> ) de todo el evento de transmisión en vivo</li>
-	<li>Con <code translate="No">start_time</code> y/o <code translate="No">end_time</code> definido en tiempo de Época (Unix) (en segundos)</li>
+	<li>Con <code translate="No">stream_start_timecode</code> y / o <code translate="No">stream_end_timecode</code> definido en los códigos de tiempo SMPTE para el evento de transmisión en vivo - <strong>tenga en cuenta que esto requiere que el codificador envíe información de código de tiempo</strong></li>
+	<li>Con <code translate="No">start_time</code> y/o <code translate="No">end_time</code> definida en relación con la hora de inicio ( <code translate="No">stream_start_time</code>) de todo el evento de transmisión en directo</li>
+	<li>Con <code translate="No">start_time</code> y / o <code translate="No">end_time</code> definido en tiempo Epoch (Unix) (en segundos)</li>
 	<li>Con <code translate="No">duration</code></li>
-	<li>La API VOD <strong>no se puede</strong> utilizar con trabajos <strong>cifrados</strong> .</li>
+	<li>La API de VOD <strong>lata</strong> ser usado con <strong>cifrado o protegido por DRM</strong> trabajos. Actualmente, el Live Module no es compatible con esto, pero lo hará en una versión futura.</li>
 </ul>
 
 <h3>Notas</h3>
 
 <ol>
-	<li>Los perfiles de ingesta heredados ya no admiten recortes en vivo. Para crear un clip de vídeo a partir de una transmisión en directo, asegúrate de que tu cuenta esté habilitada para Entrega dinámica y utiliza un perfil de ingesta de entrega dinámica.</li>
-	<li>Para que los clips estén disponibles lo más rápido posible, primero se crea un clip con precisión de segmentos y, a continuación, se reemplaza por un clip con precisión de marco tan pronto como esté disponible.</li>
-	<li>Si especifica <code translate="No">duration</code>, el clip resultante será el siguiente:
+	<li>Para que los clips estén disponibles lo más rápido posible, primero se crea un clip con precisión de segmento y luego se reemplaza por un clip con precisión de fotograma tan pronto como esté disponible.</li>
+	<li>Si lo especifica <code translate="No">duration</code>, el clip resultante será el siguiente:
 	<ul>
-		<li>Si el trabajo está activo y sigue activo: (tiempo de solicitud - duración) a (tiempo de solicitud)</li>
-		<li>Si el trabajo ha finalizado: ( <code translate="No">finished_at</code> - duración) a ( <code translate="No">finished_at</code>)</li>
+		<li>Si el trabajo está activo y aún en vivo: (tiempo de solicitud - duración) a (tiempo de solicitud)</li>
+		<li>Si el trabajo ha finalizado: ( <code translate="No">finished_at</code>- duración) a ( <code translate="No">finished_at</code>)</li>
 	</ul>
 	</li>
-	<li>Si especifica tanto <code translate="No">start_time</code> AND <code translate="No">end_time</code>:
+	<li>Si especifica ambos <code translate="No">start_time</code> Y <code translate="No">end_time</code>:
 	<ul>
-		<li>Si el trabajo está activo y sigue activo: siempre que la ventana de tiempo de Época se encuentre completamente dentro <code translate="No">created_at</code> y el tiempo de solicitud, el clip se realizará</li>
-		<li>Si el trabajo ha finalizado: siempre y cuando la ventana de tiempo de Época se encuentre completamente dentro <code translate="No">created_at</code> y <code translate="No">finished_at</code> , el clip se hará</li>
+		<li>Si el trabajo está activo y aún en vivo: siempre que la ventana de tiempo de Época se encuentre completamente dentro <code translate="No">created_at</code> y el tiempo de solicitud, se realizará el clip</li>
+		<li>Si el trabajo ha finalizado: siempre que la ventana de tiempo de época caiga completamente dentro <code translate="No">created_at</code> y <code translate="No">finished_at</code>, se realizará el clip</li>
 	</ul>
 	</li>
-	<li>Los clips de transmisiones en directo que utilicen <a href="/live-api/ssai/live-api-server-side-ad-insertion-ssai.html">SSAI</a> no incluirán anuncios.</li>
+	<li>Clips de transmisiones en vivo usando <a href="/live-api/ssai/live-api-server-side-ad-insertion-ssai.html">SSAI</a> no incluirá anuncios.</li>
 	<li>Los clips se pueden crear hasta 7 días después de un evento. Para <a translate="No" href="/live-api/guides/live-api-static-entry-points.html">SEP</a>, se pueden crear hasta la próxima activación o 7 días (lo que sea más corto).</li>
-	<li>La API VOD no agregará ningún contenido fuera de lo que está presente en la secuencia. Si especifica 350 en una transmisión en vivo de 300 segundos de duración, la salida tendrá 300 segundos de duración.</li>
-	<li>No es necesario utilizar una transmisión en vivo habilitada para DVR para que el recorte funcione, ya que la transmisión en vivo se almacena mientras se transmite y está disponible inmediatamente y durante 7 días después de que finalizó el evento.</li>
-	<li>El recorte de Brightcove Live solo producirá un clip con la misma resolución que la salida de resolución más alta. No coincidirá con la resolución de entrada de origen (a menos que sea la misma que la salida de resolución más alta).</li>
+	<li>La API de VOD no agregará ningún contenido fuera de lo que está presente en la transmisión. Si especifica 350 en una transmisión en vivo de 300 segundos, la salida será de 300 segundos.</li>
+	<li>No es necesario que use una transmisión en vivo habilitada para DVR para que el recorte funcione, porque la transmisión en vivo se almacena mientras se transmite y está disponible de inmediato y durante 7 días después de que finaliza el evento.</li>
+	<li>El recorte de Brightcove Live solo producirá un clip que tenga la misma resolución que la salida de mayor resolución. No coincidirá con la resolución de entrada de la fuente (a menos que sea la misma que la salida con la resolución más alta).</li>
 </ol>
 
 <p>Los clips también se pueden enviar a varios destinos:</p>
 
 <ul>
-	<li>Una <span translate="No"><span translate="No">Video Cloud</span></span> cuenta</li>
+	<li>A <span translate="No"><span translate="No">Video Cloud</span></span> cuenta</li>
 	<li>Un servidor FTP</li>
 	<li>Un cubo S3</li>
 </ul>
 
-<p>Cuando especifica un clip, la salida <strong>debe</strong> Contiene <strong>ya sea</strong> un <code translate="No">url</code> destino <strong>o</strong> un <code translate="No">videocloud</code> objeto para detallar la creación del video y la ingestión del clip en <span translate="No">Video Cloud</span>.</p>
+<p>Cuando especifica un clip, la salida <strong>debe</strong> Contiene <strong>cualquiera</strong> a <code translate="No">url</code> destino <strong>o</strong> a <code translate="No">videocloud</code> objeto para detallar la creación del video y la ingestión del clip en <span translate="No">Video Cloud</span>.</p>
 
-<p>Nota: los clips <strong>se pueden crear mientras se ejecuta la transmisión en directo</strong>. Para ello, deberá definir las horas de inicio y finalización del clip en tiempo de época o relativa a la hora de <strong>inicio</strong> de la transmisión en vivo.</p>
+<p>Nota: clips <strong>se puede crear mientras se ejecuta la transmisión en vivo</strong>. Para hacer esto, deberá definir las horas de inicio y finalización del clip en tiempo de Época o en relación con <strong>comienzo</strong> hora de la transmisión en vivo.</p>
 </section>
 
 <section class="bcls-section">
-<h2 id="credentials">Credenciales</h2>
+<h2 id="credentials">Cartas credenciales</h2>
 
-<p>Si el destino al que va a enviar el clip requiere credenciales para acceder, puede crearlas utilizando las operaciones de credenciales de Live API. Consulte <a href="/live-api/guides/managing-credentials-live-api.html">Administración de credenciales para Live API</a> para obtener más detalles.</p>
+<p>Si el destino al que está enviando el clip requiere credenciales para acceder, puede crearlas usando las operaciones de credenciales de Live API. Ver <a href="/live-api/guides/managing-credentials-live-api.html">Administrar credenciales para la API en vivo</a> para más detalles.</p>
 
-<aside class="bcls-aside bcls-aside--information">Tenga en cuenta que si va a enviar el clip a una cuenta de Video Cloud asociada a la cuenta Live, <strong>no</strong> debe incluir las credenciales en el trabajo de recorte.</aside>
+<aside class="bcls-aside bcls-aside--information">Tenga en cuenta que si está enviando el clip a una cuenta de Video Cloud que está asociada con la cuenta Live, debe <strong>no</strong> incluir las credenciales en el trabajo de recorte.</aside>
 </section>
 
 <section class="bcls-section">
-<h2 id="Endpoint">Endpoint</h2>
+<h2 id="Endpoint">Punto final</h2>
 
-<p>Los clips se crean enviando una <code translate="No">POST</code> solicitud a:</p>
+<p>Los clips se crean enviando un <code translate="No">POST</code> solicitud de:</p>
 
 <pre class="line-numbers">
 <code class="language-http" translate="No">https://api.bcovlive.io/v1/vods
@@ -530,13 +88,13 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
 </section>
 
 <section class="bcls-section">
-<h2 id="Request_body_video_cloud">Solicitud de cuerpo - <span translate="No"><span translate="No">Video Cloud</span></span></h2>
+<h2 id="Request_body_video_cloud">Cuerpo de la solicitud - <span translate="No"><span translate="No">Video Cloud</span></span></h2>
 
-<aside class="bcls-aside bcls-aside--tip">Nota: <strong>se recomienda encarecidamente no</strong> especificar el perfil de ingest que se debe utilizar para transcodificar el clip y, en su lugar, utilizar el perfil predeterminado de la cuenta. Esto reducirá la posibilidad de errores en la creación del clip en <span translate="No"><span translate="No">Video Cloud</span></span></aside>
+<aside class="bcls-aside bcls-aside--tip">Nota: recomendamos encarecidamente <strong>no</strong> especificando el perfil de ingesta que debe usarse para transcodificar el clip y, en su lugar, use el perfil predeterminado de la cuenta. Esto reducirá la posibilidad de errores al crear el clip en <span translate="No"><span translate="No">Video Cloud.</span></span></aside>
 
-<h3>Ejemplo 1: tiempos de inicio/fin relativos al inicio de la secuencia</h3>
+<h3>Ejemplo 1: horas de inicio / finalización relativas al inicio de la transmisión</h3>
 
-<p>El cuerpo de la solicitud incluye las horas de inicio y finalización, así como detalles sobre dónde enviar el clip. Aquí hay un cuerpo de solicitud de muestra que crea un clip del tercer minuto de una secuencia y lo envía a una <span translate="No">Video Cloud</span> cuenta:</p>
+<p>El cuerpo de la solicitud incluye las horas de inicio y finalización, y detalles sobre dónde enviar el clip. Aquí hay un cuerpo de solicitud de muestra que crea un clip del tercer minuto de una transmisión y lo envía a un <span translate="No">Video Cloud</span> cuenta:</p>
 
 <pre class="line-numbers">
 <code class="language-json" translate="No">{
@@ -562,11 +120,11 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
 </code>
 </pre>
 
-<p>En este ejemplo, estamos creando un clip de un minuto de duración y enviándolo a <span translate="No">Video Cloud</span> . Estamos dando al clip un nombre y un par de etiquetas, no especificando el <a translate="No" href="https://apis.support.brightcove.com/ingest-profiles/getting-started/overview-ingest-profiles-api-dynamic-delivery-context-aware-encoding.html">ingest profile</a> para retranscodificación, de modo que se usará la cuenta predeterminada, e indicaremos que <span translate="No">Video Cloud</span> capturar imágenes en miniatura y póster del clip durante transcodificación.</p>
+<p>En este ejemplo, estamos creando un clip de un minuto de duración y lo enviamos a <span translate="No">Video Cloud</span>. Le damos al clip un nombre y un par de etiquetas, sin especificar el <a translate="No" href="https://apis.support.brightcove.com/ingest-profiles/getting-started/overview-ingest-profiles-api-dynamic-delivery-context-aware-encoding.html">perfil de ingesta</a> para retranscodificar, de modo que se utilice la cuenta predeterminada, e instruir <span translate="No">Video Cloud</span> para capturar imágenes en miniatura y póster del clip durante la transcodificación.</p>
 
-<h3>Ejemplo 2: tiempos de inicio/fin en tiempo de época</h3>
+<h3>Ejemplo 2: horas de inicio / finalización en la época de la Época</h3>
 
-<p>El cuerpo de la solicitud incluye las horas de inicio y finalización en tiempo de época, y detalles sobre dónde enviar el clip. Aquí hay un cuerpo de solicitud de muestra que crea un clip del tercer minuto de una secuencia y lo envía a una <span translate="No">Video Cloud</span> cuenta:</p>
+<p>El cuerpo de la solicitud incluye las horas de inicio y finalización en la época de Epoch y detalles sobre dónde enviar el clip. Aquí hay un cuerpo de solicitud de muestra que crea un clip del tercer minuto de una transmisión y lo envía a un <span translate="No">Video Cloud</span> cuenta:</p>
 
 <pre class="line-numbers">
 <code class="language-json" translate="No">{
@@ -592,11 +150,11 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
 </code>
 </pre>
 
-<p>En este ejemplo, estamos creando un clip de un minuto de duración en una época específica (en este caso, 22 de enero de 2018 a las 08:24:54 GMT).</p>
+<p>En este ejemplo, estamos creando un clip de duración de un minuto en una época específica (en este caso el 22 de enero de 2018 a las 08:24:54 GMT).</p>
 
-<h3>Ejemplo 3: duración con tiempo de inicio relativo al inicio de la secuencia</h3>
+<h3>Ejemplo 3: duración con hora de inicio relativa al inicio de la transmisión</h3>
 
-<p>El cuerpo de la solicitud incluye la duración y stream_start_time, así como detalles sobre dónde enviar el clip. Aquí hay un cuerpo de solicitud de muestra que crea un clip del tercer minuto de una secuencia y lo envía a una <span translate="No">Video Cloud</span> cuenta:</p>
+<p>El cuerpo de la solicitud incluye la duración y stream_start_time, y detalles sobre dónde enviar el clip. Aquí hay un cuerpo de solicitud de muestra que crea un clip del tercer minuto de una transmisión y lo envía a un <span translate="No">Video Cloud</span> cuenta:</p>
 
 <pre class="line-numbers">
 <code class="language-json" translate="No">{
@@ -624,9 +182,9 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
 
 <p>En este ejemplo, estamos creando un clip de un minuto de duración que comienza 5 minutos después del inicio de la transmisión en vivo.</p>
 
-<h3>Ejemplo 4: duración sin hora de inicio o finalización</h3>
+<h3>Ejemplo 4: duración sin hora de inicio ni de finalización</h3>
 
-<p>El cuerpo de la solicitud incluye las horas de inicio y finalización en tiempo de época, y detalles sobre dónde enviar el clip. Aquí hay un cuerpo de solicitud de muestra que crea un clip del tercer minuto de una secuencia y lo envía a una <span translate="No">Video Cloud</span> cuenta:</p>
+<p>El cuerpo de la solicitud incluye las horas de inicio y finalización en la época de Epoch y detalles sobre dónde enviar el clip. Aquí hay un cuerpo de solicitud de muestra que crea un clip del tercer minuto de una transmisión y lo envía a un <span translate="No">Video Cloud</span> cuenta:</p>
 
 <pre class="line-numbers">
 <code class="language-json" translate="No">{
@@ -656,7 +214,7 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
 
 <h3>Ejemplo 5: usar <code translate="No">stream_start_timecode</code> y <code translate="No">stream_end_timecode</code></h3>
 
-<p>El cuerpo de la solicitud incluye los tiempos de inicio y finalización/fotogramas en los códigos de tiempo HH:MM:SS:FF y detalles sobre dónde enviar el clip. Tenga en cuenta que para usar códigos de tiempo, el codificador debe estar enviando códigos de tiempo. Aquí hay un cuerpo de solicitud de muestra que crea un clip de los 50 minutos de una secuencia y lo envía a una <span translate="No">Video Cloud</span> cuenta:</p>
+<p>El cuerpo de la solicitud incluye las horas / fotogramas de inicio y finalización en los códigos de tiempo HH: MM: SS: FF y detalles sobre dónde enviar el clip. Tenga en cuenta que para utilizar códigos de tiempo, el codificador debe enviar códigos de tiempo. Aquí hay un cuerpo de solicitud de muestra que crea un clip de los 50 minutos de una transmisión y lo envía a un <span translate="No">Video Cloud</span> cuenta:</p>
 
 <pre class="line-numbers">
 <code class="language-json" translate="No">{
@@ -685,18 +243,18 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
 
 <h3>Información general sobre el envío de clips a <span translate="No">Video Cloud</span></h3>
 
-<p>Para ver qué campos se pueden incluir en el <code translate="No">video</code> y <code translate="No">ingest</code> objetos, ver el <a translate="No" href="https://docs.brightcove.com/dynamic-ingest-api/v1/doc/index.html"><span translate="No">Dynamic Ingest API</span> Reference</a>.</p>
+<p>Para ver qué campos se pueden incluir en el <code translate="No">video</code> y <code translate="No">ingest</code> objetos, ver el <a translate="No" href="https://docs.brightcove.com/dynamic-ingest-api/v1/doc/index.html"><span translate="No">API de ingesta dinámica</span> Referencia</a>.</p>
 
-<aside class="bcls-aside bcls-aside--warning"> <strong>No</strong> incluya el <code translate="No">master</code> campo en el <code translate="No">ingest</code> objeto, ya que esa información será proporcionada por la API Live.</aside>
+<aside class="bcls-aside bcls-aside--warning">Hacer <strong>no</strong> incluir la <code translate="No">master</code> campo en el <code translate="No">ingest</code> objeto, ya que esa información será proporcionada por la API en vivo.</aside>
 
 <section class="bcls-section">
-<h2 id="Request_body_s3">Cuerpo de solicitud - S3</h2>
+<h2 id="Request_body_s3">Cuerpo de la solicitud - S3</h2>
 
-<p>El cuerpo de la solicitud incluye las horas de inicio y finalización, así como detalles sobre dónde enviar el clip. Aquí hay un cuerpo de solicitud de muestra que crea un clip del tercer minuto de una secuencia y lo envía a un depósito de S3:</p>
+<p>El cuerpo de la solicitud incluye las horas de inicio y finalización, y detalles sobre dónde enviar el clip. A continuación, se muestra un cuerpo de solicitud de muestra que crea un clip del tercer minuto de una transmisión y lo envía a un depósito de S3:</p>
 
 <pre class="line-numbers">
 <code class="language-json" translate="No">{
-  "live_job_id":"",
+  "live_job_id":"{{job_id}}",
   "outputs":[
     {
       "label": "last_30",
@@ -710,16 +268,16 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
 </code>
 </pre>
 
-<p>En este ejemplo, estamos creando un clip de 30 segundos de duración y enviándolo a un depósito de S3. Proporcionamos la URL del depósito, incluido el nombre del archivo para el clip, y una cadena que es el nombre de las credenciales de depósito de S3 guardadas. Brightcove Support puede configurar las credenciales para su cuenta.</p>
+<p>En este ejemplo, estamos creando un clip de 30 segundos de duración y lo enviamos a un bucket de S3. Proporcionamos la URL del depósito, incluido el nombre del archivo del clip, y una cadena que es el nombre de las credenciales del depósito de S3 guardadas; Brightcove Support puede configurar las credenciales para su cuenta.</p>
 </section>
 
 <section class="bcls-section">
-<h2 id="Request_body_fields">Campos de cuerpo de solicitud</h2>
+<h2 id="Request_body_fields">Solicitar campos de cuerpo</h2>
 
 <p>Aquí hay una tabla completa de los campos del cuerpo de la solicitud.</p>
 
 <table class="bcls-table">
-	<caption class="bcls-caption--table">Campos de cuerpo de solicitud</caption>
+	<caption class="bcls-caption--table">Solicitar campos de cuerpo</caption>
 	<thead class="bcls-table__head">
 		<tr>
 			<th>Campo</th>
@@ -730,21 +288,21 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
 	<tbody class="bcls-table__body">
 		<tr>
 			<td><code translate="No">live_job_id</code></td>
-			<td>Cadena</td>
+			<td>Cuerda</td>
 			<td>
-			<p>Id. del trabajo de transmisión en vivo desde el que crear el clip VOD.</p>
+			<p>El ID del trabajo de Live Stream desde el que crear el clip VOD.</p>
 			</td>
 		</tr>
 		<tr>
 			<td><code translate="No">outputs</code></td>
-			<td>Objeto []</td>
+			<td>Objeto[]</td>
 			<td>
 			<p>Matriz de salidas VOD</p>
 			</td>
 		</tr>
 		<tr>
 			<td><code translate="No">outputs.label</code></td>
-			<td>Cadena</td>
+			<td>Cuerda</td>
 			<td>
 			<p>Etiqueta para la salida</p>
 			</td>
@@ -753,21 +311,21 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
 			<td><code translate="No">outputs.duration</code></td>
 			<td>Número</td>
 			<td>
-			<p>Duración del clip en segundos. los <code translate="No">duration</code> se puede utilizar solo para definir un clip que se hará del final <code translate="No">{duration}</code> segundos de la secuencia. <code translate="No">duration</code> también se puede utilizar con cualquier <strong>uno de</strong> <code translate="No">stream_start_time</code> , <code translate="No">stream_end_time</code> , <code translate="No">start_time</code> , <code translate="No">end_time</code> , <code translate="No">stream_end_timecode</code> o <code translate="No">stream_start_timecode</code>.</p>
+			<p>Duración del clip en segundos. Se <code translate="No">duration</code> puede utilizar solo para definir un clip que se hará de los <code translate="No">{duration}</code> segundos finales de la transmisión. <code translate="No">duration</code> también se puede utilizar con <strong>cualquiera de</strong> <code translate="No">stream_start_time</code>, <code translate="No">stream_end_time</code>, <code translate="No">start_time</code>, <code translate="No">end_time</code>, <code translate="No">stream_end_timecode</code>, o <code translate="No">stream_start_timecode</code>.</p>
 			</td>
 		</tr>
 		<tr>
 			<td><code translate="No">outputs.stream_start_time</code></td>
 			<td>Número</td>
 			<td>
-			<p>El tiempo de inicio en segundos para el clip en relación con la hora de inicio de la transmisión en vivo, se <code translate="No">stream_start_time</code> debe utilizar con <strong>cualquiera</strong> de <code translate="No">stream_end_time</code> o <code translate="No">duration</code>.</p>
+			<p>Hora de inicio en segundos para el clip en relación con la hora de inicio de la transmisión en vivo, <code translate="No">stream_start_time</code> debe usarse con <strong>ya sea</strong> <code translate="No">stream_end_time</code> o <code translate="No">duration</code>.</p>
 			</td>
 		</tr>
 		<tr>
 			<td><code translate="No">outputs.stream_end_time</code></td>
 			<td>Número</td>
 			<td>
-			<p>La hora de finalización en segundos para el clip en relación con la hora de inicio de la transmisión en vivo, <code translate="No">stream_end_time</code> debe usarse con <strong>cualquiera</strong> de <code translate="No">stream_start_time</code> o <code translate="No">duration</code>.</p>
+			<p>Hora de finalización en segundos para el clip en relación con la hora de inicio de la transmisión en vivo, <code translate="No">stream_end_time</code> debe usarse con <strong>ya sea</strong> <code translate="No">stream_start_time</code> o <code translate="No">duration</code>.</p>
 			</td>
 		</tr>
 		<tr>
@@ -800,14 +358,14 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
 		</tr>
 		<tr>
 			<td><code translate="No">outputs.url</code></td>
-			<td>Cadena</td>
+			<td>Cuerda</td>
 			<td>
-			<p>URL de destino del clip, tenga en cuenta que la salida <strong>debe</strong> Contiene <strong>ya sea</strong> esta <code translate="No">url</code> campo <strong>o</strong> un <code translate="No">videocloud</code> objeto que define las propiedades de vídeo y las opciones de ingesta para <span translate="No">Video Cloud</span>.</p>
+			<p>URL de destino del clip, tenga en cuenta que la salida <strong>debe</strong> Contiene <strong>cualquiera</strong> esta <code translate="No">url</code> campo <strong>o</strong> a <code translate="No">videocloud</code> objeto que define las propiedades del video y las opciones de ingesta para <span translate="No">Video Cloud</span>.</p>
 			</td>
 		</tr>
 		<tr>
 			<td><code translate="No">outputs.credentials</code></td>
-			<td>Cadena</td>
+			<td>Cuerda</td>
 			<td>
 			<p>El nombre de las credenciales configuradas en su cuenta para esta dirección</p>
 			</td>
@@ -816,32 +374,32 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
 			<td><code translate="No">outputs.videocloud</code></td>
 			<td>Objeto</td>
 			<td>
-			<p>Un objeto que contiene entradas para la <span translate="No"><span translate="No">Video Cloud</span></span> ingestión</p>
+			<p>Un objeto que contiene entradas para <span translate="No"><span translate="No">Video Cloud</span></span> ingestión</p>
 			</td>
 		</tr>
 		<tr>
 			<td><code translate="No"><a href="#video_fields">outputs.videocloud.video</a></code></td>
 			<td>Objeto</td>
 			<td>
-			<p>Un objeto que contiene entradas para la creación de objetos de <span translate="No"><span translate="No">Video Cloud</span></span> vídeo: vea la <a translate="No" href="https://docs.brightcove.com/cms-api/v1/doc/index.html#api-videoGroup-Create_Video">CMS API Reference for creating a video</a></p>
+			<p>Un objeto que contiene entradas para <span translate="No"><span translate="No">Video Cloud</span></span> creación de objetos de vídeo: consulte la <a translate="No" href="https://docs.brightcove.com/cms-api/v1/doc/index.html#api-videoGroup-Create_Video">Referencia de la API de CMS para crear un video</a></p>
 			</td>
 		</tr>
 		<tr>
 			<td><code translate="No"><a href="#dynamic_ingest_fields">outputs.videocloud.ingest</a></code></td>
 			<td>Objeto</td>
 			<td>
-			<p>Un objeto que contiene entradas para la ingestión de <span translate="No"><span translate="No">Video Cloud</span></span> vídeo <a translate="No" href="https://docs.brightcove.com/dynamic-ingest-api/v1/doc/index.html#api-Ingest-Ingest_Media_Asset">Dynamic Ingest Reference</a> - ver el - <strong>no</strong> incluye el <code translate="No">master</code> campo, ya que se proporcionará esa información por la API en vivo. Si no se especifica ningún perfil de ingesta, se utilizará el perfil predeterminado de la cuenta.</p>
+			<p>Un objeto que contiene entradas para <span translate="No"><span translate="No">Video Cloud</span></span> ingestión de vídeo: consulte la <a translate="No" href="https://docs.brightcove.com/dynamic-ingest-api/v1/doc/index.html#api-Ingest-Ingest_Media_Asset">Referencia de ingesta dinámica</a> - hacer <strong>no</strong> incluir la <code translate="No">master</code> campo, ya que esa información será proporcionada por la API en vivo. Si no se especifica ningún perfil de ingesta, se utilizará el perfil predeterminado de la cuenta.</p>
 			</td>
 		</tr>
 	</tbody>
 </table>
 
-<h3 id="video_fields">Campos de vídeo para <span translate="No">Video Cloud</span> ingestión</h3>
+<h3 id="video_fields">Campos de video para <span translate="No">Video Cloud</span> ingestión</h3>
 
-<p>Consulte la <a href="https://docs.brightcove.com/cms-api/v1/doc/index.html#operation/CreateVideo">Referencia de la API de CMS</a> para obtener más detalles.</p>
+<p>Ver el <a href="https://docs.brightcove.com/cms-api/v1/doc/index.html#operation/CreateVideo">Referencia de la API de CMS</a> para más detalles.</p>
 
 <table class="bcls-table">
-	<caption class="bcls-caption--table">Campos del vídeo</caption>
+	<caption class="bcls-caption--table">Campos de video</caption>
 	<thead class="bcls-table__head">
 		<tr>
 			<th>Campo</th>
@@ -852,8 +410,8 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
 	<tbody class="bcls-table__body">
 		<tr>
 			<td><code translate="No">ad_keys</code></td>
-			<td>Cadena</td>
-			<td>Cadena que representa los pares clave/valor de anuncio asignados al vídeo. Los pares clave/valor se formatean como clave=valor y están separados por símbolos. Por ejemplo: <code translate="No">"adKeys": "category=sports&amp;live=true"</code></td>
+			<td>Cuerda</td>
+			<td>Cadena que representa los pares clave / valor del anuncio asignados al video. Los pares clave / valor tienen el formato clave = valor y están separados por símbolos de unión. Por ejemplo: <code translate="No">"adKeys": "category=sports&amp;live=true"</code></td>
 		</tr>
 		<tr>
 			<td><a href="#cuepoint"><code translate="No">cue_points</code> </a></td>
@@ -862,80 +420,80 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
 		</tr>
 		<tr>
 			<td><code translate="No">custom_fields</code></td>
-			<td>Mapa de pares de valores de campo (Cadenas)</td>
-			<td> <code translate="No">fieldname:value</code> Conjuntos personalizados para el vídeo: tenga en cuenta que el campo personalizado que <strong>no</strong> tiene un valor para este vídeo no se incluye en este mapa; los valores de campo personalizados tienen una longitud máxima de 1024 caracteres de un solo byte.</td>
+			<td>Mapa de pares de campo-valor (cadenas)</td>
+			<td>Personalizado <code translate="No">fieldname:value</code> conjuntos para el vídeo: tenga en cuenta que los campos personalizados <strong>no</strong> tienen un valor para este video no están incluidos en este mapa; Los valores de campo personalizados tienen una longitud máxima de 1024 caracteres de un solo byte.</td>
 		</tr>
 		<tr>
 			<td><code translate="No">description</code></td>
-			<td>String; ocupa el lugar de la antigua ShortDescription</td>
-			<td>Breve descripción del vídeo (longitud máxima: 248 caracteres de un byte)</td>
+			<td>Cuerda; ocupa el lugar de la vieja descripción corta</td>
+			<td>Breve descripción del video (longitud máxima: 248 caracteres de un solo byte)</td>
 		</tr>
 		<tr>
 			<td><code translate="No">economics</code></td>
-			<td>Cadena, debe ser uno de los valores enum válidos</td>
-			<td>ya sea «AD_SUPPORTED» (predeterminado) o «FREE»</td>
+			<td>Cadena, debe ser uno de los valores de enumeración válidos</td>
+			<td>"AD_SUPPORTED" (predeterminado) o "GRATIS"</td>
 		</tr>
 		<tr>
 			<td><a href="#geo"><code translate="No">geo</code></a></td>
-			<td>Mapa de pares de propiedades y valor</td>
-			<td>Propiedades de restricción geográfica para el vídeo</td>
+			<td>Mapa de pares propiedad-valor</td>
+			<td>Propiedades de restricción geográfica para el video</td>
 		</tr>
 		<tr>
 			<td><a href="#link"><code translate="No">link</code> </a></td>
-			<td>Mapa de pares de propiedades y valor</td>
-			<td>Mapa de propiedades relacionadas con enlaces</td>
+			<td>Mapa de pares propiedad-valor</td>
+			<td>Mapa de propiedades de enlaces relacionados</td>
 		</tr>
 		<tr>
 			<td><code translate="No">long_description</code></td>
-			<td>Cadena</td>
+			<td>Cuerda</td>
 			<td>Descripción larga (hasta 5000 caracteres)</td>
 		</tr>
 		<tr>
 			<td><code translate="No">name</code></td>
-			<td>Cadena</td>
-			<td>Se <strong>requiere</strong>el nombre del vídeo (longitud máxima: 248 caracteres de un byte)</td>
+			<td>Cuerda</td>
+			<td>El nombre del video (longitud máxima: 248 caracteres de un solo byte) <strong>requerido</strong></td>
 		</tr>
 		<tr>
 			<td><code translate="No">offline_enabled</code></td>
 			<td>Booleano</td>
-			<td>Si el vídeo está habilitado para la reproducción sin conexión</td>
+			<td>Si el video está habilitado para reproducción sin conexión</td>
 		</tr>
 		<tr>
 			<td><code translate="No">projection</code></td>
-			<td>Cadena</td>
-			<td>La proyección cartográfica para vídeos de 360°, por ejemplo, «equirectangular»</td>
+			<td>Cuerda</td>
+			<td>La proyección de mapeo para videos de 360 °, por ejemplo, "equirectangular"</td>
 		</tr>
 		<tr>
 			<td><code translate="No">reference_id</code></td>
-			<td>Cadena</td>
-			<td>Identificador especificado por el usuario que <strong>identifica de forma única el vídeo</strong>, limitado a 150 caracteres. Un ReferenceID se puede utilizar como clave externa para identificar este vídeo en otro sistema. El identificador de referencia no debe contener espacios, comas o caracteres especiales.</td>
+			<td>Cuerda</td>
+			<td>Identificador especificado por el usuario que identifica de <strong>forma exclusiva el vídeo</strong>, limitado a 150 caracteres. Se puede usar un referenceId como clave externa para identificar este video en otro sistema. El ID de referencia no debe contener espacios, comas ni caracteres especiales.</td>
 		</tr>
 		<tr>
 			<td><a href="#schedule"><code translate="No">schedule</code></a></td>
-			<td>Mapa de pares de propiedades y valor</td>
-			<td>Mapa de las fechas de inicio y finalización de la disponibilidad del vídeo</td>
+			<td>Mapa de pares propiedad-valor</td>
+			<td>Mapa de fecha y hora de inicio y finalización para la disponibilidad del video</td>
 		</tr>
 		<tr>
 			<td><code translate="No">state</code></td>
-			<td>Cadena</td>
-			<td>ACTIVO, INACTIVO</td>
+			<td>Cuerda</td>
+			<td>ACTIVO INACTIVO</td>
 		</tr>
 		<tr>
 			<td><code translate="No">tags</code></td>
-			<td>Matriz de etiquetas (Cadenas)</td>
-			<td>Matriz de etiquetas asignadas al vídeo</td>
+			<td>Matriz de etiquetas (cadenas)</td>
+			<td>Matriz de etiquetas asignadas al video</td>
 		</tr>
 		<tr>
 			<td><a href="#text_tracks"><code translate="No">text_tracks</code> </a></td>
-			<td>Matriz de pistas de texto de estilo HTML5</td>
-			<td>Matriz de pistas de texto (archivos WebVTT) asignadas al vídeo</td>
+			<td>Matriz de pistas de texto estilo HTML5</td>
+			<td>Matriz de pistas de texto (archivos WebVTT) asignadas al video</td>
 		</tr>
 	</tbody>
 </table>
 
-<h4 id="cuepoint">Campos de punto de referencia de vídeo</h4>
+<h4 id="cuepoint">Campos de puntos de referencia de video</h4>
 
-<p>En la siguiente tabla se muestran los campos para <code translate="No">video.cuepoints</code>.</p>
+<p>La siguiente tabla muestra campos para <code translate="No">video.cuepoints</code>.</p>
 
 <table class="bcls-table">
 	<caption class="bcls-caption--table">Campos de punto de referencia</caption>
@@ -949,40 +507,40 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
 	<tbody class="bcls-table__body">
 		<tr>
 			<td><code translate="No">id</code></td>
-			<td>Cadena</td>
-			<td>Identificador del sistema para el punto de referencia</td>
+			<td>Cuerda</td>
+			<td>Identificación del sistema para el punto de referencia</td>
 		</tr>
 		<tr>
 			<td><code translate="No">force_stop</code></td>
 			<td><em>Booleano</em></td>
-			<td>Si el vídeo debe detenerse en el punto de referencia</td>
+			<td>Si el video debe detenerse en el punto de referencia</td>
 		</tr>
 		<tr>
 			<td><code translate="No">metadata</code></td>
-			<td>Cadena; sólo punto de código<em></em></td>
-			<td>Una cadena de metadatos asociada al punto de referencia</td>
+			<td><em>Cuerda; solo punto de código</em></td>
+			<td>Una cadena de metadatos asociada con el punto de referencia.</td>
 		</tr>
 		<tr>
 			<td><code translate="No">name</code></td>
-			<td>Cadena<em></em></td>
+			<td><em>Cuerda</em></td>
 			<td>El nombre del punto de referencia</td>
 		</tr>
 		<tr>
 			<td><code translate="No">time</code></td>
 			<td><em>Flotador</em></td>
-			<td>Tiempo del punto de referencia en segundos medido desde el inicio del vídeo</td>
+			<td>Tiempo del punto de referencia en segundos medido desde el inicio del video</td>
 		</tr>
 		<tr>
 			<td><code translate="No">type</code></td>
-			<td>Cadena<em></em></td>
-			<td>El tipo de punto de referencia (o)<code translate="No">AD</code><code translate="No">DATA</code></td>
+			<td><em>Cuerda</em></td>
+			<td>El tipo de punto de referencia ( <code translate="No">AD</code> o <code translate="No">DATA</code>)</td>
 		</tr>
 	</tbody>
 </table>
 
-<h4 id="geo">Campos geográficos de vídeo</h4>
+<h4 id="geo">Campos geográficos de video</h4>
 
-<p>En la siguiente tabla se muestran los campos de objeto.<code translate="No">video.geo</code></p>
+<p>La siguiente tabla muestra el <code translate="No">video.geo</code> campos de objeto.</p>
 
 <table class="bcls-table">
 	<caption class="bcls-caption--table">Campos de filtrado geográfico</caption>
@@ -997,24 +555,24 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
 		<tr>
 			<td><code translate="No">countries</code></td>
 			<td>Matriz de cadenas de códigos de país</td>
-			<td>Matriz de la lista ISO 3166 de códigos de 2 o 4 letras (https://www.iso.org/obp/ui/) para los países en los que el vídeo está permitido o no permitido reproducir</td>
+			<td>Matriz de la lista ISO 3166 de códigos de 2 o 4 letras (https://www.iso.org/obp/ui/) para los países en los que se permite o no se permite la reproducción del video</td>
 		</tr>
 		<tr>
 			<td><code translate="No">exclude_countries</code></td>
 			<td>Booleano</td>
-			<td>Si es true, la matriz de países se trata como una lista de países excluidos de la visualización</td>
+			<td>Si es verdadero, la matriz de países se trata como una lista de países excluidos de la visualización.</td>
 		</tr>
 		<tr>
 			<td><code translate="No">restricted</code></td>
 			<td>Booleano</td>
-			<td>Si el filtrado geográfico está habilitado para este vídeo</td>
+			<td>Si el filtrado geográfico está habilitado para este video</td>
 		</tr>
 	</tbody>
 </table>
 
-<h4 id="link">Campos de enlace de vídeo</h4>
+<h4 id="link">Campos de enlace de video</h4>
 
-<p>En la siguiente tabla se muestran los campos de objeto.<code translate="No">video.link</code></p>
+<p>La siguiente tabla muestra el <code translate="No">video.link</code> campos de objeto.</p>
 
 <table class="bcls-table">
 	<caption class="bcls-caption--table">Campos de enlace</caption>
@@ -1028,20 +586,20 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
 	<tbody class="bcls-table__body">
 		<tr>
 			<td><code translate="No">url</code></td>
-			<td>Cadena</td>
-			<td>URL de vínculo relacionado</td>
+			<td>Cuerda</td>
+			<td>URL del enlace relacionado</td>
 		</tr>
 		<tr>
 			<td><code translate="No">text</code></td>
-			<td>Cadena</td>
-			<td>Texto de enlace relacionado</td>
+			<td>Cuerda</td>
+			<td>Texto del enlace relacionado</td>
 		</tr>
 	</tbody>
 </table>
 
-<h4 id="schedule">Campos de programación de vídeo</h4>
+<h4 id="schedule">Campos de programación de video</h4>
 
-<p>La siguiente tabla muestra los campos del <code translate="No">video.schedule</code> objeto</p>
+<p>La siguiente tabla muestra los campos para <code translate="No">video.schedule</code> objeto</p>
 
 <table class="bcls-table">
 	<caption class="bcls-caption--table">video.schedule Campos</caption>
@@ -1056,12 +614,12 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
 		<tr>
 			<td><code translate="No">ends_at</code></td>
 			<td>Cadena en formato de fecha ISO-8601</td>
-			<td>Fecha-hora cuando el vídeo deja de estar disponible para su visualización</td>
+			<td>Fecha y hora en que el video deja de estar disponible para su visualización</td>
 		</tr>
 		<tr>
 			<td><code translate="No">starts_at</code></td>
 			<td>Cadena en formato de fecha ISO-8601</td>
-			<td>Fecha-hora cuando el vídeo está disponible para su visualización</td>
+			<td>Fecha y hora en que el video estará disponible para su visualización</td>
 		</tr>
 	</tbody>
 </table>
@@ -1081,93 +639,93 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
 		<tr>
 		</tr>
 		<tr>
-			<td><code translate="No">audio_tracks</code> <em>Opcional</em> <strong>Entrega dinámica únicamente</strong></td>
-			<td>Objeto []</td>
+			<td><code translate="No">audio_tracks</code> <em>opcional</em> <strong>Entrega dinámica únicamente</strong></td>
+			<td>Objeto[]</td>
 			<td>
-			<p>de objetos de pista de audio - consulte <a href="https://apis.support.brightcove.com/dynamic-ingest/ingest-guides/implementing-multiple-audio-tracks-using-apis.html">Implementación de varias pistas de audio usando las API</a> para obtener más información.</p>
+			<p>matriz de objetos de pista de audio - ver <a href="https://apis.support.brightcove.com/dynamic-ingest/ingest-guides/implementing-multiple-audio-tracks-using-apis.html">Implementación de varias pistas de audio mediante las API</a> para más información.</p>
 			</td>
 		</tr>
 		<tr>
 			<td><code translate="No">audio_tracks.merge_with_existing</code> <em>opcional</em></td>
 			<td>Booleano</td>
 			<td>
-			<p>si desea reemplazar pistas de audio existentes o agregar las nuevas (actualmente solo <code translate="No">false</code> se admite) <strong>Sólo entrega dinámica</strong></p>
+			<p>ya sea para reemplazar las pistas de audio existentes o agregar las nuevas (actualmente solo <code translate="No">false</code> esta apoyado) <strong>Entrega dinámica únicamente</strong></p>
 
-			<p class="default-value">Valor predeterminado: <code translate="No">false</code></p>
+			<p class="default-value">Valor por defecto: <code translate="No">false</code></p>
 			</td>
 		</tr>
 		<tr>
 			<td><code translate="No">audio_tracks.masters</code> <em>opcional</em></td>
-			<td>Objeto []</td>
+			<td>Objeto[]</td>
 			<td>
-			<p>matriz de objetos de pista de audio <strong>sólo Entrega dinámica</strong></p>
+			<p>matriz de objetos de pista de audio <strong>Entrega dinámica únicamente</strong></p>
 			</td>
 		</tr>
 		<tr>
 			<td><code translate="No">audio_tracks.masters.url</code> <em>opcional</em></td>
-			<td>Cadena</td>
+			<td>Cuerda</td>
 			<td>
-			<p>URL del archivo de audio sólo Entrega dinámica<strong></strong></p>
+			<p>URL del archivo de audio <strong>Entrega dinámica únicamente</strong></p>
 			</td>
 		</tr>
 		<tr>
 			<td><code translate="No">audio_tracks.masters.language</code> <em>opcional</em></td>
-			<td>Cadena</td>
+			<td>Cuerda</td>
 			<td>
-			<p>Código de idioma para la pista de audio de las subetiquetas de <a href="https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry">https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry (se</a> puede establecer de forma predeterminada para la cuenta poniéndose en contacto con el servicio de soporte de Brightcove) <strong>Sólo entrega dinámica</strong></p>
+			<p>Código de idioma para la pista de audio de las subetiquetas en <a href="https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry">https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry</a> (se puede configurar el valor predeterminado para la cuenta comunicándose con el soporte de Brightcove) <strong>Entrega dinámica únicamente</strong></p>
 			</td>
 		</tr>
 		<tr>
 			<td><code translate="No">audio_tracks.masters.variant</code> <em>opcional</em></td>
-			<td>Cadena</td>
+			<td>Cuerda</td>
 			<td>
-			<p>el tipo de pista de audio (se puede establecer de forma predeterminada para la cuenta poniéndose en contacto con el servicio de soporte de Brightcove)<strong></strong></p>
+			<p>el tipo de pista de audio (el valor predeterminado se puede configurar para la cuenta comunicándose con el Soporte de Brightcove) <strong>Entrega dinámica únicamente</strong></p>
 
-			<p class="type-size">Valores permitidos: <code translate="No">"main"</code> , <code translate="No">"alternate"</code> , <code translate="No">"commentary"</code> , <code translate="No">"dub"</code> , <code translate="No">"descriptive"</code></p>
+			<p class="type-size">Valores permitidos: <code translate="No">"main"</code>, <code translate="No">"alternate"</code>, <code translate="No">"commentary"</code>, <code translate="No">"dub"</code>, <code translate="No">"descriptive"</code></p>
 			</td>
 		</tr>
 		<tr>
 			<td><code translate="No">profile</code> <em>opcional</em></td>
-			<td>Cadena</td>
+			<td>Cuerda</td>
 			<td>
-			<p>perfil de ingest para usarlo para la transcodificación; si está ausente, se usará el perfil predeterminado</p>
+			<p>ingiera el perfil que se utilizará para la transcodificación; si está ausente, se utilizará el perfil predeterminado</p>
 			</td>
 		</tr>
 		<tr>
 			<td><code translate="No">text_tracks</code> <em>opcional</em></td>
-			<td>Objeto []</td>
+			<td>Objeto[]</td>
 			<td>
-			<p>matriz de <code translate="No">text_tracks</code> objetos: consulte <a href="https://apis.support.brightcove.com/dynamic-ingest/ingest-guides/ingesting-webvtt-files-text-trackscaptions.html">Ingesta de archivos WebVTT (pistas de texto)</a></p>
+			<p>gama de <code translate="No">text_tracks</code> objetos - ver <a href="https://apis.support.brightcove.com/dynamic-ingest/ingest-guides/ingesting-webvtt-files-text-trackscaptions.html">Ingesta de archivos WebVTT (pistas de texto)</a></p>
 			</td>
 		</tr>
 		<tr>
 			<td><code translate="No">text_tracks.url</code></td>
-			<td>Url</td>
+			<td>URL</td>
 			<td>
 			<p>URL de un archivo WebVTT</p>
 			</td>
 		</tr>
 		<tr>
 			<td><code translate="No">text_tracks.srclang</code></td>
-			<td>Cadena</td>
+			<td>Cuerda</td>
 			<td>
 			<p>Código de idioma ISO 639 de 2 letras (alfa-2) para las pistas de texto</p>
 			</td>
 		</tr>
 		<tr>
 			<td><code translate="No">text_tracks.kind</code> <em>opcional</em></td>
-			<td>Cadena</td>
+			<td>Cuerda</td>
 			<td>
 			<p>cómo se debe usar el archivo vtt</p>
 
-			<p class="default-value">Valor predeterminado: <code translate="No">captions</code></p>
+			<p class="default-value">Valor por defecto: <code translate="No">captions</code></p>
 
-			<p class="type-size">Valores permitidos: <code translate="No">"captions"</code> , <code translate="No">"subtitles"</code> , <code translate="No">"chapters"</code> , <code translate="No">"metadata"</code></p>
+			<p class="type-size">Valores permitidos: <code translate="No">"captions"</code>, <code translate="No">"subtitles"</code>, <code translate="No">"chapters"</code>, <code translate="No">"metadata"</code></p>
 			</td>
 		</tr>
 		<tr>
 			<td><code translate="No">text_tracks.label</code> <em>opcional</em></td>
-			<td>Cadena</td>
+			<td>Cuerda</td>
 			<td>
 			<p>título legible por el usuario</p>
 			</td>
@@ -1176,28 +734,28 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
 			<td><code translate="No">text_tracks.default</code> <em>opcional</em></td>
 			<td>Booleano</td>
 			<td>
-			<p>establece el idioma predeterminado para subtítulos o subtítulos</p>
+			<p>establece el idioma predeterminado para los subtítulos</p>
 			</td>
 		</tr>
 		<tr>
 			<td><code translate="No">capture-images</code> <em>opcional</em></td>
 			<td>Booleano</td>
 			<td>
-			<p>si el póster y la miniatura deben capturarse durante la transcodificación; el valor predeterminado es <code translate="No">true</code> si el perfil tiene representaciones de imágenes, <code translate="No">false</code> si no lo hace - vea <a href="https://apis.support.brightcove.com/dynamic-ingest/ingest-guides/images-and-dynamic-ingest-api.html">Imágenes y la API de ingesta dinámica</a> para más información</p>
+			<p>si el póster y la miniatura deben capturarse durante la transcodificación; predeterminado a <code translate="No">true</code> si el perfil tiene representaciones de imágenes, <code translate="No">false</code> si no es así, mira <a href="https://apis.support.brightcove.com/dynamic-ingest/ingest-guides/images-and-dynamic-ingest-api.html">Imágenes y API de ingesta dinámica</a> para más información</p>
 			</td>
 		</tr>
 		<tr>
 			<td><code translate="No">poster</code> <em>opcional</em></td>
 			<td>Objeto</td>
 			<td>
-			<p>el póster de vídeo que se va a ingerir - consulte <a href="https://apis.support.brightcove.com/dynamic-ingest/ingest-guides/images-and-dynamic-ingest-api.html">Imágenes y la API de ingesta dinámica</a> para obtener más información</p>
+			<p>el póster del video que se va a ingerir - ver <a href="https://apis.support.brightcove.com/dynamic-ingest/ingest-guides/images-and-dynamic-ingest-api.html">Imágenes y API de ingesta dinámica</a> para más información</p>
 			</td>
 		</tr>
 		<tr>
 			<td><code translate="No">poster.url</code></td>
-			<td>Url</td>
+			<td>URL</td>
 			<td>
-			<p>URL de la imagen del póster de vídeo</p>
+			<p>URL de la imagen del póster del video</p>
 			</td>
 		</tr>
 		<tr>
@@ -1218,14 +776,14 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
 			<td><code translate="No">thumbnail</code> <em>opcional</em></td>
 			<td>Objeto</td>
 			<td>
-			<p>la miniatura de vídeo que se va a ingerir - consulte <a href="https://apis.support.brightcove.com/dynamic-ingest/ingest-guides/images-and-dynamic-ingest-api.html">Imágenes y la API de ingesta dinámica</a> para obtener más información</p>
+			<p>la miniatura del video que se va a ingerir; consulte <a href="https://apis.support.brightcove.com/dynamic-ingest/ingest-guides/images-and-dynamic-ingest-api.html">Imágenes y API de ingesta dinámica</a> para más información</p>
 			</td>
 		</tr>
 		<tr>
 			<td><code translate="No">thumbnail.url</code></td>
-			<td>Url</td>
+			<td>URL</td>
 			<td>
-			<p>URL de la imagen en miniatura del vídeo</p>
+			<p>URL de la imagen en miniatura del video</p>
 			</td>
 		</tr>
 		<tr>
@@ -1244,8 +802,8 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
 		</tr>
 		<tr>
 			<td><code translate="No">callbacks</code> <em>opcional</em></td>
-			<td>Cadena []</td>
-			<td>Matriz de direcciones URL a <a href="https://apis.support.brightcove.com/dynamic-ingest/general/notifications-dynamic-delivery-video-cloud.html">las que se deben enviar las notificaciones</a> 
+			<td>Cuerda[]</td>
+			<td>Matriz de URL que <a href="https://apis.support.brightcove.com/dynamic-ingest/general/notifications-dynamic-delivery-video-cloud.html">notificaciones</a> debe ser enviado a
 			<p>&nbsp;</p>
 			</td>
 		</tr>
@@ -1254,9 +812,9 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
 </section>
 
 <section class="bcls-section">
-<h2 id="API_response">Respuesta de API</h2>
+<h2 id="API_response">Respuesta de la API</h2>
 
-<p>La respuesta a una solicitud de creación de clip incluye un identificador para el trabajo y la etiqueta establecida en el cuerpo de la solicitud, así como el id de trabajo activo:</p>
+<p>La respuesta a una solicitud de creación de clip incluye una identificación para el trabajo y la etiqueta que estableciste en el cuerpo de la solicitud, así como la identificación del trabajo en vivo:</p>
 
 <pre class="line-numbers">
 <code class="language-json" translate="No">{
@@ -1292,23 +850,23 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
 		</tr>
 		<tr>
 			<td><code translate="No">jvod_id</code></td>
-			<td>Cadena</td>
+			<td>Cuerda</td>
 			<td>
-			<p>El ID del trabajo del clip</p>
+			<p>La identificación del trabajo de clip</p>
 			</td>
 		</tr>
 		<tr>
 			<td><code translate="No">label</code></td>
-			<td>Cadena</td>
+			<td>Cuerda</td>
 			<td>
 			<p>La etiqueta del clip (de la entrada)</p>
 			</td>
 		</tr>
 		<tr>
 			<td><code translate="No">live_job_id</code></td>
-			<td>Cadena</td>
+			<td>Cuerda</td>
 			<td>
-			<p>El ID del trabajo en vivo (de la entrada)</p>
+			<p>La identificación del trabajo en vivo (de la entrada)</p>
 			</td>
 		</tr>
 	</tbody>
@@ -1316,158 +874,3 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
 </section>
 </section>
 </article>
-
-<!-- complete bootstrap layout -->
-    </div>
-    <div class="col-sm-2 right-side-bar">
-      
-      <nav class="right-side-nav" id="right_side_nav">
-        <h6 class="toc">Contenido de la página</h6>
-        <ul id="in_page_nav" class="list-none"></ul>
-      </nav>
-      
-    </div>
-  </div>
-</div>
-
-<hr>
-<footer class="bcls-footer" role="contentinfo">  <div class="row">
-    <div class="region region-footer-top-center col-md-12">
-      <nav role="navigation" aria-labelledby="block-brightcovesupport-menu" id="block-brightcovesupport" class="footer-menu">
-
-        <h2>Asistencia técnica de Brightcove</h2>
-
-        <ul class="menu">
-          <li>
-            Estado del sistema<a href="https://status.brightcove.com"></a>
-          </li>
-          <li>
-            <a href="https://supportportal.brightcove.com/s/login/?">Contactar soporte</a>
-          </li>
-          <li>
-            <a href="https://support.brightcove.com/">Documentación</a>
-          </li>
-        </ul>
-
-      </nav>
-      <nav role="navigation" aria-labelledby="block-training-menu" id="block-training" class="footer-menu">
-
-        <h2>Formación</h2>
-
-        <ul class="menu">
-          <li>
-            Cursos en línea<a href="https://studio.support.brightcove.com/training/online-training-courses.html"></a>
-          </li>
-          <li>
-            Inscríbete a un curso<a href="https://studio.support.brightcove.com/training/register-training.html"></a>
-          </li>
-          <li>
-            <a href="https://university.brightcove.com/">Universidad de Brightcove</a>
-          </li>
-        </ul>
-
-      </nav>
-      <nav role="navigation" aria-labelledby="block-brightcove-menu" class="footer-menu">
-
-        <h2>Brightcove</h2>
-
-        <ul class="menu">
-          <li>
-            <a href="https://www.brightcove.com">BrightCove.com</a>
-          </li>
-          <li>
-            <a href="https://supportportal.brightcove.com/s/login/?">Contáctanos</a>
-          </li>
-        </ul>
-      </nav>
-    </div>
-  </div>
-  <div class="row">
-    <div class="region region-footer-bottom-center col-md-12">
-      <div class="bcls-copyright footer-menu">
-        <table>
-          <tr>
-            <td>
-              <div id="bc_copyright" class="field field--name-field-copyright-year field--type-string field--label-hidden field--item" style="float: left;"> Brightcove Inc. All rights reserved.</div>
-            </td>
-            <td>Privacidad | Términos y Condiciones<a href="https://www.brightcove.com/en/legal/privacy"></a><a href="https://www.brightcove.com/en/terms-and-conditions"></a></td>
-            <td>
-              <div class="gf-links-cols footer-menu">
-                <div class="gf-social"><a href="https://www.linkedin.com/company/16439" title="LinkedIn" newtab="newtab" class="gf-social-linkedin"><i class="fab fa-linkedin-in" style="font-size: 1.5rem;"></i></a><a href="https://twitter.com/brightcove" title="Twitter" newtab="newtab" class="gf-social-twitter"><i class="fab fa-twitter" style="font-size: 1.5rem;"></i></a><a href="https://www.facebook.com/Brightcove" title="Facebook" newtab="newtab" class="gf-social-facebook"><i class="fab fa-facebook-f" style="font-size: 1.5rem;"></i></a>
-                </div>
-              </div>
-            </td>
-          </tr>
-        </table>
-      </div>
-    </div>
-  </div>
-</footer>
-
-<script>
-      
-  var searchBox = sajari.init({
-    mode: "search-box",
-    project: "1588255093746585379", // Set this to your project.
-    collection: "brightcove-documenation", // Set this to your collection.
-    instantPipeline: "autocomplete", // Pipeline used as you type
-    inputPlaceholder: "Search", // Input element placeholder
-    maxSuggestions: 5, // Maximum number of suggestions to show
-    attachSearchBox: document.getElementById("nav-search-box") // DOM element to attach to
-  });
-  
-    searchBox("sub", "pipeline.search-sent", function (_, query) {
-      window.location = "/search.html?q=" + encodeURIComponent(query.q);
-    });
-  
-
-</script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  <script src="https://support.brightcove.com/site-assets/js/site/https-fix.js"></script>
-  <script src="https://support.brightcove.com/site-assets/js/site/setDate.js"></script>
-  
-  <script src="https://support.brightcove.com/site-assets/js/site/prism.js"></script>
-  
-  <script src="https://support.brightcove.com/site-assets/js/site/site.js"></script>
-  <script src="https://support.brightcove.com/site-assets/js/site/tabs.js"></script>
-  <script src="https://support.brightcove.com/site-assets/js/site/toc.js"></script>
-  <script src="/assets/js/sites_nav.js"></script>
-  <script src="https://support.brightcove.com/site-assets/js/site/bcls-utils.js"></script>
-  <script src="https://support.brightcove.com/site-assets/js/site/local-link-fix.js"></script>
-  <script src="/assets/js/feedback.js"></script>
-  
-  <script src="/assets/js/sajari-search-foot.js"></script>
-  
-  <!-- <script src="/assets/js/sajari-index.js"></script> -->
-  <style>
-    a.sj-paginator__page-number.sj-paginator__page-number--current.css-so0ov7 {
-      background-color: lightblue;
-    }
-    div.sj-tabs__tab {
-      margin-top: 3rem;
-      margin-left: .3rem;
-      border-top-left-radius: .4rem;
-      border-top-right-radius: .4rem;
-      background-color:#e8e8e8;
-    }
-
-    div.sj-tabs__tab.sj-tabs__tab--selected {
-      border-bottom-color: crimson;
-      background-color: #f8f8f8;
-    }
-
-    p.sj-results__result__description.css-p9jvyt {
-      font-size: 1rem;
-    }
-
-    .sj-result__text.css-31l7gp h3 {
-      color: navy;
-      font-size: 1.4rem;
-    }
-    </style>
-
-</body>
-
-</html>

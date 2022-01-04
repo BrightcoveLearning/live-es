@@ -1,0 +1,102 @@
+---
+title: Programación de clips en Brightcove Live
+parent: Live Module
+---
+
+
+<article class="bcls-article">
+    <h1>{{ page.title }}</h1>
+    <summary>En este tema, aprenderá a programar un videoclip utilizando el módulo Live.
+        </summary>
+   
+
+        <section class="bcls-section">
+            <h2 id="schedule">Programación de un clip en la sala de control</h2>
+
+            <ol class="bcls-tasklist-restart">
+                <li>En el módulo En vivo, cree un nuevo evento en vivo con un punto de entrada estático o visite uno creado previamente.</li>
+                <li>En el <strong>Sala de control</strong> , desplácese hacia abajo hasta el <strong>Clips programados</strong> sección.</li>
+                <li>Hacer clic <strong>Agregar clip programado</strong> para programar un nuevo clip. <aside class="bcls-aside bcls-aside--information">Nota: Si el <strong>Clips programados</strong> El panel no está disponible en el <strong>Sala de control</strong> , póngase en contacto con el soporte de Brightcove para habilitarlo.</aside>
+                    <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/live-module/clip-scheduling/1add-scheduling.png" /></figure>
+
+                </li>
+                <li>Aparecerá una ventana modal. Selecciona el <strong>Fecha y hora de inicio</strong> y el <strong>Fecha y hora de finalización</strong> <aside class="bcls-aside bcls-aside--information">
+                    <ul>Nota: 
+                        <li>los <strong>Fecha y hora de inicio</strong> y <strong>Fecha y hora de finalización</strong> de su clip programado debe coincidir con un evento de transmisión actual o futuro. <strong>Fecha final</strong> debe estar en el futuro. De lo contrario, la creación del clip fallará.</li>
+                        <li>La duración mínima de un clip programado es de 5 minutos y la máxima de 24 horas.</li>
+
+                    </ul>
+                </aside>
+                    <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/live-module/clip-scheduling/2modal-copy.png" /></figure>
+                    
+                </li>
+                <li>La <strong>duración</strong> del clip se calcula automáticamente.</li>
+                <li>Dale un <strong>Nombre</strong>.</li>
+                <li>Escribe un <strong>Breve descripción</strong>. (Opcional)</li>
+                <li>Asignar <strong>Etiquetas</strong> si necesario. (Opcional)</li>
+                <li>Agrega un <strong>Identificación de referencia</strong>. El ID debe ser un valor único para toda la cuenta de Studio. (Opcional)</li>
+                <li>Hacer clic <strong>Programar clip</strong>.</li>
+                <aside class="bcls-aside bcls-aside--information">El clip programado se creará cuando el <strong>Fecha final</strong> es alcanzado. Mientras tanto, se creará un recurso de vídeo vacío como marcador de posición en el módulo multimedia. </aside>
+                <li>Para actualizar un clip programado, haga clic en el clip.
+                    <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/live-module/clip-scheduling/5update-clip.png" /></figure>
+                </li>
+                <li>Realice los cambios deseados.</li>
+                <li>Hacer clic <strong>Actualizar clip</strong>.
+                </li>
+                <li>Para eliminar un clip programado, haga clic en el icono de la papelera. 
+
+                </li>
+                
+
+            </ol>
+        </section>
+
+        <section class="bcls-section">
+            <h2 id="clipping-page">Programación de un clip en la página de recorte</h2>
+            <ol class="bcls-tasklist-restart">
+                <li>En la Sala de control, haga clic en <strong>Crear clip</strong> en el menú de la izquierda.    
+                    <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/live-module/clip-scheduling/3create-clip.png" /></figure>
+                </li>
+                    <li>Hacer clic <strong>Agregar clip programado</strong> para programar un nuevo clip. <aside class="bcls-aside bcls-aside--information">Nota: Si el <strong>Clips programados</strong> El panel no está disponible en el <strong>Sala de control</strong> , póngase en contacto con el soporte de Brightcove para habilitarlo.</aside>     
+                    </li>
+                    <li>Aparecerá una ventana modal. Selecciona el <strong>Fecha y hora de inicio</strong> y el <strong>Fecha y hora de finalización</strong> <aside class="bcls-aside bcls-aside--information">
+                        <ul>Nota: 
+                            <li>los <strong>Fecha y hora de inicio</strong> y <strong>Fecha y hora de finalización</strong> de su clip programado debe coincidir con un evento de transmisión actual o futuro. <strong>Fecha final</strong> debe estar en el futuro. De lo contrario, la creación del clip fallará.</li>
+                            <li>La duración mínima de un clip programado es de 5 minutos y la máxima de 24 horas.</li>
+    
+                        </ul>
+                    </aside>
+                        <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/live-module/clip-scheduling/2modal.png" /></figure>
+                        
+                    </li>
+                    <li>La <strong>duración</strong> del clip se calcula automáticamente.</li>
+                    <li>Dale un <strong>Nombre</strong>.</li>
+                    <li>Escribe un <strong>Breve descripción</strong>. (Opcional)</li>
+                    <li>Asignar <strong>Etiquetas</strong> si necesario. (Opcional)</li>
+                    <li>Agrega un <strong>Identificación de referencia</strong>. El ID debe ser un valor único para toda la cuenta de Studio. (Opcional)</li>
+                    <li>Hacer clic <strong>Programar clip</strong>.</li>
+                    <aside class="bcls-aside bcls-aside--information">El clip programado se creará cuando el <strong>Fecha final</strong> es alcanzado. Mientras tanto, se creará un recurso de vídeo vacío como marcador de posición en el módulo multimedia. </aside>
+
+                <li>Para actualizar un clip programado, haga clic en el clip.
+                    <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/live-module/clip-scheduling/4update-clip.png" /></figure>
+                </li>
+                <li>Realice los cambios deseados.</li>
+                <li>Hacer clic <strong>Actualizar clip</strong>.
+                </li>
+                <li>Para eliminar un clip programado, haga clic en el icono de la papelera. </li>
+
+            </ol>
+            <aside class="bcls-aside bcls-aside--information">
+                <ul>
+                    <li>Solo podrás actualizar el clip programado <strong>Fecha de inicio</strong> y <strong>Fecha final</strong> solo antes de que se alcance la fecha de finalización.</li>
+                    <li>Es posible que aparezcan entradas rojas en el panel Clip programado, que son programaciones fallidas. Los clips programados pueden fallar por una variedad de razones, por ejemplo, puntos de referencia que no se encuentran dentro de las horas de inicio y finalización de VOD.</li>
+
+                </ul>
+
+            </aside>
+
+            </section>
+
+
+
+</article>
