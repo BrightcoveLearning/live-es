@@ -1,469 +1,904 @@
-﻿<!doctype html>
-<html lang="es-es">
+﻿<!DOCTYPE html>
+<html lang="es"> 
+    <head>
+        <title>API en vivo: Puntos de referencia y balizas publicitarias con SSAI</title>
+        
+        <!-- Meta -->
+        <meta charset="utf-8">
+        <meta name="robots" content="noindex,nofollow"> 
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="En este tema, aprenderá a administrar puntos de referencia y balizas publicitarias cuando utilice la inserción de anuncios del lado del servidor (SSAI) de Brightcove para sus trabajos de transmisión en vivo.">
+        
+        <!-- Google Font -->
+        <link href="/assets/s-site-assets-stylesheets/fonts/poppins.css" rel="stylesheet">
+        <link rel="stylesheet" href="/assets/s-site-assets-stylesheets/fonts/articulat-site.css">
+        <link href="/assets/s-site-assets-stylesheets/fonts/source-code-pro.css" rel="stylesheet">
+        
+        <!-- FontAwesome JS-->
+        <script src="https://kit.fontawesome.com/d67c74a882.js" crossorigin="anonymous"></script>  
+        
+        <!-- Plugins CSS -->
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.2/styles/atom-one-dark.min.css">
+        <link rel="stylesheet" href="/assets/s-site-assets-template-stylesheets/plugins/simplelightbox/simple-lightbox.min.css">
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="En este tema, aprenderá a administrar los puntos de referencia y los indicadores de anuncio cuando utilice la Inserción de anuncios del lado del servidor (SSAI) de Brightcove para sus trabajos de transmisión en directo.">
-  
-  <title>API en vivo: Puntos de referencia y balizas de anuncio con SSAI</title>
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-  <link rel="manifest" href="/site.webmanifest">  
-  <link data-react-helmet="true" rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500&amp;display=swap">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://support.brightcove.com/site-assets/css/site/prism.css">
-  <link rel="stylesheet" href="https://support.brightcove.com/site-assets/css/site/styles.css">
-  <link rel="stylesheet" href="https://support.brightcove.com/site-assets/css/site/landing-page.css">
-  <link rel="stylesheet" href="https://support.brightcove.com/site-assets/css/site/tabs.css">
-  <link rel="stylesheet" href="/assets/css/local.css">
-  <link data-react-helmet="true" rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500&display=swap">
-  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro&display=swap" rel="stylesheet">
-  <script src="https://kit.fontawesome.com/381443caa8.js" crossorigin="anonymous"></script>
-  <script src="https://support.brightcove.com/site-assets/js/site/google-analytics.js"></script>
-  <script src="/assets/js/sajari-head.js"></script>
-</head>
-
-<body class="body">
-
-<header>
-  <div class="div-header">
-    <a href="/"><img class="product-logo" src="https://support.brightcove.com/site-assets/images/site/product-logos/Live_Logo.svg" alt="logotipo del producto" style="max-height: 100px;max-width: 232px;"/></a>
-<!-- GTranslate: https://gtranslate.io/ -->
-<select onchange="doGTranslate(this);"><option value="">Seleccionar idioma</option><option value="en|en" translate="No">English</option><option value="en|zh-TW" translate="No">繁體中文</option><option value="en|fr" translate="No">Français</option><option value="en|de" translate="No">Deutsche</option><option value="en|ja" translate="No">日本語</option><option value="en|ko" translate="No">한국어</option><option value="en|es" translate="No">Español</option></select>
-
-<script>
-/* <![CDATA[ */
-function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;if(lang_pair=='')return;var lang=lang_pair.split('|')[1];var plang=location.hostname.split('.')[0];if(plang.length !=2 && plang.toLowerCase() != 'zh-cn' && plang.toLowerCase() != 'zh-tw')plang='en';location.href=location.protocol+'//'+(lang == 'en' ? '' : lang+'.')+location.hostname.replace('www.', '').replace(RegExp('^' + plang + '\\.'), '')+location.pathname+location.search;}
-/* ]]> */
-</script>
-
-    
+        <!-- Theme CSS -->  
+        <link id="theme-style" rel="stylesheet" href="/assets/s-site-assets-template-stylesheets/css/theme.css">
+        <link rel="stylesheet" href="/assets/s-site-assets-stylesheets/prism.css">
+        <link rel="stylesheet" href="/assets/s-site-assets-template-stylesheets/custom-css/styles.css">
 
 
-    <span class="secondary-nav"><a href="https://supportportal.brightcove.com/s/login/?"><img src="https://support.brightcove.com/site-assets/images/site/support.png" alt="soporte"/> Contactar con Soporte</a> <span style="vertical-align: top;margin-left:1em;margin-right:1em;">|</span> <a href="https://status.brightcove.com/">Estado<img src="https://support.brightcove.com/site-assets/images/site/status.png" alt="estado del sistema"/> del sistema</a></span> <br/>
-    
-  </div>
-  <nav aria-label="breadcrumb">
-    <ol class="breadcrumb arr-right">
-      
-      <li class="breadcrumb-item"><a href="/">Inicio</a></li>
-      
-      
-      
-      <li class="breadcrumb-item">SSAI<a href="/live-api/ssai/"></a></li>
-      
-      <li class="breadcrumb-item active" aria-current="page">API en vivo: Puntos de referencia y balizas de anuncio con SSAI</li>
-    </ol>
-  </nav>
-</header>
-<div class="container">
-    <div class="row">
-            <div class="col-sm-3 left-side-bar">
-        <select id="site_select" class="bcls-select" style="margin-right: 1rem;">
-          <option value="">Otros documentos de Brightcove</option>
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-XBJC11HF8Z"></script>
+        <script translate="no">
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-XBJC11HF8Z');
+        </script>
+        <script src="/assets/s-site-assets-scripts/sixth-sense.js"></script>
+        <script src="/assets/s-site-assets-scripts/sajari-head.js"></script>
+        <script src="/assets/s-site-assets-scripts/feather.min.js"></script>
+
+    </head> 
+
+    <body class="docs-page">
+
+
+<header class="header fixed-top">
+  <div class="branding docs-branding">
+    <div class="container-fluid position-relative py-2">
+      <div class="docs-logo-wrapper">
+        <button id="docs-sidebar-toggler" class="docs-sidebar-toggler"
+          type="button">
+          <span></span> <span></span> <span></span>
+        </button>
+        <div class="site-logo"><a class="navbar-brand" href="https://support.brightcove.com/" style="margin-left: 15px;"> <img class="logo-icon me-2" src="/assets/s-site-assets-template-stylesheets/images/bc_logo_black_1@1x.png" alt="logo" style="margin-bottom: 9px;"/>
+            <!-- <span class="logo-text">BRIGHTCOVE</span> -->
+          </a></div>
+      </div><!--//docs-logo-wrapper-->
+
+      <div class="docs-top-utilities d-flex justify-content-end
+        align-items-center">
+        
+        <!-- Search bar -->
+        <div id="nav-search-box" class="top-search-box d-none d-lg-flex" style="margin-right: 10px ;"></div>
+
+<select id="site_select" class="form-select select-focus" style="width:
+          20%; margin-right: 10px;" translate="no">
+          <option value="">Other Brightcove Docs</option>
           
-            
-              <option value="https://support.brightcove.com">Documentación Inicio</option>
-            
           
-            
-              <option value="https://audience.support.brightcove.com">Audiencia de Brightcove</option>
-            
+          <option value="https://support.brightcove.com" translate="no">Documentation Home</option>
           
-            
-              <option value="https://beacon.support.brightcove.com">Baliza Brightcove</option>
-            
           
-            
-              <option value="https://campaign.support.brightcove.com">Campaña de Brightcove</option>
-            
           
-            
-              <option value="https://engage.support.brightcove.com">Brightcove Engage</option>
-            
+          <option value="https://support.brightcove.com/" translate="no">-- VIDEO CLOUD --</option>
           
-            
-              <option value="https://live.support.brightcove.com">Brightcove Live</option>
-            
           
-            
-              <option value="https://gallery.support.brightcove.com">Brightcove Gallery</option>
-            
           
-            
-              <option value="https://ssai.support.brightcove.com">Brightcove SSAI</option>
-            
+          <option value="https://studio.support.brightcove.com" translate="no">&nbsp;&nbsp;&nbsp;&nbsp;Video Cloud Studio</option>
           
-            
-              <option value="https://social.support.brightcove.com">Brightcove Social</option>
-            
           
-            
-              <option value="https://studio.support.brightcove.com">Video Cloud Studio</option>
-            
           
-            
-              <option value="https://player.support.brightcove.com">Desarrollo de jugadores de Brightcove</option>
-            
+          <option value="https://mstudio.support.brightcove.com" translate="no">&nbsp;&nbsp;&nbsp;&nbsp;Marketing Studio</option>
           
-            
-              <option value="https://apis.support.brightcove.com">API para la plataforma de Video Cloud</option>
-            
           
-            
-              <option value="https://sdks.support.brightcove.com">SDK de dispositivos de Video Cloud</option>
-            
           
-            
-              <option value="https://integrations.support.brightcove.com">Integraciones y conectores CMS</option>
-            
+          <option value="https://player.support.brightcove.com" translate="no">&nbsp;&nbsp;&nbsp;&nbsp;Brightcove Player Development</option>
           
-            
-              <option value="https://general.support.brightcove.com">Información general de Video Cloud</option>
-            
           
-            
-              <option value="https://zencoder.support.brightcove.com">Zencoder</option>
-            
+          
+          <option value="https://apis.support.brightcove.com" translate="no">&nbsp;&nbsp;&nbsp;&nbsp;Video Cloud Platform APIs</option>
+          
+          
+          
+          <option value="https://sdks.support.brightcove.com" translate="no">&nbsp;&nbsp;&nbsp;&nbsp;Video Cloud Device SDKs</option>
+          
+          
+          
+          <option value="https://integrations.support.brightcove.com" translate="no">&nbsp;&nbsp;&nbsp;&nbsp;Integrations and CMS Connectors</option>
+          
+          
+          
+          <option value="https://general.support.brightcove.com" translate="no">&nbsp;&nbsp;&nbsp;&nbsp;Video Cloud General Information</option>
+          
+          
+          
+          <option value="https://support.brightcove.com/" translate="no">-- VIDEO ESSENTIALS --</option>
+          
+          
+          
+          <option value="https://audience-insights.support.brightcove.com" translate="no">&nbsp;&nbsp;&nbsp;&nbsp;Brightcove Audience Insights</option>
+          
+          
+          
+          <option value="https://beacon-help.support.brightcove.com" translate="no">&nbsp;&nbsp;&nbsp;&nbsp;Brightcove Beacon Studio</option>
+          
+          
+          
+          <option value="https://beacon.support.brightcove.com" translate="no">&nbsp;&nbsp;&nbsp;&nbsp;Brightcove Beacon Classic</option>
+          
+          
+          
+          <option value="https://corptv.support.brightcove.com" translate="no">&nbsp;&nbsp;&nbsp;&nbsp;CorpTV</option>
+          
+          
+          
+          <option value="https://live.support.brightcove.com" translate="no">&nbsp;&nbsp;&nbsp;&nbsp;Brightcove Live</option>
+          
+          
+          
+          <option value="https://zencoder.support.brightcove.com" translate="no">&nbsp;&nbsp;&nbsp;&nbsp;Zencoder</option>
+          
+          
+          
+          <option value="https://support.brightcove.com/" translate="no">-- VIDEO CLOUD ADD-ONS --</option>
+          
+          
+          
+          <option value="https://gallery.support.brightcove.com" translate="no">&nbsp;&nbsp;&nbsp;&nbsp;Brightcove Gallery</option>
+          
+          
+          
+          <option value="https://studio.support.brightcove.com/social/index.html" translate="no">&nbsp;&nbsp;&nbsp;&nbsp;Brightcove Social</option>
+          
+          
+          
+          <option value="https://interactivity.support.brightcove.com/index.html" translate="no">&nbsp;&nbsp;&nbsp;&nbsp;Brightcove Interactivity</option>
+          
+          
+          
+          <option value="https://ssai.support.brightcove.com" translate="no">&nbsp;&nbsp;&nbsp;&nbsp;Brightcove SSAI</option>
+          
+          
+          
+          <option value="https://campaign.support.brightcove.com" translate="no">&nbsp;&nbsp;&nbsp;&nbsp;Brightcove Campaign</option>
+          
           
         </select>
 
-        <nav class="sidenav" id="side_nav">
-          
-            
-            <h5><a href="/index.html">Inicio</a></h5>
-            
-          
-            
-              <h5 class="submenu-header"><a href="/get-started/index.html">Empezar <strong>+</strong></a></h5>
-              <ul class="sidenav-submenu" style="display:none;">
-                
-                  
-                    <li><a href="/get-started/brightcove-live-training-videos.html">Vídeos de formación en directo de Brightcove</a></li>
-                  
-                
-                  
-                    <li><a href="/get-started/delivering-live-streams.html">Entrega de transmisiones en directo</a></li>
-                  
-                
-                  
-                    <li>Pautas y prácticas recomendadas del módulo en vivo<a href="/get-started/live-module-guidelines-and-best-practices.html"></a></li>
-                  
-                
-                  
-                    <li>Paso a paso:<a href="/get-started/step-step-using-live-module-open-broadcaster-software-obs.html"> Uso del Módulo Live con OBS</a></li>
-                  
-                
-                  
-                    <li>Paso a paso:<a href="/get-started/step-step-using-live-module-telestream-wirecast.html"> Uso del Módulo Live con Wirecast</a></li>
-                  
-                
-              </ul>
-            
-          
-            
-              <h5 class="submenu-header"><a href="/general/index.html">Información general <strong>+</strong></a></h5>
-              <ul class="sidenav-submenu" style="display:none;">
-                
-                  
-                    <li>DRM en vivo<a href="/general/live-drm.html"></a></li>
-                  
-                
-                  
-                    <li>Matriz de comparación de plataformas activas<a href="/general/live-platforms-comparison-matrix.html"></a></li>
-                  
-                
-                  
-                    <li>Glosario de Vídeo en Vivo<a href="/general/live-video-glossary.html"></a></li>
-                  
-                
-                  
-                    <li>Reducción de la latencia para transmisiones en directo<a href="/general/reducing-latency-live-streams.html"></a></li>
-                  
-                
-                  
-                    <li>Codificadores compatibles para eventos en directo<a href="/general/supported-encoders-live-events.html"></a></li>
-                  
-                
-                  
-                    <li>Uso del empaquetado de Akamai Stream y Wirecast<a href="/general/creating-live-stream-using-akamai-stream-packaging-and-telestream-wirecast.html"></a></li>
-                  
-                
-              </ul>
-            
-          
-            
-              <h5 class="submenu-header">Uso del Módulo Live +<a href="/live-module/index.html"><strong></strong></a></h5>
-              <ul class="sidenav-submenu" style="display:none;">
-                
-                  
-                    <li><a href="/live-module/client-side-preroll-with-live-ssai.html">Anuncios previos del lado del cliente con SSAI en vivo</a></li>
-                  
-                
-                  
-                    <li><a href="/live-module/creating-and-managing-live-events-using-live-module.html">Creación y administración de eventos en directo</a></li>
-                  
-                
-                  
-                    <li><a href="/live-module/creating-video-clip-using-live-module.html">Creación de un clip de vídeo</a></li>
-                  
-                
-                  
-                    <li><a href="https://integrations.support.brightcove.com/web-conferencing/host-avaya-conference-brightcove-live.html">Anfitrión de la conferencia de Avaya en Brightcove Live</a></li>
-                  
-                
-                  
-                    <li><a href="https://integrations.support.brightcove.com/web-conferencing/host-cisco-webex-conference-brightcove-live.html">Hospedar Cisco Webex a Brightcove Live</a></li>
-                  
-                
-                  
-                    <li><a href="https://integrations.support.brightcove.com/web-conferencing/host-zoom-conference-brightcove-live.html">Zoom de host a Brightcove Live</a></li>
-                  
-                
-                  
-                    <li><a href="https://integrations.support.brightcove.com/web-conferencing/host-inxpo-live.html">Organiza un evento INXPO en Brightcove Live</a></li>
-                  
-                
-                  
-                    <li><a href="/live-module/implementing-server-side-ads-live-module.html">Implementación de anuncios del lado del servidor</a></li>
-                  
-                
-                  
-                    <li>Redundancia en vivo<a href="/live-module/live-redundancy.html"></a></li>
-                  
-                
-                  
-                    <li>Publicación de un evento en vivo en Facebook<a href="/live-module/publishing-live-event-facebook.html"></a></li>
-                  
-                
-                  
-                    <li>Publicar un evento en vivo en YouTube<a href="/live-module/publishing-live-event-youtube.html"></a></li>
-                  
-                
-                  
-                    <li>Revisión de Live Analytics<a href="/live-module/reviewing-live-analytics.html"></a></li>
-                  
-                
-                  
-                    <li>Uso de salidas RTMP en vivo<a href="/live-module/using-live-rtmp-outputs-stream-facebook-and-youtube.html"></a></li>
-                  
-                
-              </ul>
-            
-          
-            
-              <h5 class="submenu-header">Trabajar con Live API +<a href="/live-api/index.html"><strong></strong></a></h5>
-              <ul class="sidenav-submenu" style="display:none;">
-                
-                  
-                    <li class="submenu-header">
-                      API en vivo:<a href="/live-api/getting-started/index.html"> Empezar <strong>+</strong></a>
-                      <ul class="sidenav-subsubmenu" style="display:none;">
-                        
-                        <li>Visión general:<a href="/live-api/getting-started/overview-brightcove-live-api.html"> API en vivo</a></li>
-                        
-                        <li><a href="/live-api/getting-started/quick-start-create-live-stream-using-brightcove-live-api.html">Creación de una transmisión en vivo mediante la API</a></li>
-                        
-                      </ul>
-                    </li>
-                  
-                
-                  
-                    <li class="submenu-header">
-                      API en vivo:<a href="/live-api/code-samples/index.html"> Ejemplos de código <strong>+</strong></a>
-                      <ul class="sidenav-subsubmenu" style="display:none;">
-                        
-                        <li><a href="/live-api/code-samples/live-api-sample-create-live-job.html">Crear un trabajo activo</a></li>
-                        
-                        <li><a href="/live-api/code-samples/quick-start-create-live-job-mpeg2-ts-input.html">Crear un trabajo activo para la entrada MPEG2-TS</a></li>
-                        
-                        <li>Uso de salidas RTMP para eventos en directo<a href="/live-api/code-samples/quick-start-using-rtmp-outputs-live-events.html"></a></li>
-                        
-                        <li>Evento en vivo simulado<a href="/live-api/code-samples/simulated-live.html"></a></li>
-                        
-                      </ul>
-                    </li>
-                  
-                
-                  
-                    <li class="submenu-header">
-                      API en vivo:<a href="/live-api/references/index.html"> Referencias +<strong></strong></a>
-                      <ul class="sidenav-subsubmenu" style="display:none;">
-                        
-                        <li><a href="/live-api/references/live-api-error-messages.html">Mensajes de error</a></li>
-                        
-                        <li>Notas de versión<a href="/live-api/references/live-api-release-notes.html"></a></li>
-                        
-                        <li>Referencia de API en vivo<a href="/live-api/references/reference.html"></a></li>
-                        
-                      </ul>
-                    </li>
-                  
-                
-                  
-                    <li class="submenu-header">
-                      API en vivo:<a href="/live-api/ssai/index.html"> SSAI +<strong></strong></a>
-                      <ul class="sidenav-subsubmenu" style="display:none;">
-                        
-                        <li><a href="/live-api/ssai/live-api-cue-points-and-ad-beacons-ssai.html">Puntos de referencia y balizas de anuncio con SSAI</a></li>
-                        
-                        <li>Inserción de anuncios en el lado del servidor (SSAI)<a href="/live-api/ssai/live-api-server-side-ad-insertion-ssai.html"></a></li>
-                        
-                        <li>Visión general:<a href="/live-api/ssai/overview-player-enhancements-live-ssai.html"> Mejoras del jugador para SSAI en vivo</a></li>
-                        
-                      </ul>
-                    </li>
-                  
-                
-                  
-                    <li class="submenu-header">
-                      API en vivo:<a href="/live-api/guides/index.html"> Guías <strong>+</strong></a>
-                      <ul class="sidenav-subsubmenu" style="display:none;">
-                        
-                        <li><a href="/live-api/guides/brightcove-live-best-practices.html">Prácticas recomendadas de Brightcove Live</a></li>
-                        
-                        <li><a href="/live-api/guides/brightcove-live-program-ad-metadata-api.html">API de metadatos de anuncios del programa Brightcove Live</a></li>
-                        
-                        <li><a href="/live-api/guides/live-api-creating-frame-accurate-clip.html">Creación de un clip preciso de marco</a></li>
-                        
-                        <li><a href="/live-api/guides/live-api-creating-vod-clips.html">Creación de clips VOD</a></li>
-                        
-                        <li><a href="/live-api/guides/getting-list-live-or-vod-jobs.html">Obtención de una lista de trabajos en vivo o VOD</a></li>
-                        
-                        <li><a href="/live-api/guides/live-api-insert-id3-timed-metadata.html">Insertar metadatos temporizados ID3</a></li>
-                        
-                        <li>DRM en vivo a través de Live API<a href="/live-api/guides/live-drm-live-api.html"></a></li>
-                        
-                        <li>Administración de credenciales para Live API<a href="/live-api/guides/managing-credentials-live-api.html"></a></li>
-                        
-                        <li>Notificaciones<a href="/live-api/guides/live-api-notifications.html"></a></li>
-                        
-                        <li>Reducción de la latencia para transmisiones en directo<a href="/general/reducing-latency-live-streams.html"></a></li>
-                        
-                        <li>Salidas RTMP<a href="/live-api/guides/live-api-rtmp-outputs.html"></a></li>
-                        
-                        <li>Puntos de entrada estáticos<a href="/live-api/guides/live-api-static-entry-points.html"></a></li>
-                        
-                        <li>URL firmadas y autenticación de tokens con una transmisión en directo<a href="/live-api/guides/signed-urls-and-token-auth-live-stream.html"></a></li>
-                        
-                        <li>Uso de Redundancia en Vivo<a href="/live-api/guides/using-live-redundancy.html"></a></li>
-                        
-                        <li>VOD del Evento en Vivo<a href="/live-api/guides/live-api-vod-live-event.html"></a></li>
-                        
-                      </ul>
-                    </li>
-                  
-                
-              </ul>
-            
-          
-            
-              <h5 class="submenu-header"><a href="/admin/index.html">Administrar cuentas <strong>+</strong></a></h5>
-              <ul class="sidenav-submenu" style="display:none;">
-                
-                  
-                    <li><a href="/admin/creating-custom-live-ingest-profiles.html">Creación de perfiles de ingesta dinámica personalizados</a></li>
-                  
-                
-                  
-                    <li>Campos para perfiles personalizados de ingesta activa<a href="/admin/fields-custom-live-ingest-profiles.html"></a></li>
-                  
-                
-                  
-                    <li>Administrar la configuración de Live<a href="/admin/managing-live-settings.html"></a></li>
-                  
-                
-                  
-                    <li>Administración de credenciales de autenticación de API<a href="/admin/managing-api-authentication-credentials.html"></a></li>
-                  
-                
-                  
-                    <li>Perfiles de ingesta en vivo estándar<a href="/admin/standard-live-ingest-profiles.html"></a></li>
-                  
-                
-              </ul>
-            
-          
-            
-              <h5 class="submenu-header">Notas de la versión +<a href="/release-notes/index.html"><strong></strong></a></h5>
-              <ul class="sidenav-submenu" style="display:none;">
-                
-                  
-                    <li>Notas de versión en vivo<a href="/release-notes/live-api-release-notes.html"></a></li>
-                  
-                
-                  
-                    <li>Problemas conocidos<a href="/release-notes/known-issues.html"></a></li>
-                  
-                
-              </ul>
-            
-          
-            
-              <h5 class="submenu-header">Soporte +<a href="/support/index.html"><strong></strong></a></h5>
-              <ul class="sidenav-submenu" style="display:none;">
-                
-                  
-                    
-                  
-                
-                  
-                    <li>Visualización de la página Estado del Sistema de Brightcove<a href="/support/viewing-brightcove-system-status-page.html"></a></li>
-                  
-                
-                  
-                    <li><a href="/support/contact-sales.html">Contacto con Ventas</a></li>
-                  
-                
-                  
-                    <li>Apertura de un caso de soporte<a href="/support/opening-case-with-brightcove-support.html"></a></li>
-                  
-                
-              </ul>
-            
-          
-      </nav>
+        <select id="language_select" class="form-select select-focus" style="width: 10%;"
+          onchange="doGTranslate(this);" translate="no">
+          <!-- <option value="">Select Language</option> -->
+          <option value="en|en" translate="No">English</option>
+          <option value="en|zh-TW" translate="No">繁體中文</option>
+          <option value="en|fr" translate="No">Français</option>
+          <option value="en|de" translate="No">Deutsche</option>
+          <option value="en|ja" translate="No">日本語</option>
+          <option value="en|ko" translate="No">한국어</option>
+          <option value="en|es" translate="No">Español</option>
+        </select>
+
+        <script translate="no">
+          /* <![CDATA[ */
+          function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;if(lang_pair=='')return;var lang=lang_pair.split('|')[1];var plang=location.hostname.split('.')[0];if(plang.length !=2 && plang.toLowerCase() != 'zh-cn' && plang.toLowerCase() != 'zh-tw')plang='en';location.href=location.protocol+'//'+(lang == 'en' ? '' : lang+'.')+location.hostname.replace('www.', '').replace(RegExp('^' + plang + '\\.'), '')+location.pathname+location.search;}
+          /* ]]> */
+        </script>
+      </div>
     </div>
-    <div class="col-lg-7" style="background-color: white;color: #333333;margin-top: -1em;margin-bottom: -1em;padding-bottom:1em;">
-  <!-- bootstrap layout -->
+  </div>
+</header><!--//header-->
 
-<p id="bc_veggie_burger_wrapper" style="display: none;"><img id="bc_veggie_burger" src="/assets/images/feather/menu.svg" alt="Menú de navegación"/></p>
+<div class="docs-wrapper">
+  <div id="docs-sidebar" class="docs-sidebar" style="padding-right: 15px;">
+    <div id="nav-search-box" class="top-search-box d-lg-none p-3"></div>
+    <div class="row">
+      
+        <div id="side_nav" style="margin-left: 1em; display: inline-block; border-right: 1px solid #e5e5e6; padding-right: 1em;">
+          
+          <nav class="docs-nav sidenav" aria-label="Main">
+            <ul class="site-nav" style="list-style-type: none;">
+            
+            
+            
+            <li class="nav-item section-title"><a class="nav-link" href="/index.html">Inicio</a></li>
+            
+            
+            
+            
+            <li class="nav-item section-title"><a class="nav-link" href="/get-started/index.html"><span class="theme-icon-holder me-2"> <i class="fa-solid fa-plus"></i></span>&nbsp;Empezando</a>
+              <ul role="list" class="section-items list-unstyled nav flex-column pb-3" style="display:none;">
+              
+              
+              
+              <li class="nav-item"><a class="nav-link" href="/get-started/brightcove-live-training-videos.html">Vídeos de formación en directo de Brightcove</a></li>
+              
+              
+              
+              
+              
+              <li class="nav-item"><a class="nav-link" href="/get-started/delivering-live-streams.html">Entrega de transmisiones en vivo</a></li>
+              
+              
+              
+              
+              
+              <li class="nav-item"><a class="nav-link" href="/get-started/live-module-guidelines-and-best-practices.html">Brightcove en directo: Mejores prácticas</a></li>
+              
+              
+              
+              
+              
+              <li class="nav-item"><a class="nav-link" href="/get-started/step-step-using-live-module-open-broadcaster-software-obs.html">Paso a paso: Uso del módulo en vivo con OBS</a></li>
+              
+              
+              
+              
+              
+              <li class="nav-item"><a class="nav-link" href="/get-started/step-step-using-live-module-telestream-wirecast.html">Paso a paso: Uso del módulo en directo con Wirecast</a></li>
+              
+              
+              
+              
+              
+              <li class="nav-item"><a class="nav-link" href="/get-started/step-step-live-srt.html">Paso a paso: Transmisión de un evento en directo de SRT</a></li>
+              
+              
+              
+            </ul>
+            </li>
+            
+            
+            
+            <li class="nav-item section-title"><a class="nav-link" href="/general/index.html"><span class="theme-icon-holder me-2"> <i class="fa-solid fa-plus"></i></span>&nbsp;Información general</a>
+              <ul role="list" class="section-items list-unstyled nav flex-column pb-3" style="display:none;">
+              
+              
+              
+              <li class="nav-item"><a class="nav-link" href="/general/captions-with-live-streams.html">Subtítulos con transmisiones en vivo</a></li>
+              
+              
+              
+              
+              
+              <li class="nav-item"><a class="nav-link" href="/general/live-drm.html">DRM en vivo</a></li>
+              
+              
+              
+              
+              
+              <li class="nav-item"><a class="nav-link" href="/general/live-video-glossary.html">Glosario de video en vivo</a></li>
+              
+              
+              
+              
+              
+              <li class="nav-item"><a class="nav-link" href="/general/reducing-latency-live-streams.html">Reducción de la latencia de las transmisiones en vivo</a></li>
+              
+              
+              
+              
+              
+              <li class="nav-item"><a class="nav-link" href="/general/supported-encoders-live-events.html">Codificadores compatibles para eventos en vivo</a></li>
+              
+              
+              
+              
+              
+              <li class="nav-item"><a class="nav-link" href="/general/using-mtr-to-look-at-network-traffic.html">Usando MTR (mi traceroute)</a></li>
+              
+              
+              
+            </ul>
+            </li>
+            
+            
+            
+            <li class="nav-item section-title"><a class="nav-link" href="/live-module/index.html"><span class="theme-icon-holder me-2"> <i class="fa-solid fa-plus"></i></span>&nbsp;Uso del módulo en vivo</a>
+              <ul role="list" class="section-items list-unstyled nav flex-column pb-3" style="display:none;">
+              
+              
 
-<!-- search bar -->
-<div id="nav-search-box" style="margin-top: 1rem;"></div>
-<!-- in-page navigation for narrow screens -->
-<details class="centered-inpage-nav" id="centered_inpage_nav">
-  <summary><h6 class="toc">Contenido de la página</h6></summary>
-  <nav id="centered_toc"></nav>
-  <ul id="centered_in_page_toc" class="list-none"></ul>
-</details>
-<!-- open in new tab/window -->
-<a id="open_new_tab" href="#" target="_blank" style="display: none;"><img src="/assets/images/feather/external-link.svg" alt="abrir en una nueva pestaña" style="margin-top:4em;width: 1.5em;"/></a>
+              <li class="nav-item subsection-title">
+                
+                <a class="nav-link" href="/live-module/getting-started-index.html"> <span class="theme-icon-holder me-2"><i class="fa-solid fa-minus"></i></span>&nbsp;Empezando</a>
+                
 
+                <ul role="list" class="section-items list-unstyled nav flex-column pb-3" style="display:none;">
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="/live-module/creating-and-managing-live-events-using-live-module.html">Creación y gestión de eventos en directo</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="/live-module/creating-video-clip-using-live-module.html">Crear un videoclip</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="/live-module/reviewing-live-analytics.html">Revisión de análisis en vivo</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="/live-module/scheduling-live-event.html">Programación de eventos en vivo</a></li>
+                  
+                  
+                  
+                </ul>
+              </li>
+              
+              
+              
 
+              <li class="nav-item subsection-title">
+                
+                <a class="nav-link" href="/live-module/advertising-index.html"> <span class="theme-icon-holder me-2"><i class="fa-solid fa-minus"></i></span>&nbsp;Publicidad</a>
+                
 
-  
-    
+                <ul role="list" class="section-items list-unstyled nav flex-column pb-3" style="display:none;">
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="/live-module/implementing-server-side-ads-live-module.html">Implementación de anuncios del lado del servidor (SSAI)</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="/live-module/client-side-preroll-with-live-ssai.html">Anuncios pre-roll del lado del cliente con Live SSAI</a></li>
+                  
+                  
+                  
+                </ul>
+              </li>
+              
+              
+              
 
+              <li class="nav-item subsection-title">
+                
+                <a class="nav-link" href="/live-module/guides-index.html"> <span class="theme-icon-holder me-2"><i class="fa-solid fa-minus"></i></span>&nbsp;Guías</a>
+                
 
+                <ul role="list" class="section-items list-unstyled nav flex-column pb-3" style="display:none;">
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="/live-module/audio-only-live-events.html">Eventos en vivo de solo audio</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="/live-module/multi-language-audio.html">Audio en varios idiomas con módulo en vivo</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="/live-module/playback-restrictions-live-module.html">Restricciones de reproducción con eventos en vivo</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="/live-module/live-redundancy.html">Uso de redundancia en vivo</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="/live-module/using-live-rtmp-outputs-stream-facebook-and-youtube.html">Uso de salidas RTMP en vivo</a></li>
+                  
+                  
+                  
+                </ul>
+              </li>
+              
+              
+              
+
+              <li class="nav-item subsection-title">
+                
+                <a class="nav-link" href="/live-module/hosting-platforms-index.html"> <span class="theme-icon-holder me-2"><i class="fa-solid fa-minus"></i></span>&nbsp;Plataformas de alojamiento</a>
+                
+
+                <ul role="list" class="section-items list-unstyled nav flex-column pb-3" style="display:none;">
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="/live-module/overview-hosting-platforms.html">Descripción general: Plataformas de alojamiento</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="/live-module/zoom-live-integration.html">Integración de una reunión de Zoom</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://studio.support.brightcove.com/social/general/publishing-live-event-facebook.html">Publicar un evento en vivo en Facebook</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://studio.support.brightcove.com/social/general/publishing-live-event-youtube.html">Publicar un evento en vivo en YouTube</a></li>
+                  
+                  
+                  
+                </ul>
+              </li>
+              
+              
+            </ul>
+            </li>
+            
+            
+            
+            <li class="nav-item section-title"><a class="nav-link" href="/web-conferencing/index.html"><span class="theme-icon-holder me-2"> <i class="fa-solid fa-plus"></i></span>&nbsp;Conferencia web</a>
+              <ul role="list" class="section-items list-unstyled nav flex-column pb-3" style="display:none;">
+              
+              
+              
+              <li class="nav-item"><a class="nav-link" href="/web-conferencing/host-zoom-conference-brightcove-live.html">Conferencia Zoom en Brightcove Live</a></li>
+              
+              
+              
+              
+              
+              <li class="nav-item"><a class="nav-link" href="/web-conferencing/host-cisco-webex-conference-brightcove-live.html">Conferencia de Cisco Webex a Brightcove Live</a></li>
+              
+              
+              
+              
+              
+              <li class="nav-item"><a class="nav-link" href="/web-conferencing/host-avaya-conference-brightcove-live.html">Conferencia de Avaya en Brightcove Live</a></li>
+              
+              
+              
+              
+              
+              <li class="nav-item"><a class="nav-link" href="/web-conferencing/host-inxpo-live.html">Evento INXPO en Brightcove Live</a></li>
+              
+              
+              
+            </ul>
+            </li>
+            
+            
+            
+            <li class="nav-item section-title"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/index.html"><span class="theme-icon-holder me-2"> <i class="fa-solid fa-plus"></i></span>&nbsp;Trabajar con la API en vivo</a>
+              <ul role="list" class="section-items list-unstyled nav flex-column pb-3" style="display:none;">
+              
+              
+
+              <li class="nav-item subsection-title">
+                
+                <a class="nav-link" href="https://apis.support.brightcove.com/live-api/getting-started/index.html"><span class="theme-icon-holder me-2"><i class="fa-solid fa-minus"></i></span>&nbsp;API en vivo: Obtener Empezado</a>
+                
+
+                <ul role="list" class="section-items list-unstyled nav flex-column pb-3" style="display:none;">
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/getting-started/overview-brightcove-live-api.html">Descripción general: API en vivo</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/getting-started/quick-start-create-live-stream-using-brightcove-live-api.html">Crear una transmisión en vivo usando la API</a></li>
+                  
+                  
+                  
+                </ul>
+              </li>
+              
+              
+              
+
+              <li class="nav-item subsection-title">
+                
+                <a class="nav-link" href="https://apis.support.brightcove.com/live-api/code-samples/index.html"><span class="theme-icon-holder me-2"><i class="fa-solid fa-minus"></i></span>&nbsp;API en vivo: Muestras de código</a>
+                
+
+                <ul role="list" class="section-items list-unstyled nav flex-column pb-3" style="display:none;">
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/code-samples/live-api-sample-create-live-job.html">Crear un trabajo en vivo</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/code-samples/quick-start-create-live-job-mpeg2-ts-input.html">Crear un trabajo en vivo para entrada MPEG2-TS</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/code-samples/quick-start-using-rtmp-outputs-live-events.html">Uso de salidas RTMP para eventos en vivo</a></li>
+                  
+                  
+                  
+                </ul>
+              </li>
+              
+              
+              
+
+              <li class="nav-item subsection-title">
+                
+                <a class="nav-link" href="https://apis.support.brightcove.com/live-api/references/index.html"><span class="theme-icon-holder me-2"><i class="fa-solid fa-minus"></i></span>&nbsp;API en vivo: Referencias</a>
+                
+
+                <ul role="list" class="section-items list-unstyled nav flex-column pb-3" style="display:none;">
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/references/live-api-error-messages.html">Mensajes de error</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/references/live-api-release-notes.html">Notas de versión</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/references/reference.html">Referencia de API en vivo</a></li>
+                  
+                  
+                  
+                </ul>
+              </li>
+              
+              
+              
+
+              <li class="nav-item subsection-title">
+                
+                <a class="nav-link" href="https://apis.support.brightcove.com/live-api/ssai/index.html"><span class="theme-icon-holder me-2"><i class="fa-solid fa-minus"></i></span>&nbsp;API en vivo: SSAI</a>
+                
+
+                <ul role="list" class="section-items list-unstyled nav flex-column pb-3" style="display:none;">
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/ssai/live-api-cue-points-and-ad-beacons-ssai.html">Puntos de referencia y balizas publicitarias con SSAI</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/ssai/live-api-server-side-ad-insertion-ssai.html">Inserción de anuncios en el servidor (SSAI)</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/ssai/overview-player-enhancements-live-ssai.html">Descripción general: Mejoras del jugador para Live SSAI</a></li>
+                  
+                  
+                  
+                </ul>
+              </li>
+              
+              
+              
+
+              <li class="nav-item subsection-title">
+                
+                <a class="nav-link" href="https://apis.support.brightcove.com/live-api/guides/index.html"><span class="theme-icon-holder me-2"><i class="fa-solid fa-minus"></i></span>&nbsp;API en vivo: Guías</a>
+                
+
+                <ul role="list" class="section-items list-unstyled nav flex-column pb-3" style="display:none;">
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/guides/brightcove-live-best-practices.html">Prácticas recomendadas de Brightcove Live</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/guides/brightcove-live-program-ad-metadata-api.html">API de metadatos de anuncios del programa en vivo de Brightcove</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/guides/live-api-creating-frame-accurate-clip.html">Creación de un clip con precisión de cuadro</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/guides/live-api-creating-vod-clips.html">Creación de clips VOD</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/guides/getting-list-live-or-vod-jobs.html">Obtener una lista de trabajos en vivo o VOD</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/guides/live-api-insert-id3-timed-metadata.html">Insertar metadatos cronometrados ID3</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/guides/live-drm-live-api.html">Live DRM a través de Live API</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/guides/managing-credentials-live-api.html">Administrar credenciales para la API en vivo</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/guides/live-multi-language-audio.html">Audio en varios idiomas con Live API</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/guides/live-api-notifications.html">Notificaciones</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/guides/live-playback-restrictions.html">Restricciones de reproducción con transmisiones en vivo</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="/general/reducing-latency-live-streams.html">Reducción de la latencia de las transmisiones en vivo</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/guides/live-api-rtmp-outputs.html">Salidas RTMP</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/guides/live-api-static-entry-points.html">Puntos de entrada estáticos</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/guides/signed-urls-and-token-auth-live-stream.html">URL firmadas y autenticación de token con transmisión en vivo</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/guides/using-live-redundancy.html">Uso de redundancia en vivo</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/guides/live-api-vod-live-event.html">VOD de evento en vivo</a></li>
+                  
+                  
+                  
+                </ul>
+              </li>
+              
+              
+            </ul>
+            </li>
+            
+            
+            
+            <li class="nav-item section-title"><a class="nav-link" href="/admin/index.html"><span class="theme-icon-holder me-2"> <i class="fa-solid fa-plus"></i></span>&nbsp;Administración de cuentas</a>
+              <ul role="list" class="section-items list-unstyled nav flex-column pb-3" style="display:none;">
+              
+              
+
+              <li class="nav-item subsection-title">
+                
+                <a class="nav-link" href="/admin/general/index.html"> <span class="theme-icon-holder me-2"><i class="fa-solid fa-minus"></i></span>&nbsp;Información general</a>
+                
+
+                <ul role="list" class="section-items list-unstyled nav flex-column pb-3" style="display:none;">
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="/admin/general/configuring-server-side-ad-settings.html">Configuración de la configuración de anuncios del lado del servidor</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="/admin/general/managing-live-settings.html">Administrar la configuración en vivo</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="/admin/general/managing-api-authentication-credentials.html">Administración de credenciales de autenticación de API</a></li>
+                  
+                  
+                  
+                </ul>
+              </li>
+              
+              
+              
+
+              <li class="nav-item subsection-title">
+                
+                <a class="nav-link" href="/admin/ingest-profiles/index.html"> <span class="theme-icon-holder me-2"><i class="fa-solid fa-minus"></i></span>&nbsp;Gestión de perfiles de ingesta</a>
+                
+
+                <ul role="list" class="section-items list-unstyled nav flex-column pb-3" style="display:none;">
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="/admin/ingest-profiles/creating-custom-live-ingest-profiles.html">Creación de perfiles personalizados de ingesta en vivo</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="/admin/ingest-profiles/fields-custom-live-ingest-profiles.html">Campos para perfiles personalizados de ingesta en vivo</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="/admin/ingest-profiles/standard-live-ingest-profiles.html">Perfiles de ingesta en vivo estándar</a></li>
+                  
+                  
+                  
+                </ul>
+              </li>
+              
+              
+            </ul>
+            </li>
+            
+            
+            
+            <li class="nav-item section-title"><a class="nav-link" href="/release-notes/index.html"><span class="theme-icon-holder me-2"> <i class="fa-solid fa-plus"></i></span>&nbsp;Notas de lanzamiento</a>
+              <ul role="list" class="section-items list-unstyled nav flex-column pb-3" style="display:none;">
+              
+              
+              
+              <li class="nav-item"><a class="nav-link" href="/release-notes/live-api-release-notes.html">Notas de la versión en vivo</a></li>
+              
+              
+              
+            </ul>
+            </li>
+            
+            
+            
+            <li class="nav-item section-title"><a class="nav-link" href="/support/index.html"><span class="theme-icon-holder me-2"> <i class="fa-solid fa-plus"></i></span>&nbsp;Apoyo</a>
+              <ul role="list" class="section-items list-unstyled nav flex-column pb-3" style="display:none;">
+              
+              
+              
+              <li class="nav-item"><a class="nav-link" href="/support/viewing-brightcove-system-status-page.html">Visualización de la página de estado del sistema Brightcove</a></li>
+              
+              
+              
+              
+              
+              <li class="nav-item"><a class="nav-link" href="/support/contact-sales.html">Contactar con ventas</a></li>
+              
+              
+              
+              
+              
+              <li class="nav-item"><a class="nav-link" href="/support/opening-case-with-brightcove-support.html">Abrir un caso de soporte</a></li>
+              
+              
+              
+              
+              
+              <li class="nav-item"><a class="nav-link" href="/support/reset-support-portal-password.html">Restablecer la contraseña del portal de soporte</a></li>
+              
+              
+              
+            </ul>
+            </li>
+            
+            
+          </ul>
+          </nav>
+        </div>
+      </div>
+    </div><!--//docs-sidebar-->
+  </div>
+</div>
+
+<div style="margin-top: 20px;">
+  <div class="docs-content" style="padding-bottom: 0px;">
+    <div class="container">
+      <div class="docs-overview">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            
+            <li class="breadcrumb-item"><a class="theme-link" href="/">Inicio</a></li>
+            
+            
+            <li class="breadcrumb-item"><a class="theme-link" href="/live-api/">API en vivo</a></li>
+            
+            
+            
+            <li class="breadcrumb-item"><a class="theme-link" href="/live-api/ssai/">sai</a></li>
+            
+            
+            
+            <li class="breadcrumb-item active" aria-current="page">API en vivo: Puntos de referencia y balizas publicitarias con SSAI</li>
+            
+            
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="docs-content">
+  <div class="container">
+    <div class="docs-overview py-5">
+      
+      <div class="centered-inpage-nav" id="centered_inpage_nav">
+        <nav id="centered_toc">
+          <select id="centered_in_page_toc" class="form-select select-focus"></select>
+        </nav>
+      </div>
+      <br/>
+      
+      
+<h1>Esta página se ha movido; se le dirigirá a la <a href="https://apis.support.brightcove.com/live-api/ssai/live-api-cue-points-and-ad-beacons-ssai.html">nueva ubicacion</a> en 3 segundos. ¡Actualiza tus marcadores!</h1>
+<script type="text/javascript">
+var t = setTimeout(function() {
+    window.location.href = 'https://apis.support.brightcove.com/live-api/ssai/live-api-cue-points-and-ad-beacons-ssai.html';
+}, 3000);
+</script>
 <article class="bcls-article">
- <h1>API en vivo: Puntos de referencia y balizas de anuncio con SSAI</h1>
- <summary>En este tema, aprenderá a administrar los puntos de referencia y los indicadores de anuncio cuando utilice la Inserción de anuncios del lado del servidor (SSAI) de Brightcove para sus trabajos de transmisión en directo.</summary>
+ <h1>API en vivo: Puntos de referencia y balizas publicitarias con SSAI</h1>
+ <summary>En este tema, aprenderá a administrar puntos de referencia y balizas publicitarias cuando utilice la inserción de anuncios del lado del servidor (SSAI) de Brightcove para sus trabajos de transmisión en vivo.</summary>
 
  <section class="bcls-section">
-  <h2 id="Overview">Resumen</h2>
+  <h2 id="Overview">Descripción general</h2>
   
-  <p>La inserción de anuncios en el lado del servidor <span translate="No">(SSAI)</span> le permite mostrar anuncios durante un evento de transmisión en vivo en momentos especificados. Para obtener información general, consulte la <a href="/live-api/ssai/live-api-server-side-ad-insertion-ssai.html">API Live: Inserción de anuncios en el servidor <span translate="No">(SSAI)</span></a> documento.</p>
+  <p>Inserción de anuncios del lado del servidor <span translate="No">(SSAI)</span> le permite mostrar anuncios durante un evento de transmisión en vivo en momentos específicos. Para obtener información general, consulte el <a href="/live-api/ssai/live-api-server-side-ad-insertion-ssai.html">API en vivo: Inserción de anuncios en el servidor <span translate="No">(SSAI)</span></a> documento.</p>
   
-  <aside class="bcls-aside bcls-aside--information">Antes de poder utilizarlo <span translate="No">SSAI</span>, debe estar habilitado para su cuenta. Consulte los detalles al gestor de su cuenta.</aside>
+  <aside class="bcls-aside bcls-aside--information">
+    
+    <ul>
+      <li>Antes de que puedas usar <span translate="No">SSAI</span> , debe estar habilitado para su cuenta. Póngase en contacto con su administrador de cuentas para obtener más</li>
+   </ul>
+  
+  </aside>
   </section>
   
   <section class="bcls-section">
   <h2 id="Cue_points">Puntos de referencia</h2>
   
-  <p>Los saltos de anuncios se activan mediante puntos de referencia, que se pueden especificar de dos maneras:</p>
+  <p>Las pausas publicitarias se activan mediante puntos de referencia, que se pueden especificar de dos formas:</p>
   
   <ul>
     <li>Enviado a Brightcove por el codificador</li>
@@ -472,7 +907,7 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
   
   <h3>Desde el codificador</h3>
   
-  <p>El sistema de entrega en directo de Brightcove puede interpretar los puntos de referencia enviados por el codificador en el formato AMF:</p>
+  <p>El sistema de entrega en vivo de Brightcove puede interpretar los puntos de referencia enviados por el codificador en el formato AMF:</p>
   
   <pre class="line-numbers">
   <code class="language-bash" translate="No">AMFDataList
@@ -491,17 +926,17 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
   <h4>Notas:</h4>
   
   <ul>
-    <li>Actualmente sólo se admiten los puntos de referencia de <code translate="No">avail_in</code> tipo.</li>
-    <li>Los puntos de referencia SCTE-35 son compatibles con las entradas RTMP y <a href="/live-api/getting-started/overview-brightcove-live-api.html#input_protocol">TS</a> .</li>
+    <li>Solo <code translate="No">avail_in</code> Los puntos de referencia de tipo se admiten actualmente en la entrada RTMP.</li>
+    <li>Los puntos de referencia SCTE-35 son compatibles con las entradas RTP y SRT.</li>
   </ul>
   
-  <aside class="bcls-aside bcls-aside--information">Consulte el <a href="#Appendix">apéndice a continuación</a> para obtener una captura de pantalla de una configuración de punto de referencia de muestra para el codificador Elemental.</aside>
+  <aside class="bcls-aside bcls-aside--information">Ver el <a href="#Appendix">apéndice a continuación</a> para obtener una captura de pantalla de una configuración de punto de referencia de muestra para el codificador elemental.</aside>
   </section>
   
   <section class="bcls-section">
-  <h2 id="Manual_cue_point_insertion">Inserción manual de puntos de referencia</h2>
+  <h2 id="Manual_cue_point_insertion">Inserción manual del punto de referencia</h2>
   
-  <p>Puede crear puntos de referencia inmediatos <span translate="No">Live API</span> mediante el envío de una <code translate="No">POST</code> solicitud:</p>
+  <p>Puede crear puntos de referencia inmediatos utilizando el <span translate="No">Live API</span> enviando un <code translate="No">POST</code> pedido:</p>
   
   <table class="bcls-table">
     <tbody class="bcls-table__body">
@@ -514,7 +949,7 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
         <td><code class="language-http" translate="No">https://api.bcovlive.io/v1/jobs/<span class="bcls-input">Job_ID</span>/cuepoint</code></td>
       </tr>
       <tr>
-        <th>Encabezado</th>
+        <th>Encabezamiento</th>
         <td><code class="language-http" translate="No">X-API-KEY: <span class="bcls-input">your API KEY</span></code></td>
       </tr>
     </tbody>
@@ -534,26 +969,26 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
       <tr>
         <td><code translate="No">duration</code></td>
         <td>Entero</td>
-        <td>Duración del descanso en segundos.<br/> <br/> La duración del punto de referencia que se inserta debe ser al <strong>menos el doble de la longitud de los segmentos</strong> del trabajo. Consulte el <a href="#Duration_example">ejemplo de duración</a>.</td>
+        <td>Duración de la pausa en segundos.<br/> <br/> La duración del punto de referencia que se inserta debe ser <strong>al menos el doble de la longitud de los segmentos</strong> en el trabajo. Ver el <a href="#Duration_example">ejemplo de duración</a>.</td>
       </tr>
       <tr>
         <td><code translate="No">timecode</code></td>
         <td>Formato SMPTE</td>
-        <td>OPCIONAL:<strong></strong> Un código de tiempo en formato SMPTE, <strong>HH:MM:SS:FF</strong> (FF = frames), para especificar cuándo se debe pasar un conjunto de variables (pares clave/valor) al AdServer.<br/> <br/> Si se omite, el punto de referencia se insertará inmediatamente.<br/> <br/> Si utiliza la propiedad timecode, el codificador debe enviar código de tiempo con formato SMPTE (<code translate="No">HH:MM:SS:FF</code>) almacenado en la <code translate="No">tc</code> propiedad a través de <code translate="No">OnFI</code>. Los códigos de tiempo son desde el inicio de la transmisión en vivo.</td>
+        <td><strong>OPCIONAL:</strong> Un código de tiempo en formato SMPTE, <strong>HH: MM: SS: FF</strong> (FF = marcos), para especificar cuándo se debe pasar un conjunto de variables (pares clave / valor) al adServer.<br/> <br/> Si se omite, el punto de referencia se insertará inmediatamente.<br/> <br/> Si usa la propiedad de código de tiempo, el codificador debe enviar con formato SMPTE (<code translate="No">HH:MM:SS:FF</code> ) código de tiempo almacenado en el <code translate="No">tc</code> propiedad a través de <code translate="No">OnFI</code>. Los códigos de tiempo son desde el inicio de la transmisión en vivo.</td>
       </tr>
       <tr>
         <td><code translate="No">ad_server_data</code></td>
         <td>Objeto</td>
-        <td>OPCIONAL:<strong></strong> Los pares clave/valor que pase dependerán del servidor de anuncios que esté utilizando. Para obtener más información, consulte la documentación del servidor de anuncios y la sección <a href="/live-api/ssai/live-api-server-side-ad-insertion-ssai.html#Targeting_ads_using_ad_macros">Segmentación de anuncios mediante macros</a> de anuncios.</td>
+        <td><strong>OPCIONAL:</strong> Los pares clave / valor que pase dependerán del servidor de anuncios que esté utilizando. Para obtener más detalles, consulte la documentación de su servidor de anuncios y la <a href="/live-api/ssai/live-api-server-side-ad-insertion-ssai.html#Targeting_ads_using_ad_macros">Orientación de anuncios mediante macros publicitarias</a> sección.</td>
       </tr>
     </tbody>
   </table>
   
   <h4 id="Duration_example">Ejemplo de duración</h4>
   
-  <p>La duración del punto de referencia que se inserta debe ser al <strong>menos el doble de la longitud de los segmentos</strong> del trabajo.</p>
+  <p>La duración del punto de referencia que se inserta debe ser <strong>al menos el doble de la longitud de los segmentos</strong> en el trabajo.</p>
   
-  <p>Por ejemplo, insertar un <strong>punto de referencia de 10 segundos</strong> en un trabajo con <code translate="No">"segment_seconds"=4</code> , funcionará bien. Sin embargo, insertar el mismo punto de referencia en un trabajo con <code translate="No">"segment_seconds"=6</code> dará como resultado el siguiente error:</p>
+  <p>Por ejemplo, insertar un punto de referencia de <strong>10 segundos</strong> en un trabajo con <code translate="No">"segment_seconds"=4</code>, funcionará bien. Sin embargo, al insertar el mismo punto de referencia en un trabajo con <code translate="No">"segment_seconds"=6</code> dará como resultado el siguiente error:</p>
   
   <pre>
   <code class="language-json" translate="No">"error": "The parameter duration should be greater than
@@ -576,8 +1011,8 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
   <h4>Notas</h4>
   
   <ol>
-    <li>Los codificadores de software como Wirecast y OBS no admiten el envío de código de tiempo a través de <code translate="No">OnFI</code> paquetes en la secuencia RTMP</li>
-    <li>Los codificadores de hardware elementales admiten el código de tiempo de envío a través de <code translate="No">OnFI</code> paquetes en la secuencia RTMP</li>
+    <li>Los codificadores de software como Wirecast y OBS no admiten el envío de código de tiempo a través de <code translate="No">OnFI</code> paquetes en el flujo RTMP</li>
+    <li>Los codificadores de hardware elementales admiten el envío de código de tiempo a través de <code translate="No">OnFI</code> paquetes en el flujo RTMP</li>
   </ol>
   
   <h3>Respuesta de muestra</h3>
@@ -597,7 +1032,7 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
   <section class="bcls-section">
   <h2 id="Beacons">Balizas</h2>
   
-  <p>Los indicadores son puntos de datos de reproducción enviados a análisis de terceros para realizar un seguimiento de si se han reproducido anuncios y cuántos de ellos se han reproducido. En esta sección vamos a ver los tipos de balizas que se pueden establecer usando las variables <span translate="No">Live API</span>, y que se pueden usar para proporcionar los datos. En la siguiente sección se detallará el uso de las solicitudes de API para crear y administrar conjuntos de balizas.</p>
+  <p>Las balizas son puntos de datos sobre la reproducción que se envían a análisis de terceros para rastrear si se reprodujeron anuncios y en qué cantidad. En esta sección veremos los tipos de balizas que se pueden configurar usando el <span translate="No">Live API</span> y variables que se pueden utilizar para proporcionar los datos. La siguiente sección detallará el uso de solicitudes de API para crear y administrar conjuntos de balizas.</p>
   
   <h3>Tipos de balizas</h3>
   
@@ -612,15 +1047,15 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
     <tbody class="bcls-table__body">
       <tr>
         <td style="width:20%"><code translate="No">Load </code></td>
-        <td style="text-align:left;width:60%;word-wrap:break-word">Se dispara una vez por sesión y solo se activa cuando se solicita el manifiesto de nivel superior</td>
+        <td style="text-align:left;width:60%;word-wrap:break-word">Se activa una vez por sesión y solo se activa cuando se solicita un manifiesto de nivel superior</td>
       </tr>
       <tr>
         <td style="width:20%"><code translate="No">Play </code></td>
-        <td style="text-align:left;width:60%;word-wrap:break-word">Se ha solicitado contenido y se ha devuelto el primer segmento</td>
+        <td style="text-align:left;width:60%;word-wrap:break-word">Se solicitó contenido y se devolvió el primer segmento.</td>
       </tr>
       <tr>
         <td style="width:20%"><code translate="No">Heartbeat </code></td>
-        <td style="text-align:left;width:60%;word-wrap:break-word">Duración objetivo (segmentos segundos)</td>
+        <td style="text-align:left;width:60%;word-wrap:break-word">Duración objetivo (segundos de segmento)</td>
       </tr>
       <tr>
         <td style="width:20%"><code translate="No">AdStart </code></td>
@@ -628,7 +1063,7 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
       </tr>
       <tr>
         <td style="width:20%"><code translate="No">AdFirstQuartile </code></td>
-        <td style="text-align:left;width:60%;word-wrap:break-word">Primer cuartil de anuncios (25%)</td>
+        <td style="text-align:left;width:60%;word-wrap:break-word">Primer cuartil del anuncio (25%)</td>
       </tr>
       <tr>
         <td style="width:20%"><code translate="No">AdMidpoint </code></td>
@@ -636,7 +1071,7 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
       </tr>
       <tr>
         <td style="width:20%"><code translate="No">AdThirdQuartile </code></td>
-        <td style="text-align:left;width:60%;word-wrap:break-word">Tercer cuartil de anuncios (75%)</td>
+        <td style="text-align:left;width:60%;word-wrap:break-word">Tercer cuartil del anuncio (75%)</td>
       </tr>
       <tr>
         <td style="width:20%"><code translate="No">AdComplete </code></td>
@@ -644,18 +1079,18 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
       </tr>
       <tr>
         <td style="width:20%"><code translate="No">AdBreakStart </code></td>
-        <td style="text-align:left;width:60%;word-wrap:break-word">Se ha iniciado la interrupción de anuncios</td>
+        <td style="text-align:left;width:60%;word-wrap:break-word">Ha comenzado la pausa publicitaria</td>
       </tr>
       <tr>
         <td style="width:20%"><code translate="No">AdBreakComplete </code></td>
-        <td style="text-align:left;width:60%;word-wrap:break-word">ha finalizado la interrupción del anuncio</td>
+        <td style="text-align:left;width:60%;word-wrap:break-word">la pausa publicitaria ha terminado</td>
       </tr>
     </tbody>
   </table>
   
-  <h3>Variables de baliza/anuncio</h3>
+  <h3>Variables de baliza / anuncio</h3>
   
-  <p>La siguiente tabla muestra las variables que puede utilizar para proporcionar datos para las URL de indicadores. Para incluir una variable, rodea con llaves dobles, como esta: <code translate="No"><span class="bcls-highlight">{{</span>job.job_id<span class="bcls-highlight">}}</span> </code>. Consulte la siguiente sección sobre administración de conjuntos de balizas para ver ejemplos completos.</p>
+  <p>La siguiente tabla muestra las variables que puede utilizar para proporcionar datos para las URL de baliza. Para incluir una variable, rodee con llaves dobles, como esta: <code translate="No"><span class="bcls-highlight">{{</span>job.job_id<span class="bcls-highlight">}}</span> </code>. Consulte la siguiente sección sobre la gestión de conjuntos de balizas para ver ejemplos completos.</p>
   
   <table class="bcls-table">
     <caption class="bcls-caption--table">Variables de configuración de anuncios</caption>
@@ -671,19 +1106,19 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
       <tr>
         <td style="width:20%"><code translate="No">session.session_id </code></td>
         <td style="text-align:left;width:60%;">
-        <div style="word-wrap:break-word;">ID de sesión única</div>
+        <div style="word-wrap:break-word;">id de sesión única</div>
         </td>
       </tr>
       <tr>
         <td style="width:20%"><code translate="No">job.job_id </code></td>
         <td style="text-align:left;width:60%;">
-        <div style="word-wrap:break-word;">ID de trabajo único</div>
+        <div style="word-wrap:break-word;">id de trabajo único</div>
         </td>
       </tr>
       <tr>
         <td style="width:20%"><code translate="No">videocloud.video_id</code></td>
         <td style="text-align:left;width:60%;">
-        <div style="word-wrap:break-word;">Solo disponible para trabajos creados con un vídeo VideoCloud.</div>
+        <div style="word-wrap:break-word;">Solo disponible para trabajos creados con un video de VideoCloud.</div>
         </td>
       </tr>
       <tr>
@@ -695,25 +1130,25 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
       <tr>
         <td style="width:20%"><code translate="No">random.int32 </code></td>
         <td style="text-align:left;width:60%;">
-        <div style="word-wrap:break-word;">Entero aleatorio de 32 bits con signo</div>
+        <div style="word-wrap:break-word;">entero aleatorio de 32 bits con signo</div>
         </td>
       </tr>
       <tr>
         <td style="width:20%"><code translate="No">random.int64 </code></td>
         <td style="text-align:left;width:60%;">
-        <div style="word-wrap:break-word;">Entero con signo aleatorio de 64 bits</div>
+        <div style="word-wrap:break-word;">entero aleatorio de 64 bits con signo</div>
         </td>
       </tr>
       <tr>
         <td style="width:20%"><code translate="No">random.uint32 </code></td>
         <td style="text-align:left;width:60%;">
-        <div style="word-wrap:break-word;">Entero sin signo aleatorio de 32 bits</div>
+        <div style="word-wrap:break-word;">entero sin signo aleatorio de 32 bits</div>
         </td>
       </tr>
       <tr>
         <td style="width:20%"><code translate="No">random.uint64 </code></td>
         <td style="text-align:left;width:60%;">
-        <div style="word-wrap:break-word;">Entero aleatorio de 64 bits sin signo</div>
+        <div style="word-wrap:break-word;">entero sin signo aleatorio de 64 bits</div>
         </td>
       </tr>
       <tr>
@@ -725,7 +1160,7 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
       <tr>
         <td style="width:20%"><code translate="No">server.timestamputc </code></td>
         <td style="text-align:left;width:60%;">
-        <div style="word-wrap:break-word;">tiempo de época en milisegundos cuando se ha realizado la llamada desde el ads-api</div>
+        <div style="word-wrap:break-word;">tiempo de época en milisegundos cuando se ha realizado la llamada desde ads-api</div>
         </td>
       </tr>
       <tr>
@@ -737,13 +1172,13 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
       <tr>
         <td style="width:20%"><code translate="No">client.ipaddress </code></td>
         <td style="text-align:left;width:60%;">
-        <div style="word-wrap:break-word;">http x-forwarded-for valor de encabezado en la creación de la sesión, si se proporciona, de lo contrario, la dirección remota</div>
+        <div style="word-wrap:break-word;">http x-reenviado-para valor de encabezado en la creación de la sesión, si se proporciona; de lo contrario, la dirección remota</div>
         </td>
       </tr>
       <tr>
         <td style="width:20%"><code translate="No">client.referrer </code></td>
         <td style="text-align:left;width:60%;">
-        <div style="word-wrap:break-word;">valor de encabezado de referencia http en la creación de la sesión (nota: esa es la ortografía correcta)</div>
+        <div style="word-wrap:break-word;">valor del encabezado de referencia http en la creación de la sesión (nota: esa es la ortografía correcta)</div>
         </td>
       </tr>
       <tr>
@@ -761,25 +1196,25 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
       <tr>
         <td style="width:20%"><code translate="No">live.adbreak </code></td>
         <td style="text-align:left;width:60%;">
-        <div style="word-wrap:break-word;">(actualmente no utilizado)</div>
+        <div style="word-wrap:break-word;">(actualmente sin usar)</div>
         </td>
       </tr>
       <tr>
         <td style="width:20%"><code translate="No">live.adbreakdurationms</code></td>
         <td style="text-align:left;width:60%;">
-        <div style="word-wrap:break-word;">Duración de interrupción del anuncio en milisegundos</div>
+        <div style="word-wrap:break-word;">Duración de la pausa publicitaria en milisegundos</div>
         </td>
       </tr>
       <tr>
         <td style="width:20%"><code translate="No">live.adbreakduration </code></td>
         <td style="text-align:left;width:60%;">
-        <div style="word-wrap:break-word;">Duración de la interrupción del anuncio en segundos de coma flotante de precisión doble</div>
+        <div style="word-wrap:break-word;">Duración de la pausa publicitaria en segundos de punto flotante de doble precisión</div>
         </td>
       </tr>
       <tr>
         <td style="width:20%"><code translate="No">live.adbreakdurationint </code></td>
         <td style="text-align:left;width:60%;">
-        <div style="word-wrap:break-word;">Duración de interrupción del anuncio en segundos enteros</div>
+        <div style="word-wrap:break-word;">Duración de la pausa publicitaria en segundos enteros</div>
         </td>
       </tr>
       <tr>
@@ -791,25 +1226,25 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
       <tr>
         <td style="width:20%"><code translate="No">live.adbreak.timestamputc.origin </code></td>
         <td style="text-align:left;width:60%;">
-        <div style="word-wrap:break-word;">tiempo de época en milisegundos desde la lista de elementos de origen. Este valor indica la hora en que se ha creado el fragmento de salida en la lista de fragmentos de origen.</div>
+        <div style="word-wrap:break-word;">tiempo de época en milisegundos desde la lista de bloques de origen. Este valor indica el momento en que se ha creado el fragmento de salida de señal en la lista de fragmentos de origen.</div>
         </td>
       </tr>
       <tr>
         <td style="width:20%"><code translate="No">live.adbreak.timestamputc.session </code></td>
         <td style="text-align:left;width:60%;">
-        <div style="word-wrap:break-word;">tiempo de época en milisegundos de la lista de chunklist ssai. Este valor indica el tiempo del fragmento de salida de salida en la lista de fragmentos ssai. Dado que el contenido de adbreak y la brecha de adbreak NO suelen ser los mismos, después del primer adbreak el <code translate="No">live.adbreak.timestamputc.origin </code> es diferente de <code translate="No">live.adbreak.timestamputc.session </code>. Este valor tiene en cuenta los ajustes de tiempo que se han realizado en la lista de <span translate="No">SSAI</span> chunklist.</div>
+        <div style="word-wrap:break-word;">tiempo de época en milisegundos de la lista de bloques ssai. Este valor indica el tiempo del fragmento de salida en la lista de fragmentos ssai. Dado que el contenido de adbreak y la brecha de adbreak NO suelen ser los mismos, después del primer adbreak <code translate="No">live.adbreak.timestamputc.origin </code> es diferente de <code translate="No">live.adbreak.timestamputc.session </code>. Este valor tiene en cuenta los ajustes de tiempo que se han realizado en el <span translate="No">SSAI</span> chunklist.</div>
         </td>
       </tr>
     </tbody>
   </table>
   
-  <h3>Variables de anuncio SCTE-35</h3>
+  <h3>Variables publicitarias de SCTE-35</h3>
   
-  <p>La <a href="https://www.scte.org/">Sociedad de Ingenieros de Telecomunicaciones por Cable (SCTE)</a> define un estándar para la inserción dinámica de anuncios para transmisiones en directo. En la tabla siguiente se resumen las variables de configuración de anuncios SCTE-35.</p>
+  <p>La <a href="https://www.scte.org/">Sociedad de Ingenieros de Telecomunicaciones por Cable (SCTE)</a> define un estándar para la inserción de anuncios dinámicos para transmisiones en vivo. En la tabla siguiente se resumen las variables de configuración de anuncios de SCTE-35.</p>
   
   <aside class="bcls-aside bcls-aside--information">
-  <p>Los parámetros de anuncio SCTE-35 se admiten actualmente con fuentes de entrada RTMP y Transport Stream (TS) utilizando el Protocolo de transporte en tiempo real (RTP) con o sin corrección de errores de envío (FEC). Tenga en cuenta que FEC es muy recomendable para RTP.</p>
-  Estos parámetros de anuncio no están disponibles con las secuencias de entrada que utilizan el Protocolo de mensajería en tiempo real (RTMP).</aside>
+  <p>Los parámetros publicitarios de SCTE-35 son actualmente compatibles con las fuentes de entrada del protocolo de transporte en tiempo real (RTP) con o sin corrección de errores de reenvío (FEC) y del transporte confiable seguro (SRT) que se basan en Transport Stream (TS). Tenga en cuenta que FEC es muy recomendable para RTP.</p>
+  Estos parámetros de anuncio no están disponibles con los flujos de entrada que utilizan el Protocolo de mensajería en tiempo real (RTMP).</aside>
   
   <table class="bcls-table">
     <caption class="bcls-caption--table">Variables de configuración de anuncios SCTE-35</caption>
@@ -825,31 +1260,31 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
       <tr>
         <td style="width:20%"><code translate="No">scte35_eventID</code></td>
         <td style="text-align:left;width:60%;">
-        <div style="word-wrap:break-word;">un identificador de evento único pasado con un mensaje SCTE35.</div>
+        <div style="word-wrap:break-word;">se ha transmitido un identificador de evento único con un mensaje SCTE35.</div>
         </td>
       </tr>
       <tr>
         <td style="width:20%"><code translate="No">scte35_programID</code></td>
         <td style="text-align:left;width:60%;">
-        <div style="word-wrap:break-word;">Un identificador de programa único pasado con un mensaje SCTE35.</div>
+        <div style="word-wrap:break-word;">Se ha pasado un identificador de programa único con un mensaje SCTE35.</div>
         </td>
       </tr>
       <tr>
         <td style="width:20%"><code translate="No">scte35_availNum</code></td>
         <td style="text-align:left;width:60%;">
-        <div style="word-wrap:break-word;">Un identificador de un tiempo de empalme específico disponible para los anuncios, se envía a través de un mensaje SCTE35.</div>
+        <div style="word-wrap:break-word;">Identificador de un tiempo de empalme específico disponible para los anuncios, se envía mediante un mensaje SCTE35.</div>
         </td>
       </tr>
       <tr>
         <td style="width:20%"><code translate="No">scte35_breakDuration</code></td>
         <td style="text-align:left;width:60%;">
-        <div style="word-wrap:break-word;">Duración de la interrupción del anuncio, en términos de ticks del reloj de 90 kHz del programa, transmitida con un mensaje SCTE35.</div>
+        <div style="word-wrap:break-word;">La duración del descanso del anuncio, en términos de ticks del reloj de 90 kHz del programa, pasó con un mensaje SCTE35.</div>
         </td>
       </tr>
       <tr>
         <td style="width:20%"><code translate="No">scte35_spliceTime</code></td>
         <td style="text-align:left;width:60%;">
-        <div style="word-wrap:break-word;">Tiempo de empalme para un descanso publicitario, en términos de ticks del reloj de 90 kHz del programa, pasado con un mensaje SCTE35.</div>
+        <div style="word-wrap:break-word;">Combina el tiempo para una pausa publicitaria, en términos de ticks del reloj de 90 kHz del programa, transcurrido con un mensaje SCTE35.</div>
         </td>
       </tr>
     </tbody>
@@ -857,11 +1292,11 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
   </section>
   
   <section class="bcls-section">
-  <h2 id="Managing_beacon_sets">Administración de conjuntos de balizas</h2>
+  <h2 id="Managing_beacon_sets">Gestión de conjuntos de balizas</h2>
   
-  <p>Esta sección proporciona detalles sobre las solicitudes de API para administrar conjuntos de balizas. Consulte la sección anterior para ver los tipos y variables de balizas.</p>
+  <p>Esta sección proporciona detalles sobre las solicitudes de API para administrar conjuntos de balizas. Consulte la sección anterior para conocer los tipos y variables de balizas.</p>
   
-  <p>Para agregar un conjunto de balizas a un trabajo activo, primero cree el conjunto de balizas y, a continuación, incluya el identificador al crear el trabajo, de esta manera:</p>
+  <p>Para agregar un conjunto de balizas a un trabajo en vivo, primero cree el conjunto de balizas y luego incluya la identificación cuando cree el trabajo, así:</p>
   
   <pre class="line-numbers">
   <code class="language-json" translate="No">{
@@ -871,9 +1306,9 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
   "ad_insertion": true,
   "beacon_set": "<span class="bcls-input">beacon_set_id</span>", ...</code></pre>
   
-  <h3>Crear un conjunto de balizas</h3>
+  <h3>Crea un conjunto de balizas</h3>
   
-  <p>Para crear un conjunto de balizas, envíe una <code translate="No">POST</code> solicitud:</p>
+  <p>Para crear un conjunto de balizas, envíe un <code translate="No">POST</code> pedido:</p>
   
   <table class="bcls-table">
     <tbody class="bcls-table__body">
@@ -886,7 +1321,7 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
         <td><code class="language-http" translate="No">https://api.bcovlive.io/v1/ssai/beaconsets</code></td>
       </tr>
       <tr>
-        <th>Encabezado</th>
+        <th>Encabezamiento</th>
         <td><code class="language-http" translate="No">X-API-KEY: <span class="bcls-input">your API KEY</span></code></td>
       </tr>
     </tbody>
@@ -909,7 +1344,7 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
     ]
   }</code></pre>
   
-  <aside class="bcls-aside bcls-aside--information">El campo es el ID de cuenta activa.<code translate="No">account_id </code> Cuando se omite, se utiliza el ID de cuenta del usuario solicitante.</aside>
+  <aside class="bcls-aside bcls-aside--information">El <code translate="No">account_id </code> campo es el ID de cuenta real. Cuando se omite, se utiliza el ID de cuenta del usuario solicitante.</aside>
   
   <h4>Respuesta de muestra</h4>
   
@@ -932,7 +1367,7 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
   
   <h3>Actualizar un conjunto de balizas</h3>
   
-  <p>La actualización de un conjunto de balizas es similar a la creación de uno. Enviar una <code translate="No">PUT</code> solicitud:</p>
+  <p>Actualizar un conjunto de balizas es similar a crear uno. Presentar una <code translate="No">PUT</code> pedido:</p>
   
   <table class="bcls-table">
     <tbody class="bcls-table__body">
@@ -945,7 +1380,7 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
         <td><code class="language-http" translate="No">https://api.bcovlive.io/v1/ssai/beaconsets/beaconset/<span class="bcls-input">beacon_set_id</span> </code></td>
       </tr>
       <tr>
-        <th>Encabezado</th>
+        <th>Encabezamiento</th>
         <td><code class="language-http" translate="No">X-API-KEY: <span class="bcls-input">your API KEY</span></code></td>
       </tr>
     </tbody>
@@ -968,7 +1403,7 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
     ]
   }</code></pre>
   
-  <aside class="bcls-aside bcls-aside--information">El campo es el ID de cuenta activa.<code translate="No">account_id </code> Cuando se omite, se utiliza el ID de cuenta del usuario solicitante.</aside>
+  <aside class="bcls-aside bcls-aside--information">El <code translate="No">account_id </code> campo es el ID de cuenta real. Cuando se omite, se utiliza el ID de cuenta del usuario solicitante.</aside>
   
   <h4>Respuesta de muestra</h4>
   
@@ -1000,9 +1435,9 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
     }
   }</code></pre>
   
-  <h3>Obtener conjuntos de balizas</h3>
+  <h3>Obtenga conjuntos de balizas</h3>
   
-  <p>Para recuperar los conjuntos de balizas de una cuenta, envíe una <code translate="No">GET</code> solicitud:</p>
+  <p>Para recuperar los conjuntos de balizas de una cuenta, envíe un <code translate="No">GET</code> pedido:</p>
   
   <table class="bcls-table">
     <tbody class="bcls-table__body">
@@ -1015,13 +1450,13 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
         <td><code class="language-http" translate="No">https://api.bcovlive.io/v1/ssai/beaconsets/account/<span class="bcls-input">Account ID</span></code></td>
       </tr>
       <tr>
-        <th>Encabezado</th>
+        <th>Encabezamiento</th>
         <td><code class="language-http" translate="No">X-API-KEY: <span class="bcls-input">your API KEY</span></code></td>
       </tr>
     </tbody>
   </table>
   
-  <aside class="bcls-aside bcls-aside--information">Tenga en cuenta que el ID de cuenta aquí es el ID de cuenta Live.</aside>
+  <aside class="bcls-aside bcls-aside--information">Tenga en cuenta que el ID de cuenta aquí es el ID de la cuenta en vivo.</aside>
   
   <h4>Respuesta de muestra</h4>
   
@@ -1047,9 +1482,9 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
       }]
   }]</code></pre>
   
-  <h3>Obtener conjuntos de balizas para el usuario solicitante</h3>
+  <h3>Obtenga conjuntos de balizas para el usuario solicitante</h3>
   
-  <p>También puede obtener los conjuntos de balizas para la cuenta del usuario solicitante sin incluir el ID de cuenta en la URL de solicitud:</p>
+  <p>También puede obtener los conjuntos de balizas para la cuenta del usuario solicitante sin incluir la identificación de la cuenta en la URL de la solicitud:</p>
   
   <table class="bcls-table">
     <tbody class="bcls-table__body">
@@ -1062,7 +1497,7 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
         <td><code class="language-http" translate="No">https://api.bcovlive.io/v1/ssai/beaconsets</code></td>
       </tr>
       <tr>
-        <th>Encabezado</th>
+        <th>Encabezamiento</th>
         <td><code class="language-http" translate="No">X-API-KEY: <span class="bcls-input">your API KEY</span></code></td>
       </tr>
     </tbody>
@@ -1092,9 +1527,9 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
       }]
   }]</code></pre>
   
-  <h3>Obtener un beacon establecido por id</h3>
+  <h3>Obtener una baliza configurada por id</h3>
   
-  <p>Para recuperar una única baliza establecida por su ID, envíe una <code translate="No">GET</code> solicitud:</p>
+  <p>Para recuperar una baliza única establecida por su id, envíe un <code translate="No">GET</code> pedido:</p>
   
   <table class="bcls-table">
     <tbody class="bcls-table__body">
@@ -1107,7 +1542,7 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
         <td><code class="language-http" translate="No">https://api.bcovlive.io/v1/ssai/beaconsets/beaconset/<span class="bcls-input">beacon_set_id</span></code></td>
       </tr>
       <tr>
-        <th>Encabezado</th>
+        <th>Encabezamiento</th>
         <td><code class="language-http" translate="No">X-API-KEY: <span class="bcls-input">your API KEY</span></code></td>
       </tr>
     </tbody>
@@ -1131,7 +1566,7 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
   
   <h3>Eliminar un conjunto de balizas</h3>
   
-  <p>Finalmente, para eliminar un conjunto de balizas, envíe una <code translate="No">DELETE</code> solicitud:</p>
+  <p>Finalmente, para eliminar un conjunto de balizas, envíe un <code translate="No">DELETE</code> pedido:</p>
   
   <table class="bcls-table">
     <tbody class="bcls-table__body">
@@ -1144,7 +1579,7 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
         <td><code class="language-http" translate="No">https://api.bcovlive.io/v1/ssai/beaconsets/beaconset/<span class="bcls-input">beacon_set_id</span></code></td>
       </tr>
       <tr>
-        <th>Encabezado</th>
+        <th>Encabezamiento</th>
         <td><code class="language-http" translate="No">X-API-KEY: <span class="bcls-input">your API KEY</span></code></td>
       </tr>
     </tbody>
@@ -1164,141 +1599,154 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
   <section class="bcls-section">
   <h2 id="Appendix">Apéndice</h2>
   
-  <p>A continuación se muestra una captura de pantalla para mostrar una configuración de punto de referencia de muestra para el codificador Elemental.</p>
+  <p>A continuación se muestra una captura de pantalla para mostrar una configuración de punto de referencia de muestra para el codificador elemental.</p>
   
-  <figure class="bcls-figure"><img class="bcls-image" alt="Configuración de punto de referencia elemental" src="/assets/images/live-api/18835/elemental-screenshot.png"/>
-  <figcaption class="bcls-caption--image">Configuración de punto de referencia elemental</figcaption>
+  <figure class="bcls-figure"><img class="bcls-image" alt="Configuración de punto de señal elemental" src="/assets/images/live-api/18835/elemental-screenshot.png"/>
+  <figcaption class="bcls-caption--image">Configuración de punto de señal elemental</figcaption>
   </figure>
   </section>
   
   </article>
   
   
-<!-- complete bootstrap layout -->
-    </div>
-    <div class="col-sm-2 right-side-bar">
+<!-- <div class="col-sm-2 right-side-bar" style="display: inline-block;max-width: 20%;"> -->
+  
+  <nav class="right-side-nav" id="right_side_nav">
+    <h6 class="toc">Contenido de la página</h6>
+    <ul id="in_page_nav" class="list-none"></ul>
+  </nav>
+  
+<!-- </div> -->
+</div>
+</div>
+</div>
+<div class="page-content" style="background-color: rgb(1, 5, 14);">
+  <div class="container" style="width: 50%;">
+    <footer class="py-5">
+      <div class="row">
+        <div class="col-6 col-md">
+          <h5 class="h5-text">Soporte de Brightcove</h5>
+          <ul class="list-unstyled text-small" style="color: white ;">
+            <li><a class="a-text" href="https://status.brightcove.com">Estado del sistema</a></li>
+            <li><a class="a-text" href="https://supportportal.brightcove.com">Contactar con el soporte</a></li>
+            <li><a class="a-text" href="https://support.brightcove.com/search.html">Buscar toda la documentación</a></li>
+          </ul>
+        </div>
       
-      <nav class="right-side-nav" id="right_side_nav">
-        <h6 class="toc">Contenido de la página</h6>
-        <ul id="in_page_nav" class="list-none"></ul>
-      </nav>
+        <div class="col-6 col-md">
+          <h5 class="h5-text">Capacitación</h5>
+          <ul class="list-unstyled text-small">
+            <li><a class="a-text" href="https://studio.support.brightcove.com/get-started/training/online-training-courses.html">Cursos online</a></li>
+            <li><a class="a-text" href="https://studio.support.brightcove.com/get-started/training/register-training.html">Regístrese para un curso</a></li>
+            <li><a class="a-text" href="https://academy.brightcove.com/">Academia Brightcove</a></li>
+          </ul>
+        </div>
       
-    </div>
+        <div class="col-6 col-md">
+          <h5 class="h5-text">Brightcove</h5>
+          <ul class="list-unstyled text-small">
+            <li><a class="a-text" href="https://www.brightcove.com">Brightcove.com</a></li>
+            <li><a class="a-text" href="https://community.brightcove.com/s/">Foro de la comunidad de Bright Spot</a></li>
+            <li><a class="a-text" href="https://support.brightcove.com/product-updates.html">Notas de lanzamiento del producto</a></li>
+            <li><a class="a-text" href="https://support.brightcove.com/doc-updates.html">Actualizaciones de documentación</a></li>
+          </ul>
+        </div>
+      </div>
+    
+      <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
+      <p>© Brightcove Inc. Todos los derechos reservados.</p>
+      <a class="a-text" href="https://www.brightcove.com/en/legal/privacy">Privacidad</a> <a class="a-text" href="https://www.brightcove.com/en/terms-and-conditions">Términos y condiciones</a>
+
+      <ul class="list-unstyled d-flex">
+        <li class="ms-3"><a href="https://www.linkedin.com/company/16439" title="LinkedIn" target="_blank" class="gf-social-linkedin" style="margin-right: 1rem;"><i data-feather="linkedin" style="color:#8E9093;height: 1.25rem;"></i></a></li>
+
+        <li class="ms-3"><a href="https://twitter.com/brightcove" title="Gorjeo" target="_blank" class="gf-social-twitter" style="margin-right: 1rem;"><i data-feather="twitter" style="color:#8E9093;height: 1.25rem;"></i></a></li>
+
+        <li class="ms-3"><a href="https://www.facebook.com/Brightcove" title="Facebook" target="_blank" class="gf-social-facebook"><i data-feather="facebook" style="color:#8E9093;height: 1.25rem;"></i></a></li>
+      </ul>
+      </div>
+    </footer>
   </div>
 </div>
 
-<hr>
-<footer class="bcls-footer" role="contentinfo">  <div class="row">
-    <div class="region region-footer-top-center col-md-12">
-      <nav role="navigation" aria-labelledby="block-brightcovesupport-menu" id="block-brightcovesupport" class="footer-menu">
 
-        <h2>Asistencia técnica de Brightcove</h2>
-
-        <ul class="menu">
-          <li>
-            Estado del sistema<a href="https://status.brightcove.com"></a>
-          </li>
-          <li>
-            <a href="https://supportportal.brightcove.com/s/login/?">Contactar soporte</a>
-          </li>
-          <li>
-            <a href="https://support.brightcove.com/">Documentación</a>
-          </li>
-        </ul>
-
-      </nav>
-      <nav role="navigation" aria-labelledby="block-training-menu" id="block-training" class="footer-menu">
-
-        <h2>Formación</h2>
-
-        <ul class="menu">
-          <li>
-            Cursos en línea<a href="https://studio.support.brightcove.com/training/online-training-courses.html"></a>
-          </li>
-          <li>
-            Inscríbete a un curso<a href="https://studio.support.brightcove.com/training/register-training.html"></a>
-          </li>
-          <li>
-            <a href="https://university.brightcove.com/">Universidad de Brightcove</a>
-          </li>
-        </ul>
-
-      </nav>
-      <nav role="navigation" aria-labelledby="block-brightcove-menu" class="footer-menu">
-
-        <h2>Brightcove</h2>
-
-        <ul class="menu">
-          <li>
-            <a href="https://www.brightcove.com">BrightCove.com</a>
-          </li>
-          <li>
-            <a href="https://supportportal.brightcove.com/s/login/?">Contáctanos</a>
-          </li>
-        </ul>
-      </nav>
-    </div>
-  </div>
-  <div class="row">
-    <div class="region region-footer-bottom-center col-md-12">
-      <div class="bcls-copyright footer-menu">
-        <table>
-          <tr>
-            <td>
-              <div id="bc_copyright" class="field field--name-field-copyright-year field--type-string field--label-hidden field--item" style="float: left;"> Brightcove Inc. All rights reserved.</div>
-            </td>
-            <td>Privacidad | Términos y Condiciones<a href="https://www.brightcove.com/en/legal/privacy"></a><a href="https://www.brightcove.com/en/terms-and-conditions"></a></td>
-            <td>
-              <div class="gf-links-cols footer-menu">
-                <div class="gf-social"><a href="https://www.linkedin.com/company/16439" title="LinkedIn" newtab="newtab" class="gf-social-linkedin"><i class="fab fa-linkedin-in" style="font-size: 1.5rem;"></i></a><a href="https://twitter.com/brightcove" title="Twitter" newtab="newtab" class="gf-social-twitter"><i class="fab fa-twitter" style="font-size: 1.5rem;"></i></a><a href="https://www.facebook.com/Brightcove" title="Facebook" newtab="newtab" class="gf-social-facebook"><i class="fab fa-facebook-f" style="font-size: 1.5rem;"></i></a>
-                </div>
-              </div>
-            </td>
-          </tr>
-        </table>
-      </div>
-    </div>
-  </div>
-</footer>
-
-<script>
-      
+<script translate="no">
   var searchBox = sajari.init({
     mode: "search-box",
     project: "1588255093746585379", // Set this to your project.
-    collection: "brightcove-documenation", // Set this to your collection.
+    collection: "brightcove-documentation", // Set this to your collection.
     instantPipeline: "autocomplete", // Pipeline used as you type
-    inputPlaceholder: "Search", // Input element placeholder
+    inputPlaceholder: "Search", // Input element placeholder,
+    styling: {
+      components: {
+        
+        input: {
+          container: {
+          backgroundColor: 'white',
+          }
+        
+        }
+      }
+    },
     maxSuggestions: 5, // Maximum number of suggestions to show
-    attachSearchBox: document.getElementById("nav-search-box") // DOM element to attach to
+      attachSearchBox: document.getElementById("nav-search-box") // DOM element to attach to
   });
-  
-    searchBox("sub", "pipeline.search-sent", function (_, query) {
-      window.location = "/search.html?q=" + encodeURIComponent(query.q);
-    });
+
   
 
-</script>
+
+    searchBox("sub", "pipeline.search-sent", function (_, query) {
+    window.location = "/search.html?q=" + encodeURIComponent(query.q);
+    });
+  
+  </script>
+  
+  <!-- Javascript -->          
+  <script src="/assets/s-site-assets-template-stylesheets/plugins/popper.min.js"></script>
+  <script src="/assets/s-site-assets-template-stylesheets/plugins/bootstrap/js/bootstrap.min.js"></script>  
+
+
+  <!-- Page Specific JS -->
+  <script src="/assets/s-site-assets-template-stylesheets/plugins/smoothscroll.min.js"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script> -->
+  <!-- <script src="/assets/s-site-assets-template-stylesheets/js/highlight-custom.js"></script>  -->
+  <script src="/assets/s-site-assets-template-stylesheets/plugins/simplelightbox/simple-lightbox.min.js"></script>      
+  <script src="/assets/s-site-assets-template-stylesheets/plugins/gumshoe/gumshoe.polyfills.min.js"></script> 
+  <script src="/assets/s-site-assets-template-stylesheets/js/docs.js"></script> 
+
+  <!-- original footer components -->
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  <script src="https://support.brightcove.com/site-assets/js/site/https-fix.js"></script>
-  <script src="https://support.brightcove.com/site-assets/js/site/setDate.js"></script>
+
+  <script src="/assets/s-site-assets-scripts/https-fix.js"></script>
+  <script src="/assets/s-site-assets-scripts/setDate.js"></script>
+  <script src="/assets/s-site-assets-scripts/selector.js"></script>
   
-  <script src="https://support.brightcove.com/site-assets/js/site/prism.js"></script>
+  <script src="/assets/s-site-assets-scripts/prism.js"></script>
+  <script src="/assets/s-site-assets-scripts/prism-normalize.js"></script>
   
-  <script src="https://support.brightcove.com/site-assets/js/site/site.js"></script>
-  <script src="https://support.brightcove.com/site-assets/js/site/tabs.js"></script>
-  <script src="https://support.brightcove.com/site-assets/js/site/toc.js"></script>
+  <script src="/assets/s-site-assets-scripts/site.js"></script>
+  <script src="https://support.brightcove.com/site-assets/js/learning-paths/learning-paths.js"></script>
+  <!-- <script src="/assets/s-site-assets-scripts/site.js"></script> -->
+  <script src="/assets/s-site-assets-scripts/tabs.js"></script>
+  
+  <script src="/assets/s-site-assets-scripts/toc-new-template.js"></script>
+  
   <script src="/assets/js/sites_nav.js"></script>
-  <script src="https://support.brightcove.com/site-assets/js/site/bcls-utils.js"></script>
-  <script src="https://support.brightcove.com/site-assets/js/site/local-link-fix.js"></script>
+  <script src="/assets/s-site-assets-scripts/bcls-utils.js"></script>
+  <script src="/assets/s-site-assets-scripts/local-link-fix.js"></script>
+  <script src="/assets/s-site-assets-scripts/sajari-reindex.js"></script>
   <script src="/assets/js/feedback.js"></script>
   
-  <script src="/assets/js/sajari-search-foot.js"></script>
+  <script src="/assets/s-site-assets-scripts/sajari-search-foot.js"></script>
   
+  <script translate="no">
+    feather.replace()
+  </script>
   <!-- <script src="/assets/js/sajari-index.js"></script> -->
-  <style>
+  <script src="/assets/s-site-assets-scripts/in-app.js"></script>
+  <style translate="no">
     a.sj-paginator__page-number.sj-paginator__page-number--current.css-so0ov7 {
       background-color: lightblue;
     }
@@ -1325,6 +1773,5 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
     }
     </style>
 
-</body>
-
-</html>
+  </body>
+</html> 

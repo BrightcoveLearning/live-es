@@ -1,930 +1,1308 @@
-﻿<!doctype html>
-<html lang="es-es">
+﻿<!DOCTYPE html>
+<html lang="es"> 
+    <head>
+        <title>Creación de un videoclip con el módulo Live</title>
+        
+        <!-- Meta -->
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="En este tema, aprenderá cómo crear un clip de video usando el módulo Live.">
+        
+        <!-- Google Font -->
+        <link href="/assets/s-site-assets-stylesheets/fonts/poppins.css" rel="stylesheet">
+        <link rel="stylesheet" href="/assets/s-site-assets-stylesheets/fonts/articulat-site.css">
+        <link href="/assets/s-site-assets-stylesheets/fonts/source-code-pro.css" rel="stylesheet">
+        
+        <!-- FontAwesome JS-->
+        
+        <script src="https://kit.fontawesome.com/d67c74a882.js" crossorigin="anonymous"></script>  
+        
+        <!-- Plugins CSS -->
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.2/styles/atom-one-dark.min.css">
+        <link rel="stylesheet" href="/assets/s-site-assets-template-stylesheets/plugins/simplelightbox/simple-lightbox.min.css">
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  
-  <title>Creación de un clip de vídeo mediante el módulo Live</title>
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-  <link rel="manifest" href="/site.webmanifest">  
-  <link data-react-helmet="true" rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500&amp;display=swap">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://support.brightcove.com/site-assets/css/site/prism.css">
-  <link rel="stylesheet" href="https://support.brightcove.com/site-assets/css/site/styles.css">
-  <link rel="stylesheet" href="https://support.brightcove.com/site-assets/css/site/landing-page.css">
-  <link rel="stylesheet" href="https://support.brightcove.com/site-assets/css/site/tabs.css">
-  <link rel="stylesheet" href="/assets/css/local.css">
-  <link data-react-helmet="true" rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500&display=swap">
-  <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro&display=swap" rel="stylesheet">
-  <script src="https://kit.fontawesome.com/381443caa8.js" crossorigin="anonymous"></script>
-  <script src="https://support.brightcove.com/site-assets/js/site/google-analytics.js"></script>
-  <script src="/assets/js/sajari-head.js"></script>
-</head>
-
-<body class="body">
-
-<header>
-  <div class="div-header">
-    <a href="/"><img class="product-logo" src="https://support.brightcove.com/site-assets/images/site/product-logos/Live_Logo.svg" alt="logotipo del producto" style="max-height: 100px;max-width: 232px;"/></a>
-<!-- GTranslate: https://gtranslate.io/ -->
-<select onchange="doGTranslate(this);"><option value="">Seleccionar idioma</option><option value="en|en" translate="No">English</option><option value="en|zh-TW" translate="No">繁體中文</option><option value="en|fr" translate="No">Français</option><option value="en|de" translate="No">Deutsche</option><option value="en|ja" translate="No">日本語</option><option value="en|ko" translate="No">한국어</option><option value="en|es" translate="No">Español</option></select>
-
-<script>
-/* <![CDATA[ */
-function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;if(lang_pair=='')return;var lang=lang_pair.split('|')[1];var plang=location.hostname.split('.')[0];if(plang.length !=2 && plang.toLowerCase() != 'zh-cn' && plang.toLowerCase() != 'zh-tw')plang='en';location.href=location.protocol+'//'+(lang == 'en' ? '' : lang+'.')+location.hostname.replace('www.', '').replace(RegExp('^' + plang + '\\.'), '')+location.pathname+location.search;}
-/* ]]> */
-</script>
-
-    
+        <!-- Theme CSS -->  
+        <link id="theme-style" rel="stylesheet" href="/assets/s-site-assets-template-stylesheets/css/theme.css">
+        <link rel="stylesheet" href="/assets/s-site-assets-stylesheets/prism.css">
+        <link rel="stylesheet" href="/assets/s-site-assets-template-stylesheets/custom-css/styles.css">
 
 
-    <span class="secondary-nav"><a href="https://supportportal.brightcove.com/s/login/?"><img src="https://support.brightcove.com/site-assets/images/site/support.png" alt="soporte"/> Contactar con Soporte</a> <span style="vertical-align: top;margin-left:1em;margin-right:1em;">|</span> <a href="https://status.brightcove.com/">Estado<img src="https://support.brightcove.com/site-assets/images/site/status.png" alt="estado del sistema"/> del sistema</a></span> <br/>
-    
-  </div>
-  <nav aria-label="breadcrumb">
-    <ol class="breadcrumb arr-right">
-      
-      <li class="breadcrumb-item"><a href="/">Inicio</a></li>
-      
-      
-      
-      <li class="breadcrumb-item">Módulo Live<a href="/live-module/"></a></li>
-      
-      <li class="breadcrumb-item active" aria-current="page">Creación de un clip de vídeo mediante el módulo Live</li>
-    </ol>
-  </nav>
-</header>
-<div class="container">
-    <div class="row">
-            <div class="col-sm-3 left-side-bar">
-        <select id="site_select" class="bcls-select" style="margin-right: 1rem;">
-          <option value="">Otros documentos de Brightcove</option>
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-XBJC11HF8Z"></script>
+        <script translate="no">
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-XBJC11HF8Z');
+        </script>
+        <script src="/assets/s-site-assets-scripts/sixth-sense.js"></script>
+        <script src="/assets/s-site-assets-scripts/sajari-head.js"></script>
+        <script src="/assets/s-site-assets-scripts/feather.min.js"></script>
+
+    </head> 
+
+    <body class="docs-page">
+        
+
+<header class="header fixed-top">
+  <div class="branding docs-branding">
+    <div class="container-fluid position-relative py-2">
+      <div class="docs-logo-wrapper">
+        <button id="docs-sidebar-toggler" class="docs-sidebar-toggler"
+          type="button">
+          <span></span> <span></span> <span></span>
+        </button>
+        <div class="site-logo"><a class="navbar-brand" href="https://support.brightcove.com/" style="margin-left: 15px;"> <img class="logo-icon me-2" src="/assets/s-site-assets-template-stylesheets/images/bc_logo_black_1@1x.png" alt="logo" style="margin-bottom: 9px;"/>
+            <!-- <span class="logo-text">BRIGHTCOVE</span> -->
+          </a></div>
+      </div><!--//docs-logo-wrapper-->
+
+      <div class="docs-top-utilities d-flex justify-content-end
+        align-items-center">
+        
+        <!-- Search bar -->
+        <div id="nav-search-box" class="top-search-box d-none d-lg-flex" style="margin-right: 10px ;"></div>
+
+<select id="site_select" class="form-select select-focus" style="width:
+          20%; margin-right: 10px;" translate="no">
+          <option value="">Other Brightcove Docs</option>
           
-            
-              <option value="https://support.brightcove.com">Documentación Inicio</option>
-            
           
-            
-              <option value="https://audience.support.brightcove.com">Audiencia de Brightcove</option>
-            
+          <option value="https://support.brightcove.com" translate="no">Documentation Home</option>
           
-            
-              <option value="https://beacon.support.brightcove.com">Baliza Brightcove</option>
-            
           
-            
-              <option value="https://campaign.support.brightcove.com">Campaña de Brightcove</option>
-            
           
-            
-              <option value="https://engage.support.brightcove.com">Brightcove Engage</option>
-            
+          <option value="https://support.brightcove.com/" translate="no">-- VIDEO CLOUD --</option>
           
-            
-              <option value="https://live.support.brightcove.com">Brightcove Live</option>
-            
           
-            
-              <option value="https://gallery.support.brightcove.com">Brightcove Gallery</option>
-            
           
-            
-              <option value="https://ssai.support.brightcove.com">Brightcove SSAI</option>
-            
+          <option value="https://studio.support.brightcove.com" translate="no">&nbsp;&nbsp;&nbsp;&nbsp;Video Cloud Studio</option>
           
-            
-              <option value="https://social.support.brightcove.com">Brightcove Social</option>
-            
           
-            
-              <option value="https://studio.support.brightcove.com">Video Cloud Studio</option>
-            
           
-            
-              <option value="https://player.support.brightcove.com">Desarrollo de jugadores de Brightcove</option>
-            
+          <option value="https://mstudio.support.brightcove.com" translate="no">&nbsp;&nbsp;&nbsp;&nbsp;Marketing Studio</option>
           
-            
-              <option value="https://apis.support.brightcove.com">API para la plataforma de Video Cloud</option>
-            
           
-            
-              <option value="https://sdks.support.brightcove.com">SDK de dispositivos de Video Cloud</option>
-            
           
-            
-              <option value="https://integrations.support.brightcove.com">Integraciones y conectores CMS</option>
-            
+          <option value="https://player.support.brightcove.com" translate="no">&nbsp;&nbsp;&nbsp;&nbsp;Brightcove Player Development</option>
           
-            
-              <option value="https://general.support.brightcove.com">Información general de Video Cloud</option>
-            
           
-            
-              <option value="https://zencoder.support.brightcove.com">Zencoder</option>
-            
+          
+          <option value="https://apis.support.brightcove.com" translate="no">&nbsp;&nbsp;&nbsp;&nbsp;Video Cloud Platform APIs</option>
+          
+          
+          
+          <option value="https://sdks.support.brightcove.com" translate="no">&nbsp;&nbsp;&nbsp;&nbsp;Video Cloud Device SDKs</option>
+          
+          
+          
+          <option value="https://integrations.support.brightcove.com" translate="no">&nbsp;&nbsp;&nbsp;&nbsp;Integrations and CMS Connectors</option>
+          
+          
+          
+          <option value="https://general.support.brightcove.com" translate="no">&nbsp;&nbsp;&nbsp;&nbsp;Video Cloud General Information</option>
+          
+          
+          
+          <option value="https://support.brightcove.com/" translate="no">-- VIDEO ESSENTIALS --</option>
+          
+          
+          
+          <option value="https://audience-insights.support.brightcove.com" translate="no">&nbsp;&nbsp;&nbsp;&nbsp;Brightcove Audience Insights</option>
+          
+          
+          
+          <option value="https://beacon-help.support.brightcove.com" translate="no">&nbsp;&nbsp;&nbsp;&nbsp;Brightcove Beacon Studio</option>
+          
+          
+          
+          <option value="https://beacon.support.brightcove.com" translate="no">&nbsp;&nbsp;&nbsp;&nbsp;Brightcove Beacon Classic</option>
+          
+          
+          
+          <option value="https://corptv.support.brightcove.com" translate="no">&nbsp;&nbsp;&nbsp;&nbsp;CorpTV</option>
+          
+          
+          
+          <option value="https://live.support.brightcove.com" translate="no">&nbsp;&nbsp;&nbsp;&nbsp;Brightcove Live</option>
+          
+          
+          
+          <option value="https://zencoder.support.brightcove.com" translate="no">&nbsp;&nbsp;&nbsp;&nbsp;Zencoder</option>
+          
+          
+          
+          <option value="https://support.brightcove.com/" translate="no">-- VIDEO CLOUD ADD-ONS --</option>
+          
+          
+          
+          <option value="https://gallery.support.brightcove.com" translate="no">&nbsp;&nbsp;&nbsp;&nbsp;Brightcove Gallery</option>
+          
+          
+          
+          <option value="https://studio.support.brightcove.com/social/index.html" translate="no">&nbsp;&nbsp;&nbsp;&nbsp;Brightcove Social</option>
+          
+          
+          
+          <option value="https://interactivity.support.brightcove.com/index.html" translate="no">&nbsp;&nbsp;&nbsp;&nbsp;Brightcove Interactivity</option>
+          
+          
+          
+          <option value="https://ssai.support.brightcove.com" translate="no">&nbsp;&nbsp;&nbsp;&nbsp;Brightcove SSAI</option>
+          
+          
+          
+          <option value="https://campaign.support.brightcove.com" translate="no">&nbsp;&nbsp;&nbsp;&nbsp;Brightcove Campaign</option>
+          
           
         </select>
 
-        <nav class="sidenav" id="side_nav">
-          
-            
-            <h5><a href="/index.html">Inicio</a></h5>
-            
-          
-            
-              <h5 class="submenu-header"><a href="/get-started/index.html">Empezar <strong>+</strong></a></h5>
-              <ul class="sidenav-submenu" style="display:none;">
-                
-                  
-                    <li><a href="/get-started/brightcove-live-training-videos.html">Vídeos de formación en directo de Brightcove</a></li>
-                  
-                
-                  
-                    <li><a href="/get-started/delivering-live-streams.html">Entrega de transmisiones en directo</a></li>
-                  
-                
-                  
-                    <li>Pautas y prácticas recomendadas del módulo en vivo<a href="/get-started/live-module-guidelines-and-best-practices.html"></a></li>
-                  
-                
-                  
-                    <li>Paso a paso:<a href="/get-started/step-step-using-live-module-open-broadcaster-software-obs.html"> Uso del Módulo Live con OBS</a></li>
-                  
-                
-                  
-                    <li>Paso a paso:<a href="/get-started/step-step-using-live-module-telestream-wirecast.html"> Uso del Módulo Live con Wirecast</a></li>
-                  
-                
-              </ul>
-            
-          
-            
-              <h5 class="submenu-header"><a href="/general/index.html">Información general <strong>+</strong></a></h5>
-              <ul class="sidenav-submenu" style="display:none;">
-                
-                  
-                    <li>DRM en vivo<a href="/general/live-drm.html"></a></li>
-                  
-                
-                  
-                    <li>Matriz de comparación de plataformas activas<a href="/general/live-platforms-comparison-matrix.html"></a></li>
-                  
-                
-                  
-                    <li>Glosario de Vídeo en Vivo<a href="/general/live-video-glossary.html"></a></li>
-                  
-                
-                  
-                    <li>Reducción de la latencia para transmisiones en directo<a href="/general/reducing-latency-live-streams.html"></a></li>
-                  
-                
-                  
-                    <li>Codificadores compatibles para eventos en directo<a href="/general/supported-encoders-live-events.html"></a></li>
-                  
-                
-                  
-                    <li>Uso del empaquetado de Akamai Stream y Wirecast<a href="/general/creating-live-stream-using-akamai-stream-packaging-and-telestream-wirecast.html"></a></li>
-                  
-                
-              </ul>
-            
-          
-            
-              <h5 class="submenu-header">Uso del Módulo Live +<a href="/live-module/index.html"><strong></strong></a></h5>
-              <ul class="sidenav-submenu" style="display:none;">
-                
-                  
-                    <li><a href="/live-module/client-side-preroll-with-live-ssai.html">Anuncios previos del lado del cliente con SSAI en vivo</a></li>
-                  
-                
-                  
-                    <li><a href="/live-module/creating-and-managing-live-events-using-live-module.html">Creación y administración de eventos en directo</a></li>
-                  
-                
-                  
-                    <li><a href="/live-module/creating-video-clip-using-live-module.html">Creación de un clip de vídeo</a></li>
-                  
-                
-                  
-                    <li><a href="https://integrations.support.brightcove.com/web-conferencing/host-avaya-conference-brightcove-live.html">Anfitrión de la conferencia de Avaya en Brightcove Live</a></li>
-                  
-                
-                  
-                    <li><a href="https://integrations.support.brightcove.com/web-conferencing/host-cisco-webex-conference-brightcove-live.html">Hospedar Cisco Webex a Brightcove Live</a></li>
-                  
-                
-                  
-                    <li><a href="https://integrations.support.brightcove.com/web-conferencing/host-zoom-conference-brightcove-live.html">Zoom de host a Brightcove Live</a></li>
-                  
-                
-                  
-                    <li><a href="https://integrations.support.brightcove.com/web-conferencing/host-inxpo-live.html">Organiza un evento INXPO en Brightcove Live</a></li>
-                  
-                
-                  
-                    <li><a href="/live-module/implementing-server-side-ads-live-module.html">Implementación de anuncios del lado del servidor</a></li>
-                  
-                
-                  
-                    <li>Redundancia en vivo<a href="/live-module/live-redundancy.html"></a></li>
-                  
-                
-                  
-                    <li>Publicación de un evento en vivo en Facebook<a href="/live-module/publishing-live-event-facebook.html"></a></li>
-                  
-                
-                  
-                    <li>Publicar un evento en vivo en YouTube<a href="/live-module/publishing-live-event-youtube.html"></a></li>
-                  
-                
-                  
-                    <li>Revisión de Live Analytics<a href="/live-module/reviewing-live-analytics.html"></a></li>
-                  
-                
-                  
-                    <li>Uso de salidas RTMP en vivo<a href="/live-module/using-live-rtmp-outputs-stream-facebook-and-youtube.html"></a></li>
-                  
-                
-              </ul>
-            
-          
-            
-              <h5 class="submenu-header">Trabajar con Live API +<a href="/live-api/index.html"><strong></strong></a></h5>
-              <ul class="sidenav-submenu" style="display:none;">
-                
-                  
-                    <li class="submenu-header">
-                      API en vivo:<a href="/live-api/getting-started/index.html"> Empezar <strong>+</strong></a>
-                      <ul class="sidenav-subsubmenu" style="display:none;">
-                        
-                        <li>Visión general:<a href="/live-api/getting-started/overview-brightcove-live-api.html"> API en vivo</a></li>
-                        
-                        <li><a href="/live-api/getting-started/quick-start-create-live-stream-using-brightcove-live-api.html">Creación de una transmisión en vivo mediante la API</a></li>
-                        
-                      </ul>
-                    </li>
-                  
-                
-                  
-                    <li class="submenu-header">
-                      API en vivo:<a href="/live-api/code-samples/index.html"> Ejemplos de código <strong>+</strong></a>
-                      <ul class="sidenav-subsubmenu" style="display:none;">
-                        
-                        <li><a href="/live-api/code-samples/live-api-sample-create-live-job.html">Crear un trabajo activo</a></li>
-                        
-                        <li><a href="/live-api/code-samples/quick-start-create-live-job-mpeg2-ts-input.html">Crear un trabajo activo para la entrada MPEG2-TS</a></li>
-                        
-                        <li>Uso de salidas RTMP para eventos en directo<a href="/live-api/code-samples/quick-start-using-rtmp-outputs-live-events.html"></a></li>
-                        
-                        <li>Evento en vivo simulado<a href="/live-api/code-samples/simulated-live.html"></a></li>
-                        
-                      </ul>
-                    </li>
-                  
-                
-                  
-                    <li class="submenu-header">
-                      API en vivo:<a href="/live-api/references/index.html"> Referencias +<strong></strong></a>
-                      <ul class="sidenav-subsubmenu" style="display:none;">
-                        
-                        <li><a href="/live-api/references/live-api-error-messages.html">Mensajes de error</a></li>
-                        
-                        <li>Notas de versión<a href="/live-api/references/live-api-release-notes.html"></a></li>
-                        
-                        <li>Referencia de API en vivo<a href="/live-api/references/reference.html"></a></li>
-                        
-                      </ul>
-                    </li>
-                  
-                
-                  
-                    <li class="submenu-header">
-                      API en vivo:<a href="/live-api/ssai/index.html"> SSAI +<strong></strong></a>
-                      <ul class="sidenav-subsubmenu" style="display:none;">
-                        
-                        <li><a href="/live-api/ssai/live-api-cue-points-and-ad-beacons-ssai.html">Puntos de referencia y balizas de anuncio con SSAI</a></li>
-                        
-                        <li>Inserción de anuncios en el lado del servidor (SSAI)<a href="/live-api/ssai/live-api-server-side-ad-insertion-ssai.html"></a></li>
-                        
-                        <li>Visión general:<a href="/live-api/ssai/overview-player-enhancements-live-ssai.html"> Mejoras del jugador para SSAI en vivo</a></li>
-                        
-                      </ul>
-                    </li>
-                  
-                
-                  
-                    <li class="submenu-header">
-                      API en vivo:<a href="/live-api/guides/index.html"> Guías <strong>+</strong></a>
-                      <ul class="sidenav-subsubmenu" style="display:none;">
-                        
-                        <li><a href="/live-api/guides/brightcove-live-best-practices.html">Prácticas recomendadas de Brightcove Live</a></li>
-                        
-                        <li><a href="/live-api/guides/brightcove-live-program-ad-metadata-api.html">API de metadatos de anuncios del programa Brightcove Live</a></li>
-                        
-                        <li><a href="/live-api/guides/live-api-creating-frame-accurate-clip.html">Creación de un clip preciso de marco</a></li>
-                        
-                        <li><a href="/live-api/guides/live-api-creating-vod-clips.html">Creación de clips VOD</a></li>
-                        
-                        <li><a href="/live-api/guides/getting-list-live-or-vod-jobs.html">Obtención de una lista de trabajos en vivo o VOD</a></li>
-                        
-                        <li><a href="/live-api/guides/live-api-insert-id3-timed-metadata.html">Insertar metadatos temporizados ID3</a></li>
-                        
-                        <li>DRM en vivo a través de Live API<a href="/live-api/guides/live-drm-live-api.html"></a></li>
-                        
-                        <li>Administración de credenciales para Live API<a href="/live-api/guides/managing-credentials-live-api.html"></a></li>
-                        
-                        <li>Notificaciones<a href="/live-api/guides/live-api-notifications.html"></a></li>
-                        
-                        <li>Reducción de la latencia para transmisiones en directo<a href="/general/reducing-latency-live-streams.html"></a></li>
-                        
-                        <li>Salidas RTMP<a href="/live-api/guides/live-api-rtmp-outputs.html"></a></li>
-                        
-                        <li>Puntos de entrada estáticos<a href="/live-api/guides/live-api-static-entry-points.html"></a></li>
-                        
-                        <li>URL firmadas y autenticación de tokens con una transmisión en directo<a href="/live-api/guides/signed-urls-and-token-auth-live-stream.html"></a></li>
-                        
-                        <li>Uso de Redundancia en Vivo<a href="/live-api/guides/using-live-redundancy.html"></a></li>
-                        
-                        <li>VOD del Evento en Vivo<a href="/live-api/guides/live-api-vod-live-event.html"></a></li>
-                        
-                      </ul>
-                    </li>
-                  
-                
-              </ul>
-            
-          
-            
-              <h5 class="submenu-header"><a href="/admin/index.html">Administrar cuentas <strong>+</strong></a></h5>
-              <ul class="sidenav-submenu" style="display:none;">
-                
-                  
-                    <li><a href="/admin/creating-custom-live-ingest-profiles.html">Creación de perfiles de ingesta dinámica personalizados</a></li>
-                  
-                
-                  
-                    <li>Campos para perfiles personalizados de ingesta activa<a href="/admin/fields-custom-live-ingest-profiles.html"></a></li>
-                  
-                
-                  
-                    <li>Administrar la configuración de Live<a href="/admin/managing-live-settings.html"></a></li>
-                  
-                
-                  
-                    <li>Administración de credenciales de autenticación de API<a href="/admin/managing-api-authentication-credentials.html"></a></li>
-                  
-                
-                  
-                    <li>Perfiles de ingesta en vivo estándar<a href="/admin/standard-live-ingest-profiles.html"></a></li>
-                  
-                
-              </ul>
-            
-          
-            
-              <h5 class="submenu-header">Notas de la versión +<a href="/release-notes/index.html"><strong></strong></a></h5>
-              <ul class="sidenav-submenu" style="display:none;">
-                
-                  
-                    <li>Notas de versión en vivo<a href="/release-notes/live-api-release-notes.html"></a></li>
-                  
-                
-                  
-                    <li>Problemas conocidos<a href="/release-notes/known-issues.html"></a></li>
-                  
-                
-              </ul>
-            
-          
-            
-              <h5 class="submenu-header">Soporte +<a href="/support/index.html"><strong></strong></a></h5>
-              <ul class="sidenav-submenu" style="display:none;">
-                
-                  
-                    
-                  
-                
-                  
-                    <li>Visualización de la página Estado del Sistema de Brightcove<a href="/support/viewing-brightcove-system-status-page.html"></a></li>
-                  
-                
-                  
-                    <li><a href="/support/contact-sales.html">Contacto con Ventas</a></li>
-                  
-                
-                  
-                    <li>Apertura de un caso de soporte<a href="/support/opening-case-with-brightcove-support.html"></a></li>
-                  
-                
-              </ul>
-            
-          
-      </nav>
-    </div>
-    <div class="col-lg-7" style="background-color: white;color: #333333;margin-top: -1em;margin-bottom: -1em;padding-bottom:1em;">
-  <!-- bootstrap layout -->
-
-<p id="bc_veggie_burger_wrapper" style="display: none;"><img id="bc_veggie_burger" src="/assets/images/feather/menu.svg" alt="Menú de navegación"/></p>
-
-<!-- search bar -->
-<div id="nav-search-box" style="margin-top: 1rem;"></div>
-<!-- in-page navigation for narrow screens -->
-<details class="centered-inpage-nav" id="centered_inpage_nav">
-  <summary><h6 class="toc">Contenido de la página</h6></summary>
-  <nav id="centered_toc"></nav>
-  <ul id="centered_in_page_toc" class="list-none"></ul>
-</details>
-<!-- open in new tab/window -->
-<a id="open_new_tab" href="#" target="_blank" style="display: none;"><img src="/assets/images/feather/external-link.svg" alt="abrir en una nueva pestaña" style="margin-top:4em;width: 1.5em;"/></a>
-
-
-
-  
-    
-
-
-<article class="bcls-article">
-  <h1>Creación de un clip de vídeo mediante el módulo Live</h1>
-  <summary>En este tema aprenderá a crear un clip de vídeo utilizando el módulo Live.</summary>
-
-
-<section id="top" class="bcls-section">
-<div class="training-video-player-ipx" data-experience="5a73630f7afd7a00101bc1b5" data-video-ids="5810384996001">&nbsp;</div>
-</section>
-
-<section class="bcls-section">
-<h2 id="Overview">Resumen</h2>
-
-<p>El módulo Live proporciona la capacidad de crear clips de vídeo a partir de eventos completados. También se pueden crear clips mientras un evento en directo está en curso. Hay varias razones por las que puede querer crear un clip:</p>
-
-<ul>
-	<li>Para crear un clip corto y teaser que se pueda publicar en las redes sociales</li>
-	<li>Para limitar la duración de un vídeo que desea publicar (la mayoría de las plataformas limitan la duración de los vídeos)</li>
-	<li>Usted ha descubierto que los videos más cortos funcionan mejor en las redes sociales</li>
-</ul>
-
-<p>El recorte se puede hacer con todo tipo de eventos en vivo y también se puede hacer <em>durante</em> y <em>después</em> de la transmisión en vivo utilizando la API en vivo o el Módulo Live.</p>
-
-<h3>Notas</h3>
-
-<ul>
-	<li>Los perfiles de ingesta heredados ya no admiten recortes en vivo. Para crear un clip de vídeo a partir de una transmisión en directo, asegúrate de que tu cuenta esté habilitada para Entrega dinámica y utiliza un perfil de ingesta de entrega dinámica.</li>
-	<li>Los clips solo se pueden crear dentro de los 7 días posteriores al final del evento. Después, se desactivará el botón <strong>Crear clip</strong> . Si el evento es superior a 24 horas, solo las últimas 24 horas son recortables.</li>
-  <li>Para eventos recurrentes: Si durante los 7 días posteriores a un evento el evento se reactiva, el recorte solo estará disponible para el contenido del evento más reciente. No habrá forma de crear clips del evento anterior, incluso si son menos de 7 días después de que se desactivó el último evento.</li>
-  <li>Si detiene y reinicia un canal para una nueva transmisión en vivo, la información de transmisión en vivo anterior para recortar puede sobrescribirse</li>.
-	<li>Los clips serán precisos de fotogramas <strong>siempre que el codificador envíe códigos de tiempo SMPTE para la secuencia</strong> ; de lo contrario, serán precisos dentro de un par de fotogramas. Tenga en cuenta que para proporcionar clips lo más rápido posible, primero se crea un clip con precisión de segmentos y se sustituye por un clip con precisión de marco tan pronto como esté disponible.</li>
-	<li>No se pueden crear clips con un tiempo de inicio inferior a 10 segundos en la secuencia.</li>
-	<li>Por el momento, el navegador Safari no admite recortes. La interfaz de usuario de la línea de tiempo de recorte puede no mostrarse correctamente.</li>
-</ul>
-<aside class="bcls-aside bcls-aside--information">Tenga en cuenta que cuando crea un evento recurrente, se crea automáticamente un vídeo para él en el módulo Media.  <strong>No</strong> elimine este vídeo, ya que será necesario cada vez que se repita el evento.</aside>
-
-</section>
-
-<section class="bcls-section">
-<h2 id="Navigating_the_clip_editor">Navegar por el editor de clips</h2>
-
-<p>Para abrir el editor de clips, abra el módulo Live, haga clic en el nombre de un evento y, a continuación, haga clic en <strong>Crear clip</strong> en la navegación izquierda. Se abrirá el editor de clips.</p>
-
-<p>Tenga en cuenta que todas las horas de la interfaz de recorte se basan en la hora UTC en la que Brightcove recibió los datos de vídeo. Este es un ajuste necesario para tener en cuenta las secuencias que han superado la ventana VOD (ejecutar más de 24 horas). Cuando un vídeo ha superado esa ventana, el tiempo que regresamos del reproductor ya no se puede utilizar de forma fiable para generar clips.</p>
-
-<figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/general/18551/node18551-clip-editor-numbered.png"/></figure>
-
-<p>El editor de clips está organizado de la siguiente manera:</p>
-
-<ul>
-	<li>A - <a href="#preview">Vista previa del jugador</a></li>
-	<li>B - <a href="#playback_control">Botones de control de reproducción</a></li>
-	<li>C - <a href="#clip_time">Tiempo de clip</a></li>
-	<li>D - <a href="#clipping">Botones de recorte</a></li>
-	<li>E - <a href="#preview_clip">Botón de vista previa del clip</a></li>
-	<li>F - Botón Guardar</li>
-	<li>G - <a href="#playhead">Cabeza de reproducción</a></li>
-	<li>H - <a href="#focus_timeline">Línea de tiempo de enfoque</a></li>
-	<li>I - <a href="#context_timeline">Cronología del contexto</a></li>
-	<li>J - <a href="#zoom_buttons">Botones de zoom</a></li>
-	<li>K - <a href="#list_of_clips">Lista de clips</a></li>
-</ul>
-</section>
-
-<section class="bcls-section">
-<h2 id="Creating_a_clip">Creación de un clip</h2>
-
-<p>Al crear clips, la copia de mayor calidad del <strong>perfil de ingesta activa</strong> seleccionado se utiliza como origen del clip. El perfil de ingesta de carga predeterminado para la cuenta se utiliza al crear copias para el clip.</p>
-
-<p>Siga estos pasos para crear un clip.</p>
-
-<ol class="bcls-tasklist-restart">
-	<li>Mediante los botones de recorte o las teclas de método abreviado, defina los puntos inicial y final del clip.
-	<figure><img class="bcls-image--no-border" alt="" src="/assets/images/general/18551/node18551-clip-portion.png"/></figure>
-	</li>
-	<li>Haga clic en <strong>Guardar</strong>.</li>
-	<li>Introduzca las propiedades de vídeo del clip.
-	<ul>
-		<li><strong>Nombre del clip</strong> - Nombre del clip</li>
-		<li>Descripción corta - Descripción del clip<strong></strong></li>
-		<li>Etiquetas - Etiquetas para asociar con el clip<strong></strong></li>
-		<li>Id. de referencia: ID de referencia para asignar al clip<strong></strong></li>
-		<li>Eliminar contenido de salto de anuncio de origen: esta opción elimina los saltos de anuncios activados dentro del clip, manteniendo únicamente el contenido del programa.<strong></strong>
-		<aside class="bcls-aside bcls-aside—information">Nota: La casilla de verificación Eliminar salto de anuncios de origen solo aparecerá cuando la transmisión esté habilitada para SSAI.</aside>
-		<figure><img class="bcls-image--no-border" alt="" src="https://learning-services-media.brightcove.com/doc-assets/node/18551-creating-video-clip-using-live-module/Ad_break_rem.png"/></figure>
-		</li>
-	</ul>
-
-	<p>También se mostrarán todos los campos personalizados requeridos.</p>
-	</li>
-	<li>Haga clic en <strong>Crear clip</strong>. Comenzará el proceso de transcodificación del clip. Los clips se transcodifican utilizando el perfil de ingesta predeterminado para la cuenta.</li>
-</ol>
-
-<p>Aparecerá una lista de todos los clips debajo del editor de clips. Al hacer clic en el <strong>nombre del clip</strong> se abrirá el clip en el módulo Media de otra pestaña del navegador. Haga clic en <strong>Publicar en Social</strong> para abrir el clip en el módulo de redes sociales y publicarlo en una cuenta de redes sociales. Para obtener información sobre cómo publicar vídeos mediante el módulo Social, consulte <a href="https://social.support.brightcove.com/general/publishing-videos-social-media-platforms.html">Publicación de vídeos en plataformas de medios sociales</a>.</p>
-</section>
-
-<section class="bcls-section">
-<h2 id="preview">Vista previa del reproductor</h2>
-
-<p>El reproductor de previsualización se utiliza para previsualizar el clip. Cuando el evento está en curso y se abre el editor de clips, el clip comenzará a reproducirse desde el «punto vivo seguro», que es aproximadamente 3 segmentos antes del final. Tenga en cuenta que no todos los navegadores admiten la reproducción automática.</p>
-</section>
-
-<section class="bcls-section">
-<h2 id="playback_control">Botones de control de reproducción</h2>
-
-<p>Los botones de control de reproducción se utilizan para controlar la reproducción del clip dentro del reproductor de vista previa.</p>
-
-<table class="bcls-table">
-	<thead class="bcls-table__head">
-		<tr>
-			<th width="107">Button</th>
-			<th width="430">Descripción</th>
-		</tr>
-	</thead>
-	<tbody class="bcls-table__body">
-		<tr>
-			<td><img alt="" src="/assets/images/general/18551/node18551-start-button.png"/></td>
-			<td>Inicia la reproducción de vídeo al principio del vídeo de origen</td>
-		</tr>
-		<tr>
-			<td><img alt="" src="/assets/images/general/18551/node18551-back15-button.png"/></td>
-			<td>Salta el cabezal de reproducción 15 segundos</td>
-		</tr>
-		<tr>
-			<td><img alt="" src="/assets/images/general/18551/node18551-play-button.png"/></td>
-			<td>Inicia la reproducción de vídeo desde la posición del cabezal de reproducción</td>
-		</tr>
-		<tr>
-			<td><img alt="" src="/assets/images/general/18551/node18551-forward15-button.png"/></td>
-			<td>Salta el cabezal de reproducción 15 segundos</td>
-		</tr>
-		<tr>
-			<td><img alt="" src="/assets/images/general/18551/node18551-live-button.png"/></td>
-			<td>&nbsp;</td>
-		</tr>
-	</tbody>
-</table>
-</section>
-
-<section class="bcls-section">
-<h2 id="clip_time">Tiempo de clip</h2>
-
-<p>La hora del clip muestra la hora UTC actual del cabezal de reproducción y la hora recortable. Al hacer clic en el enlace UTC se cambiará a la visualización de la hora local.</p>
-
-<figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/general/18551/node18551-clip-time.png"/></figure>
-</section>
-
-<section class="bcls-section">
-<h2 id="clipping">Botones de recorte</h2>
-
-<p>Los botones de recorte se utilizan para recortar la parte deseada del vídeo de origen.</p>
-
-<table class="bcls-table">
-	<thead class="bcls-table__head">
-		<tr>
-			<th width="124">Button</th>
-			<th width="709">Descripción</th>
-		</tr>
-	</thead>
-	<tbody class="bcls-table__body">
-		<tr>
-			<td><img alt="" src="/assets/images/general/18551/node18551-go-cue-in-button.png"/></td>
-			<td>Salta a la señal en el punto del video</td>
-		</tr>
-		<tr>
-			<td><img alt="" src="/assets/images/general/18551/node18551-set-cue-in-button.png"/></td>
-			<td>Establece el punto inicial del clip. El punto inicial también se puede establecer arrastrando el controlador al principio de la línea de tiempo de enfoque.</td>
-		</tr>
-		<tr>
-			<td><img alt="" src="/assets/images/general/18551/node18551-set-cue-out-button.png"/></td>
-			<td>Establece el punto final del clip. El punto final también se puede establecer arrastrando el controlador al final de la línea de tiempo de enfoque.</td>
-		</tr>
-		<tr>
-			<td><img alt="" src="/assets/images/general/18551/node18551-go-cue-out-button.png"/></td>
-			<td>Salta al punto de salida del video</td>
-		</tr>
-	</tbody>
-</table>
-
-<p>Los puntos de entrada y salida de entrada son el inicio y el final de un clip. Cada uno de estos puntos se representa en la línea de tiempo de enfoque con un controlador arrastrable, y el tiempo entre los puntos se rellena en verde. Los puntos también se representan en la línea de tiempo del contexto como los bordes izquierdo y derecho del rectángulo verde que indica el espacio de clip.</p>
-
-<figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/general/18551/node18551-cue-in-out-example.png"/></figure>
-</section>
-
-<section class="bcls-section">
-<h2 id="preview_clip">Vista previa del clip</h2>
-
-<p>Haga clic en el botón de vista previa del clip para reproducir el clip.</p>
-
-<figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/general/18551/node18551-preview-clip-button.png"/></figure>
-</section>
-
-<section class="bcls-section">
-<h2 id="playhead">Playhead</h2>
-
-<p>El cabezal de reproducción es un indicador de dónde está jugando el jugador en el tiempo. El cabezal de reproducción se representa en la línea de tiempo de enfoque por una línea roja con un círculo rojo en la parte superior y con una línea vertical roja en la línea de tiempo del contexto.</p>
-
-<figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/general/18551/node18551-playhead.png"/></figure>
-
-<p>En la línea de tiempo de enfoque, el cabezal de reproducción se puede arrastrar para pasar por el vídeo. Al hacer doble clic en la línea de tiempo de enfoque, el cabezal de reproducción se moverá a ese punto. El cabezal de reproducción también se puede utilizar para establecer puntos de entrada y salida mediante los botones de entrada y salida o mediante los métodos abreviados de teclado.</p>
-</section>
-
-<section class="bcls-section">
-<h2 id="focus_timeline">Línea de tiempo de enfoque</h2>
-
-<p>La línea de tiempo de enfoque es la línea de tiempo superior de la interfaz.</p>
-
-<p>El cabezal de reproducción es un indicador de dónde está jugando el jugador en el tiempo. El cabezal de reproducción se representa en la línea de tiempo de enfoque por una línea roja con un círculo rojo en la parte superior.</p>
-
-<figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/general/18551/node18551-focus-timeline.png"/></figure>
-
-<p>El área sombreada verde representa el tiempo de delimitación seleccionado, donde las aristas también se pueden arrastrar. Tenga en cuenta que la interfaz de usuario selecciona previamente la duración del clip de acuerdo con el tiempo total de recorte disponible. Por ejemplo, en eventos superiores a 10 minutos, los últimos 10 minutos se preseleccionarán, de manera similar, durante 30 y 60 minutos.</p>
-</section>
-
-<section class="bcls-section">
-<h2 id="context_timeline">Cronología del contexto</h2>
-
-<p>La línea de tiempo de contexto es la línea de tiempo inferior en el editor de clips. La línea de tiempo de contexto muestra toda la duración del vídeo, independientemente del nivel de zoom, el área seleccionada del clip, la ubicación del cabezal de reproducción y la ventana gráfica de enfoque actual. La línea de tiempo se indica con una línea roja.</p>
-
-<figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/general/18551/node18551-context-timeline.png"/></figure>
-</section>
-
-<section class="bcls-section">
-<h2 id="zoom_buttons">Botones de zoom</h2>
-
-<p>Los botones de zoom se utilizan para acercar o alejar la línea de tiempo de enfoque.</p>
-
-<table class="bcls-table">
-	<thead class="bcls-table__head">
-		<tr>
-			<th>Button</th>
-			<th>Descripción</th>
-		</tr>
-	</thead>
-	<tbody class="bcls-table__body">
-		<tr>
-			<td><img alt="" src="/assets/images/general/18551/node18551-zoom-in-button.png"/></td>
-			<td>Amplía la línea de tiempo de enfoque. La ventana gráfica de enfoque (cuadro blanco) en la línea de tiempo del contexto mostrará el área del clip que se está mostrando en la línea de tiempo de enfoque.</td>
-		</tr>
-		<tr>
-			<td><img alt="" src="/assets/images/general/18551/node18551-zoom-out-button.png"/></td>
-			<td>Alede la línea de tiempo de enfoque. La ventana gráfica de enfoque (cuadro blanco) en la línea de tiempo del contexto mostrará el área del clip que se está mostrando en la línea de tiempo de enfoque.</td>
-		</tr>
-	</tbody>
-</table>
-</section>
-
-<section class="bcls-section">
-<h2 id="list_of_clips">Lista de clips</h2>
-
-<p>Aparecerá una lista de clips debajo del editor de clips. Haga clic en <strong>Publicar en Social</strong> para publicar el clip en uno de sus destinos sociales mediante Brightcove Social. Para obtener información sobre cómo publicar vídeos mediante el módulo Social, consulte <a href="https://social.support.brightcove.com/general/publishing-videos-social-media-platforms.html">Publicación de vídeos en plataformas de medios sociales</a>.</p>
-</section>
-
-<section class="bcls-section">
-<h2 id="Keyboard_shortcuts">Accesos directos de teclado</h2>
-
-<p>Los métodos abreviados de teclado también se pueden utilizar para reproducir y crear un clip a partir del vídeo. Los siguientes métodos abreviados de teclado están disponibles.</p>
-
-<h3>Controles de reproducción</h3>
-
-<table class="bcls-table">
-	<thead class="bcls-table__head">
-		<tr>
-			<th width="177">Presione esta tecla</th>
-			<th width="781">Para hacer esto</th>
-		</tr>
-	</thead>
-	<tbody class="bcls-table__body">
-		<tr>
-			<td><code translate="No">space, k, down</code></td>
-			<td>Reproducir/Pausa</td>
-		</tr>
-		<tr>
-			<td><code translate="No">I</code></td>
-			<td>Ir al final del intersticio</td>
-		</tr>
-		<tr>
-			<td><code translate="No">O</code></td>
-			<td>Ir al comienzo del intersticio</td>
-		</tr>
-		<tr>
-			<td><code translate="No">p</code></td>
-			<td>Reproducir vista previa</td>
-		</tr>
-		<tr>
-			<td><code translate="No">j, left</code></td>
-			<td>Saltar hacia atrás 1 cuadro</td>
-		</tr>
-		<tr>
-			<td><code translate="No">J, shift + left</code></td>
-			<td>Retroceder 1 segundo</td>
-		</tr>
-		<tr>
-			<td><code translate="No">l, right</code></td>
-			<td>Avanzar 1 fotograma</td>
-		</tr>
-		<tr>
-			<td><code translate="No">L, shift + right</code></td>
-			<td>Avanzar 1 segundo</td>
-		</tr>
-		<tr>
-			<td><code translate="No">s</code></td>
-			<td>Saltar al inicio</td>
-		</tr>
-		<tr>
-			<td><code translate="No">e</code></td>
-			<td>Saltar al final/en vivo</td>
-		</tr>
-	</tbody>
-</table>
-
-<h3>Controles de cronología</h3>
-
-<table class="bcls-table">
-	<thead class="bcls-table__head">
-		<tr>
-			<th width="177">Presione esta tecla</th>
-			<th width="781">Para hacer esto</th>
-		</tr>
-	</thead>
-	<tbody class="bcls-table__body">
-		<tr>
-			<td><code translate="No">i</code></td>
-			<td>Establecer final del intersticio</td>
-		</tr>
-		<tr>
-			<td><code translate="No">o</code></td>
-			<td>Establecer comienzo del intersticio</td>
-		</tr>
-		<tr>
-			<td><code translate="No">+</code></td>
-			<td>Acercar</td>
-		</tr>
-		<tr>
-			<td><code translate="No">-</code></td>
-			<td>Alejar</td>
-		</tr>
-		<tr>
-			<td><code translate="No">u</code></td>
-			<td>Acoplar línea de tiempo al cabezal de reproducción</td>
-		</tr>
-		<tr>
-			<td><code translate="No">?</code></td>
-			<td>Abrir ayuda modal</td>
-		</tr>
-	</tbody>
-</table>
-</section>
-<script src="https://players.brightcove.net/20318290001/experience_5a73630f7afd7a00101bc1b5/live.js"></script>
-</article>
-
-
-
-<!-- complete bootstrap layout -->
-    </div>
-    <div class="col-sm-2 right-side-bar">
-      
-      <nav class="right-side-nav" id="right_side_nav">
-        <h6 class="toc">Contenido de la página</h6>
-        <ul id="in_page_nav" class="list-none"></ul>
-      </nav>
-      
-    </div>
-  </div>
-</div>
-
-<hr>
-<footer class="bcls-footer" role="contentinfo">  <div class="row">
-    <div class="region region-footer-top-center col-md-12">
-      <nav role="navigation" aria-labelledby="block-brightcovesupport-menu" id="block-brightcovesupport" class="footer-menu">
-
-        <h2>Asistencia técnica de Brightcove</h2>
-
-        <ul class="menu">
-          <li>
-            Estado del sistema<a href="https://status.brightcove.com"></a>
-          </li>
-          <li>
-            <a href="https://supportportal.brightcove.com/s/login/?">Contactar soporte</a>
-          </li>
-          <li>
-            <a href="https://support.brightcove.com/">Documentación</a>
-          </li>
-        </ul>
-
-      </nav>
-      <nav role="navigation" aria-labelledby="block-training-menu" id="block-training" class="footer-menu">
-
-        <h2>Formación</h2>
-
-        <ul class="menu">
-          <li>
-            Cursos en línea<a href="https://studio.support.brightcove.com/training/online-training-courses.html"></a>
-          </li>
-          <li>
-            Inscríbete a un curso<a href="https://studio.support.brightcove.com/training/register-training.html"></a>
-          </li>
-          <li>
-            <a href="https://university.brightcove.com/">Universidad de Brightcove</a>
-          </li>
-        </ul>
-
-      </nav>
-      <nav role="navigation" aria-labelledby="block-brightcove-menu" class="footer-menu">
-
-        <h2>Brightcove</h2>
-
-        <ul class="menu">
-          <li>
-            <a href="https://www.brightcove.com">BrightCove.com</a>
-          </li>
-          <li>
-            <a href="https://supportportal.brightcove.com/s/login/?">Contáctanos</a>
-          </li>
-        </ul>
-      </nav>
-    </div>
-  </div>
-  <div class="row">
-    <div class="region region-footer-bottom-center col-md-12">
-      <div class="bcls-copyright footer-menu">
-        <table>
-          <tr>
-            <td>
-              <div id="bc_copyright" class="field field--name-field-copyright-year field--type-string field--label-hidden field--item" style="float: left;"> Brightcove Inc. All rights reserved.</div>
-            </td>
-            <td>Privacidad | Términos y Condiciones<a href="https://www.brightcove.com/en/legal/privacy"></a><a href="https://www.brightcove.com/en/terms-and-conditions"></a></td>
-            <td>
-              <div class="gf-links-cols footer-menu">
-                <div class="gf-social"><a href="https://www.linkedin.com/company/16439" title="LinkedIn" newtab="newtab" class="gf-social-linkedin"><i class="fab fa-linkedin-in" style="font-size: 1.5rem;"></i></a><a href="https://twitter.com/brightcove" title="Twitter" newtab="newtab" class="gf-social-twitter"><i class="fab fa-twitter" style="font-size: 1.5rem;"></i></a><a href="https://www.facebook.com/Brightcove" title="Facebook" newtab="newtab" class="gf-social-facebook"><i class="fab fa-facebook-f" style="font-size: 1.5rem;"></i></a>
-                </div>
-              </div>
-            </td>
-          </tr>
-        </table>
+        <select id="language_select" class="form-select select-focus" style="width: 10%;"
+          onchange="doGTranslate(this);" translate="no">
+          <!-- <option value="">Select Language</option> -->
+          <option value="en|en" translate="No">English</option>
+          <option value="en|zh-TW" translate="No">繁體中文</option>
+          <option value="en|fr" translate="No">Français</option>
+          <option value="en|de" translate="No">Deutsche</option>
+          <option value="en|ja" translate="No">日本語</option>
+          <option value="en|ko" translate="No">한국어</option>
+          <option value="en|es" translate="No">Español</option>
+        </select>
+
+        <script translate="no">
+          /* <![CDATA[ */
+          function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;if(lang_pair=='')return;var lang=lang_pair.split('|')[1];var plang=location.hostname.split('.')[0];if(plang.length !=2 && plang.toLowerCase() != 'zh-cn' && plang.toLowerCase() != 'zh-tw')plang='en';location.href=location.protocol+'//'+(lang == 'en' ? '' : lang+'.')+location.hostname.replace('www.', '').replace(RegExp('^' + plang + '\\.'), '')+location.pathname+location.search;}
+          /* ]]> */
+        </script>
       </div>
     </div>
   </div>
-</footer>
+</header><!--//header-->
 
-<script>
+<div class="docs-wrapper">
+  <div id="docs-sidebar" class="docs-sidebar" style="padding-right: 15px;">
+    <div id="nav-search-box" class="top-search-box d-lg-none p-3"></div>
+    <div class="row">
       
+        <div id="side_nav" style="margin-left: 1em; display: inline-block; border-right: 1px solid #e5e5e6; padding-right: 1em;">
+          
+          <nav class="docs-nav sidenav" aria-label="Main">
+            <ul class="site-nav" style="list-style-type: none;">
+            
+            
+            
+            <li class="nav-item section-title"><a class="nav-link" href="/index.html">Inicio</a></li>
+            
+            
+            
+            
+            <li class="nav-item section-title"><a class="nav-link" href="/get-started/index.html"><span class="theme-icon-holder me-2"> <i class="fa-solid fa-plus"></i></span>&nbsp;Empezando</a>
+              <ul role="list" class="section-items list-unstyled nav flex-column pb-3" style="display:none;">
+              
+              
+              
+              <li class="nav-item"><a class="nav-link" href="/get-started/brightcove-live-training-videos.html">Vídeos de formación en directo de Brightcove</a></li>
+              
+              
+              
+              
+              
+              <li class="nav-item"><a class="nav-link" href="/get-started/delivering-live-streams.html">Entrega de transmisiones en vivo</a></li>
+              
+              
+              
+              
+              
+              <li class="nav-item"><a class="nav-link" href="/get-started/live-module-guidelines-and-best-practices.html">Brightcove en directo: Mejores prácticas</a></li>
+              
+              
+              
+              
+              
+              <li class="nav-item"><a class="nav-link" href="/get-started/step-step-using-live-module-open-broadcaster-software-obs.html">Paso a paso: Uso del módulo en vivo con OBS</a></li>
+              
+              
+              
+              
+              
+              <li class="nav-item"><a class="nav-link" href="/get-started/step-step-using-live-module-telestream-wirecast.html">Paso a paso: Uso del módulo en directo con Wirecast</a></li>
+              
+              
+              
+              
+              
+              <li class="nav-item"><a class="nav-link" href="/get-started/step-step-live-srt.html">Paso a paso: Transmisión de un evento en directo de SRT</a></li>
+              
+              
+              
+            </ul>
+            </li>
+            
+            
+            
+            <li class="nav-item section-title"><a class="nav-link" href="/general/index.html"><span class="theme-icon-holder me-2"> <i class="fa-solid fa-plus"></i></span>&nbsp;Información general</a>
+              <ul role="list" class="section-items list-unstyled nav flex-column pb-3" style="display:none;">
+              
+              
+              
+              <li class="nav-item"><a class="nav-link" href="/general/captions-with-live-streams.html">Subtítulos con transmisiones en vivo</a></li>
+              
+              
+              
+              
+              
+              <li class="nav-item"><a class="nav-link" href="/general/live-drm.html">DRM en vivo</a></li>
+              
+              
+              
+              
+              
+              <li class="nav-item"><a class="nav-link" href="/general/live-video-glossary.html">Glosario de video en vivo</a></li>
+              
+              
+              
+              
+              
+              <li class="nav-item"><a class="nav-link" href="/general/reducing-latency-live-streams.html">Reducción de la latencia de las transmisiones en vivo</a></li>
+              
+              
+              
+              
+              
+              <li class="nav-item"><a class="nav-link" href="/general/supported-encoders-live-events.html">Codificadores compatibles para eventos en vivo</a></li>
+              
+              
+              
+              
+              
+              <li class="nav-item"><a class="nav-link" href="/general/using-mtr-to-look-at-network-traffic.html">Usando MTR (mi traceroute)</a></li>
+              
+              
+              
+            </ul>
+            </li>
+            
+            
+            
+            <li class="nav-item section-title"><a class="nav-link" href="/live-module/index.html"><span class="theme-icon-holder me-2"> <i class="fa-solid fa-plus"></i></span>&nbsp;Uso del módulo en vivo</a>
+              <ul role="list" class="section-items list-unstyled nav flex-column pb-3" style="display:none;">
+              
+              
+
+              <li class="nav-item subsection-title">
+                
+                <a class="nav-link" href="/live-module/getting-started-index.html"> <span class="theme-icon-holder me-2"><i class="fa-solid fa-minus"></i></span>&nbsp;Empezando</a>
+                
+
+                <ul role="list" class="section-items list-unstyled nav flex-column pb-3" style="display:none;">
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="/live-module/creating-and-managing-live-events-using-live-module.html">Creación y gestión de eventos en directo</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item section-doc"><a class="nav-link" href="/live-module/creating-video-clip-using-live-module.html" aria-current="page">Crear un videoclip</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="/live-module/reviewing-live-analytics.html">Revisión de análisis en vivo</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="/live-module/scheduling-live-event.html">Programación de eventos en vivo</a></li>
+                  
+                  
+                  
+                </ul>
+              </li>
+              
+              
+              
+
+              <li class="nav-item subsection-title">
+                
+                <a class="nav-link" href="/live-module/advertising-index.html"> <span class="theme-icon-holder me-2"><i class="fa-solid fa-minus"></i></span>&nbsp;Publicidad</a>
+                
+
+                <ul role="list" class="section-items list-unstyled nav flex-column pb-3" style="display:none;">
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="/live-module/implementing-server-side-ads-live-module.html">Implementación de anuncios del lado del servidor (SSAI)</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="/live-module/client-side-preroll-with-live-ssai.html">Anuncios pre-roll del lado del cliente con Live SSAI</a></li>
+                  
+                  
+                  
+                </ul>
+              </li>
+              
+              
+              
+
+              <li class="nav-item subsection-title">
+                
+                <a class="nav-link" href="/live-module/guides-index.html"> <span class="theme-icon-holder me-2"><i class="fa-solid fa-minus"></i></span>&nbsp;Guías</a>
+                
+
+                <ul role="list" class="section-items list-unstyled nav flex-column pb-3" style="display:none;">
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="/live-module/audio-only-live-events.html">Eventos en vivo de solo audio</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="/live-module/multi-language-audio.html">Audio en varios idiomas con módulo en vivo</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="/live-module/playback-restrictions-live-module.html">Restricciones de reproducción con eventos en vivo</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="/live-module/live-redundancy.html">Uso de redundancia en vivo</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="/live-module/using-live-rtmp-outputs-stream-facebook-and-youtube.html">Uso de salidas RTMP en vivo</a></li>
+                  
+                  
+                  
+                </ul>
+              </li>
+              
+              
+              
+
+              <li class="nav-item subsection-title">
+                
+                <a class="nav-link" href="/live-module/hosting-platforms-index.html"> <span class="theme-icon-holder me-2"><i class="fa-solid fa-minus"></i></span>&nbsp;Plataformas de alojamiento</a>
+                
+
+                <ul role="list" class="section-items list-unstyled nav flex-column pb-3" style="display:none;">
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="/live-module/overview-hosting-platforms.html">Descripción general: Plataformas de alojamiento</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="/live-module/zoom-live-integration.html">Integración de una reunión de Zoom</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://studio.support.brightcove.com/social/general/publishing-live-event-facebook.html">Publicar un evento en vivo en Facebook</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://studio.support.brightcove.com/social/general/publishing-live-event-youtube.html">Publicar un evento en vivo en YouTube</a></li>
+                  
+                  
+                  
+                </ul>
+              </li>
+              
+              
+            </ul>
+            </li>
+            
+            
+            
+            <li class="nav-item section-title"><a class="nav-link" href="/web-conferencing/index.html"><span class="theme-icon-holder me-2"> <i class="fa-solid fa-plus"></i></span>&nbsp;Conferencia web</a>
+              <ul role="list" class="section-items list-unstyled nav flex-column pb-3" style="display:none;">
+              
+              
+              
+              <li class="nav-item"><a class="nav-link" href="/web-conferencing/host-zoom-conference-brightcove-live.html">Conferencia Zoom en Brightcove Live</a></li>
+              
+              
+              
+              
+              
+              <li class="nav-item"><a class="nav-link" href="/web-conferencing/host-cisco-webex-conference-brightcove-live.html">Conferencia de Cisco Webex a Brightcove Live</a></li>
+              
+              
+              
+              
+              
+              <li class="nav-item"><a class="nav-link" href="/web-conferencing/host-avaya-conference-brightcove-live.html">Conferencia de Avaya en Brightcove Live</a></li>
+              
+              
+              
+              
+              
+              <li class="nav-item"><a class="nav-link" href="/web-conferencing/host-inxpo-live.html">Evento INXPO en Brightcove Live</a></li>
+              
+              
+              
+            </ul>
+            </li>
+            
+            
+            
+            <li class="nav-item section-title"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/index.html"><span class="theme-icon-holder me-2"> <i class="fa-solid fa-plus"></i></span>&nbsp;Trabajar con la API en vivo</a>
+              <ul role="list" class="section-items list-unstyled nav flex-column pb-3" style="display:none;">
+              
+              
+
+              <li class="nav-item subsection-title">
+                
+                <a class="nav-link" href="https://apis.support.brightcove.com/live-api/getting-started/index.html"><span class="theme-icon-holder me-2"><i class="fa-solid fa-minus"></i></span>&nbsp;API en vivo: Obtener Empezado</a>
+                
+
+                <ul role="list" class="section-items list-unstyled nav flex-column pb-3" style="display:none;">
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/getting-started/overview-brightcove-live-api.html">Descripción general: API en vivo</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/getting-started/quick-start-create-live-stream-using-brightcove-live-api.html">Crear una transmisión en vivo usando la API</a></li>
+                  
+                  
+                  
+                </ul>
+              </li>
+              
+              
+              
+
+              <li class="nav-item subsection-title">
+                
+                <a class="nav-link" href="https://apis.support.brightcove.com/live-api/code-samples/index.html"><span class="theme-icon-holder me-2"><i class="fa-solid fa-minus"></i></span>&nbsp;API en vivo: Muestras de código</a>
+                
+
+                <ul role="list" class="section-items list-unstyled nav flex-column pb-3" style="display:none;">
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/code-samples/live-api-sample-create-live-job.html">Crear un trabajo en vivo</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/code-samples/quick-start-create-live-job-mpeg2-ts-input.html">Crear un trabajo en vivo para entrada MPEG2-TS</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/code-samples/quick-start-using-rtmp-outputs-live-events.html">Uso de salidas RTMP para eventos en vivo</a></li>
+                  
+                  
+                  
+                </ul>
+              </li>
+              
+              
+              
+
+              <li class="nav-item subsection-title">
+                
+                <a class="nav-link" href="https://apis.support.brightcove.com/live-api/references/index.html"><span class="theme-icon-holder me-2"><i class="fa-solid fa-minus"></i></span>&nbsp;API en vivo: Referencias</a>
+                
+
+                <ul role="list" class="section-items list-unstyled nav flex-column pb-3" style="display:none;">
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/references/live-api-error-messages.html">Mensajes de error</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/references/live-api-release-notes.html">Notas de versión</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/references/reference.html">Referencia de API en vivo</a></li>
+                  
+                  
+                  
+                </ul>
+              </li>
+              
+              
+              
+
+              <li class="nav-item subsection-title">
+                
+                <a class="nav-link" href="https://apis.support.brightcove.com/live-api/ssai/index.html"><span class="theme-icon-holder me-2"><i class="fa-solid fa-minus"></i></span>&nbsp;API en vivo: SSAI</a>
+                
+
+                <ul role="list" class="section-items list-unstyled nav flex-column pb-3" style="display:none;">
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/ssai/live-api-cue-points-and-ad-beacons-ssai.html">Puntos de referencia y balizas publicitarias con SSAI</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/ssai/live-api-server-side-ad-insertion-ssai.html">Inserción de anuncios en el servidor (SSAI)</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/ssai/overview-player-enhancements-live-ssai.html">Descripción general: Mejoras del jugador para Live SSAI</a></li>
+                  
+                  
+                  
+                </ul>
+              </li>
+              
+              
+              
+
+              <li class="nav-item subsection-title">
+                
+                <a class="nav-link" href="https://apis.support.brightcove.com/live-api/guides/index.html"><span class="theme-icon-holder me-2"><i class="fa-solid fa-minus"></i></span>&nbsp;API en vivo: Guías</a>
+                
+
+                <ul role="list" class="section-items list-unstyled nav flex-column pb-3" style="display:none;">
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/guides/brightcove-live-best-practices.html">Prácticas recomendadas de Brightcove Live</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/guides/brightcove-live-program-ad-metadata-api.html">API de metadatos de anuncios del programa en vivo de Brightcove</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/guides/live-api-creating-frame-accurate-clip.html">Creación de un clip con precisión de cuadro</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/guides/live-api-creating-vod-clips.html">Creación de clips VOD</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/guides/getting-list-live-or-vod-jobs.html">Obtener una lista de trabajos en vivo o VOD</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/guides/live-api-insert-id3-timed-metadata.html">Insertar metadatos cronometrados ID3</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/guides/live-drm-live-api.html">Live DRM a través de Live API</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/guides/managing-credentials-live-api.html">Administrar credenciales para la API en vivo</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/guides/live-multi-language-audio.html">Audio en varios idiomas con Live API</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/guides/live-api-notifications.html">Notificaciones</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/guides/live-playback-restrictions.html">Restricciones de reproducción con transmisiones en vivo</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="/general/reducing-latency-live-streams.html">Reducción de la latencia de las transmisiones en vivo</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/guides/live-api-rtmp-outputs.html">Salidas RTMP</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/guides/live-api-static-entry-points.html">Puntos de entrada estáticos</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/guides/signed-urls-and-token-auth-live-stream.html">URL firmadas y autenticación de token con transmisión en vivo</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/guides/using-live-redundancy.html">Uso de redundancia en vivo</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="https://apis.support.brightcove.com/live-api/guides/live-api-vod-live-event.html">VOD de evento en vivo</a></li>
+                  
+                  
+                  
+                </ul>
+              </li>
+              
+              
+            </ul>
+            </li>
+            
+            
+            
+            <li class="nav-item section-title"><a class="nav-link" href="/admin/index.html"><span class="theme-icon-holder me-2"> <i class="fa-solid fa-plus"></i></span>&nbsp;Administración de cuentas</a>
+              <ul role="list" class="section-items list-unstyled nav flex-column pb-3" style="display:none;">
+              
+              
+
+              <li class="nav-item subsection-title">
+                
+                <a class="nav-link" href="/admin/general/index.html"> <span class="theme-icon-holder me-2"><i class="fa-solid fa-minus"></i></span>&nbsp;Información general</a>
+                
+
+                <ul role="list" class="section-items list-unstyled nav flex-column pb-3" style="display:none;">
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="/admin/general/configuring-server-side-ad-settings.html">Configuración de la configuración de anuncios del lado del servidor</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="/admin/general/managing-live-settings.html">Administrar la configuración en vivo</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="/admin/general/managing-api-authentication-credentials.html">Administración de credenciales de autenticación de API</a></li>
+                  
+                  
+                  
+                </ul>
+              </li>
+              
+              
+              
+
+              <li class="nav-item subsection-title">
+                
+                <a class="nav-link" href="/admin/ingest-profiles/index.html"> <span class="theme-icon-holder me-2"><i class="fa-solid fa-minus"></i></span>&nbsp;Gestión de perfiles de ingesta</a>
+                
+
+                <ul role="list" class="section-items list-unstyled nav flex-column pb-3" style="display:none;">
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="/admin/ingest-profiles/creating-custom-live-ingest-profiles.html">Creación de perfiles personalizados de ingesta en vivo</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="/admin/ingest-profiles/fields-custom-live-ingest-profiles.html">Campos para perfiles personalizados de ingesta en vivo</a></li>
+                  
+                  
+                  
+                  
+                  
+                  <li class="nav-item"><a class="nav-link" href="/admin/ingest-profiles/standard-live-ingest-profiles.html">Perfiles de ingesta en vivo estándar</a></li>
+                  
+                  
+                  
+                </ul>
+              </li>
+              
+              
+            </ul>
+            </li>
+            
+            
+            
+            <li class="nav-item section-title"><a class="nav-link" href="/release-notes/index.html"><span class="theme-icon-holder me-2"> <i class="fa-solid fa-plus"></i></span>&nbsp;Notas de lanzamiento</a>
+              <ul role="list" class="section-items list-unstyled nav flex-column pb-3" style="display:none;">
+              
+              
+              
+              <li class="nav-item"><a class="nav-link" href="/release-notes/live-api-release-notes.html">Notas de la versión en vivo</a></li>
+              
+              
+              
+            </ul>
+            </li>
+            
+            
+            
+            <li class="nav-item section-title"><a class="nav-link" href="/support/index.html"><span class="theme-icon-holder me-2"> <i class="fa-solid fa-plus"></i></span>&nbsp;Apoyo</a>
+              <ul role="list" class="section-items list-unstyled nav flex-column pb-3" style="display:none;">
+              
+              
+              
+              <li class="nav-item"><a class="nav-link" href="/support/viewing-brightcove-system-status-page.html">Visualización de la página de estado del sistema Brightcove</a></li>
+              
+              
+              
+              
+              
+              <li class="nav-item"><a class="nav-link" href="/support/contact-sales.html">Contactar con ventas</a></li>
+              
+              
+              
+              
+              
+              <li class="nav-item"><a class="nav-link" href="/support/opening-case-with-brightcove-support.html">Abrir un caso de soporte</a></li>
+              
+              
+              
+              
+              
+              <li class="nav-item"><a class="nav-link" href="/support/reset-support-portal-password.html">Restablecer la contraseña del portal de soporte</a></li>
+              
+              
+              
+            </ul>
+            </li>
+            
+            
+          </ul>
+          </nav>
+        </div>
+      </div>
+    </div><!--//docs-sidebar-->
+  </div>
+</div>
+
+<div style="margin-top: 20px;">
+  <div class="docs-content" style="padding-bottom: 0px;">
+    <div class="container">
+      <div class="docs-overview">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            
+            <li class="breadcrumb-item"><a class="theme-link" href="/">Inicio</a></li>
+            
+            
+            <li class="breadcrumb-item"><a class="theme-link" href="/live-module/">Módulo en vivo</a></li>
+            
+            
+            
+            <li class="breadcrumb-item active" aria-current="page">Creación de un videoclip con el módulo Live</li>
+            
+            
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="docs-content">
+  <div class="container">
+    <div class="docs-overview py-5">
+      
+      <div class="centered-inpage-nav" id="centered_inpage_nav">
+        <nav id="centered_toc">
+          <select id="centered_in_page_toc" class="form-select select-focus"></select>
+        </nav>
+      </div>
+      <br/>
+      
+      
+<h1>Creación de un videoclip con el módulo Live</h1>
+<article class="bcls-article">
+  <summary>En este tema, aprenderá cómo crear un clip de video usando el módulo Live.</summary>
+  <section id="top" class="bcls-section">
+    <div class="training-video-player-ipx" data-experience="5a73630f7afd7a00101bc1b5" data-video-ids="5810384996001">&nbsp;</div>
+  </section>
+  <section class="bcls-section">
+    <h2 id="Overview">Descripción general</h2>
+    <p>El módulo Live brinda la capacidad de crear videoclips a partir de eventos completados. También se pueden crear clips mientras se está realizando un evento en vivo. Hay varias razones por las que puede querer crear un clip:</p>
+    <ul>
+      <li>Para crear un clip teaser corto que se pueda publicar en las redes sociales</li>
+      <li>Para limitar la duración de un video que desea publicar (la mayoría de las plataformas limitan la duración de los videos)</li>
+      <li>Descubrió que los videos más cortos funcionan mejor en las redes sociales</li>
+    </ul>
+    <p>El recorte se puede hacer con todo tipo de eventos en vivo y también se puede hacer <em>durante</em> y <em>después</em> la transmisión en vivo usando la API en vivo o el Módulo en vivo.</p>
+    <p>Tanto Live Module como <a href="https://apis.support.brightcove.com/live-api/guides/live-api-creating-vod-clips.html">Live API</a> admiten la creación de clips a partir de trabajos encriptados o protegidos con DRM.</p>
+    <h3>Notas</h3>
+    <ul>
+      <li>Los perfiles de ingesta heredados ya no admiten el recorte en vivo. Para crear un videoclip a partir de una transmisión en vivo, asegúrese de que su cuenta esté habilitada para Dynamic Delivery y use un perfil de ingesta de Dynamic Delivery.</li>
+      <li>Los clips solo se pueden crear dentro de los 7 días posteriores al final del evento. Posteriormente, el <strong>Crear clip</strong> El botón se desactivará. Si el evento dura más de 24 horas, solo se pueden recortar las últimas 24 horas.</li>
+      <li>Para eventos recurrentes: Si durante los 7 días posteriores a un evento se reactiva el evento, el recorte solo estará disponible para el contenido del evento más reciente. No habrá forma de crear clips del evento anterior, incluso si han pasado menos de 7 días después de que se desactivó el último evento.</li>
+      <li>Si detiene y reinicia un canal para una nueva transmisión en vivo, es posible que se sobrescriba la información de la transmisión en vivo anterior para el recorte.</li>
+      <li>Los clips tendrán una precisión de fotograma <strong>siempre que el codificador envíe códigos de tiempo SMPTE para la transmisión</strong> - de lo contrario, serán precisos en un par de fotogramas. Tenga en cuenta que para proporcionar clips lo más rápido posible, primero se crea un clip con precisión de segmento y se reemplaza por un clip con precisión de fotograma tan pronto como esté disponible.</li>
+      <li>No se pueden crear clips con una hora de inicio de menos de 10 segundos en la transmisión.</li>
+      <li>El recorte no es compatible cuando se utiliza el navegador Safari.</li>
+    </ul>
+    <aside class="bcls-aside bcls-aside--information">Nota: Cuando crea un evento recurrente, se crea automáticamente un video para él en el módulo de Medios. <strong>No</strong> elimine este video, ya que será necesario cada vez que se reactive el evento.</aside>
+  </section>
+  <section class="bcls-section">
+    <h2 id="Navigating_the_clip_editor">Navegando por el editor de clips</h2>
+    <p>Para abrir el editor de clips, abra el módulo Live, haga clic en el nombre de un evento y luego haga clic en <strong>Crear clip</strong> en la navegación de la izquierda. Se abrirá el editor de clips.</p>
+    <p>Tenga en cuenta que todas las horas en la interfaz de recorte se basan en la hora UTC en la que Brightcove recibió los datos de video. Este es un ajuste necesario para tener en cuenta las transmisiones que han excedido la ventana VOD (ejecutar más de 24 horas). Cuando un video ha excedido esa ventana, el tiempo que obtenemos del reproductor ya no se puede usar de manera confiable para generar clips.</p>
+    <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/s-live-img/live-module/clipping/node18551-clip-editor-numbered.png"/></figure>
+    <p>El editor de clips está organizado de la siguiente manera:</p>
+    <ul>
+      <li>A - <a href="#preview">Reproductor de vista previa</a></li>
+      <li>B - <a href="#playback_control">Botones de control de reproducción</a></li>
+      <li>C - <a href="#clip_time">Tiempo de clip</a></li>
+      <li>D - <a href="#clipping">Botones de recorte</a></li>
+      <li>E - <a href="#preview_clip">Botón de vista previa del clip</a></li>
+      <li>F - Botón Guardar</li>
+      <li>G - <a href="#playhead">Cabeza lectora</a></li>
+      <li>H - <a href="#focus_timeline">Línea de tiempo de enfoque</a></li>
+      <li>I - <a href="#context_timeline">Cronología del contexto</a></li>
+      <li>J - <a href="#zoom_buttons">Botones de zoom</a></li>
+      <li>K - <a href="#list_of_clips">Lista de clips</a></li>
+    </ul>
+  </section>
+  <section class="bcls-section">
+    <h2 id="Creating_a_clip">Creación de un clip</h2>
+    <p>Al crear clips, la reproducción de la más alta calidad del seleccionado <strong>Perfil de ingesta en vivo</strong> se utiliza como fuente para el clip. El perfil de ingesta de carga predeterminado para la cuenta se utiliza al crear representaciones para el clip.</p>
+    <p>Siga estos pasos para crear un clip.</p>
+    <ol class="bcls-tasklist-restart">
+      <li>Con los botones de recorte o las teclas de método abreviado, establezca los puntos de inicio y finalización del clip.
+        <figure><img class="bcls-image--no-border" alt="" src="/assets/images/s-live-img/live-module/clipping/node18551-clip-portion.png"/></figure>
+      </li>
+      <li>Haz clic en <strong>Guardar</strong>.</li>
+      <li>Ingrese las propiedades del clip de video.
+        <ul>
+          <li><strong>Nombre del clip</strong> - Nombre del clip</li>
+          <li><strong>Breve descripción</strong> - Descripción del clip</li>
+          <li><strong>Etiquetas</strong> - Etiquetas para asociar con el clip</li>
+          <li><strong>Identificación de referencia</strong> - ID de referencia para asignar al clip</li>
+        </ul>
+      </li>
+      <li>Ingrese cualquier valor de campo personalizado requerido.</li>
+      <li>Marque <strong>Eliminar contenido de pausa publicitaria de origen</strong> para eliminar las pausas publicitarias activadas dentro del clip, conservando solo el contenido del programa. Esta opción solo aparecerá cuando la transmisión esté habilitada para SSAI.</li>
+      <li>Marque <strong>Crear clip usando canalización rápida de VOD</strong> para generar el clip más rápidamente. Esta opción acelera el tiempo de respuesta al crear una representación <strong>precisa de un solo segmento</strong> . Luego, el sistema reemplazará este clip con un clip <strong>con precisión de cuadro</strong> con el conjunto de reproducción completo cuando esté disponible.
+        <figure><img class="bcls-image--no-border" alt="" src="/assets/images/s-live-img/live-module/clipping/node18551-create-clip-dialog.png"/></figure>
+      </li>
+      <li>Ingrese los campos personalizados obligatorios que se muestran.</li>
+      <li>Hacer clic <span class="button-blue">Crear clip</span>. Comenzará el proceso de transcodificación del clip. Los clips se transcodifican utilizando el perfil de ingesta predeterminado para la cuenta.</li>
+    </ol>
+    <p>Aparecerá una lista de todos los clips debajo del editor de clips. Haciendo clic en el <strong>Nombre del clip</strong> abrirá el clip en el módulo de Medios en otra pestaña del navegador. Hacer clic <strong>Publicar en redes sociales</strong> para abrir el clip en el módulo social para publicarlo en una cuenta de red social. Para obtener información sobre la publicación de videos con el módulo Social, consulte <a href="https://studio.support.brightcove.com/social/general/publishing-videos-social-media-platforms.html">Publicación de videos en plataformas de redes sociales</a>.
+       </p>
+  </section>
+  <section class="bcls-section">
+    <h2 id="preview">Reproductor de vista previa</h2>
+    <p>El reproductor de vista previa se utiliza para obtener una vista previa del clip. Cuando el evento está en curso y el editor de clips está abierto, el clip comenzará a reproducirse desde el "punto seguro en vivo", que se encuentra aproximadamente 3 segmentos antes del final. Tenga en cuenta que no todos los navegadores admiten la reproducción automática.</p>
+  </section>
+  <section class="bcls-section">
+    <h2 id="playback_control">Botones de control de reproducción</h2>
+    <p>Los botones de control de reproducción se utilizan para controlar la reproducción del clip dentro del reproductor de vista previa.</p>
+    <table class="bcls-table">
+      <thead class="bcls-table__head">
+        <tr>
+          <th width="107">Botón</th>
+          <th width="430">Descripción</th>
+        </tr>
+      </thead>
+      <tbody class="bcls-table__body">
+        <tr>
+          <td><img alt="" src="/assets/images/s-live-img/live-module/clipping/node18551-start-button.png"/></td>
+          <td>Salta al inicio del video</td>
+        </tr>
+        <tr>
+          <td><img alt="" src="/assets/images/s-live-img/live-module/clipping/node18551-back15-button.png"/></td>
+          <td>Hace retroceder el cabezal de reproducción 15 segundos</td>
+        </tr>
+        <tr>
+          <td><img alt="" src="/assets/images/s-live-img/live-module/clipping/node18551-play-button.png"/></td>
+          <td>Inicia la reproducción de video desde la posición del cabezal de reproducción</td>
+        </tr>
+        <tr>
+          <td><img alt="" src="/assets/images/s-live-img/live-module/clipping/node18551-forward15-button.png"/></td>
+          <td>Avanza el cabezal de reproducción 15 segundos</td>
+        </tr>
+        <tr>
+          <td><img alt="" src="/assets/images/s-live-img/live-module/clipping/node18551-end-button.png"/></td>
+          <td>Salta al final del video</td>
+        </tr>
+        <tr>
+          <td><img alt="" src="/assets/images/s-live-img/live-module/clipping/node18551-live-button.png"/></td>
+          <td>Salta al punto en vivo en el video (solo disponible cuando la transmisión en vivo está activa)</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+  <section class="bcls-section">
+    <h2 id="clip_time">Tiempo de clip</h2>
+    <p>La hora del clip muestra la hora UTC actual para el cabezal de reproducción y la hora recortable. Al hacer clic en el enlace UTC cambiará a la visualización de la hora local.</p>
+    <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/s-live-img/live-module/clipping/node18551-clip-time.png"/></figure>
+  </section>
+  <section class="bcls-section">
+    <h2 id="clipping">Botones de recorte</h2>
+    <p>Los botones de recorte se utilizan para recortar la parte deseada del video fuente.</p>
+    <table class="bcls-table">
+      <thead class="bcls-table__head">
+        <tr>
+          <th width="124">Botón</th>
+          <th width="709">Descripción</th>
+        </tr>
+      </thead>
+      <tbody class="bcls-table__body">
+        <tr>
+          <td><img alt="" src="/assets/images/s-live-img/live-module/clipping/node18551-go-cue-in-button.png"/></td>
+          <td>Salta al punto de inicio del video.</td>
+        </tr>
+        <tr>
+          <td><img alt="" src="/assets/images/s-live-img/live-module/clipping/node18551-set-cue-in-button.png"/></td>
+          <td>Establece el punto de inicio del clip. El punto de inicio también se puede establecer arrastrando el controlador al comienzo de la línea de tiempo de enfoque.</td>
+        </tr>
+        <tr>
+          <td><img alt="" src="/assets/images/s-live-img/live-module/clipping/node18551-set-cue-out-button.png"/></td>
+          <td>Establece el punto final del clip. El punto final también se puede establecer arrastrando el controlador al final de la línea de tiempo de enfoque.</td>
+        </tr>
+        <tr>
+          <td><img alt="" src="/assets/images/s-live-img/live-module/clipping/node18551-go-cue-out-button.png"/></td>
+          <td>Salta al punto de salida del video.</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>Los puntos de entrada y salida son el inicio y el final de un clip. Cada uno de estos puntos se representa en la línea de tiempo de enfoque con un controlador que se puede arrastrar, y el tiempo entre los puntos se rellena en verde. Los puntos también se representan en la línea de tiempo del contexto como los bordes izquierdo y derecho del rectángulo verde que indica el espacio del clip.</p>
+    <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/s-live-img/live-module/clipping/node18551-cue-in-out-example.png"/></figure>
+  </section>
+  <section class="bcls-section">
+    <h2 id="preview_clip">Vista previa del clip</h2>
+    <p>Haga clic en el botón de vista previa del clip para reproducir el clip.</p>
+    <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/s-live-img/live-module/clipping/node18551-preview-clip-button.png"/></figure>
+  </section>
+  <section class="bcls-section">
+    <h2 id="playhead">Cabeza lectora</h2>
+    <p>El cabezal de reproducción es un indicador de dónde está jugando el reproductor en el tiempo. La cabeza lectora está representada en la línea de tiempo de enfoque por una línea roja con un círculo rojo en la parte superior y con una línea vertical roja en la línea de tiempo de contexto.</p>
+    <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/s-live-img/live-module/clipping/node18551-playhead.png"/></figure>
+    <p>En la línea de tiempo de enfoque, el cabezal de reproducción se puede arrastrar para desplazarse por el video. Al hacer doble clic en la línea de tiempo de enfoque, la cabeza lectora se moverá a ese punto. El cabezal de reproducción también se puede utilizar para establecer puntos de entrada y salida mediante los botones de entrada / salida o mediante los métodos abreviados de teclado.</p>
+  </section>
+  <section class="bcls-section">
+    <h2 id="focus_timeline">Línea de tiempo de enfoque</h2>
+    <p>La línea de tiempo de enfoque es la línea de tiempo superior en la interfaz.</p>
+    <p>El cabezal de reproducción es un indicador de dónde está jugando el reproductor en el tiempo. El cabezal de reproducción está representado en la línea de tiempo de enfoque mediante una línea roja con un círculo rojo en la parte superior.</p>
+    <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/s-live-img/live-module/clipping/node18551-focus-timeline.png"/></figure>
+    <p>El área sombreada verde representa el tiempo de recorte seleccionado, donde los bordes también se pueden arrastrar. Tenga en cuenta que la interfaz de usuario preselecciona la duración del clip de acuerdo con el tiempo de recorte total disponible. Por ejemplo, en eventos de más de 10 minutos, los últimos 10 minutos serán preseleccionados, de manera similar, para 30 y 60 minutos.</p>
+  </section>
+  <section class="bcls-section">
+    <h2 id="context_timeline">Cronología del contexto</h2>
+    <p>La línea de tiempo del contexto es la línea de tiempo inferior en el editor de clips. La línea de tiempo del contexto muestra la duración completa del video, independientemente del nivel de zoom, el área seleccionada del clip, la ubicación del cabezal de reproducción y la ventana de enfoque actual. La línea de tiempo se indica con una línea roja.</p>
+    <figure class="bcls-figure"><img class="bcls-image--no-border" alt="" src="/assets/images/s-live-img/live-module/clipping/node18551-context-timeline.png"/></figure>
+  </section>
+  <section class="bcls-section">
+    <h2 id="zoom_buttons">Botones de zoom</h2>
+    <p>Los botones de zoom se utilizan para acercar o alejar la línea de tiempo de enfoque.</p>
+    <table class="bcls-table">
+      <thead class="bcls-table__head">
+        <tr>
+          <th>Botón</th>
+          <th>Descripción</th>
+        </tr>
+      </thead>
+      <tbody class="bcls-table__body">
+        <tr>
+          <td><img alt="" src="/assets/images/s-live-img/live-module/clipping/node18551-zoom-in-button.png"/></td>
+          <td>Amplía la línea de tiempo del enfoque. La ventana gráfica de enfoque (cuadro blanco) de la línea de tiempo de contexto mostrará el área del clip que se muestra en la línea de tiempo de enfoque.</td>
+        </tr>
+        <tr>
+          <td><img alt="" src="/assets/images/s-live-img/live-module/clipping/node18551-zoom-out-button.png"/></td>
+          <td>Reduce la línea de tiempo de enfoque. La ventana gráfica de enfoque (cuadro blanco) de la línea de tiempo de contexto mostrará el área del clip que se muestra en la línea de tiempo de enfoque.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+  <section class="bcls-section">
+    <h2 id="list_of_clips">Lista de clips</h2>
+    <p>Aparecerá una lista de clips debajo del editor de clips. Hacer clic <strong>Publicar en redes sociales</strong> para publicar el clip en uno de sus destinos sociales mediante Brightcove Social. Para obtener información sobre la publicación de videos con el módulo Social, consulte <a href="https://studio.support.brightcove.com/social/general/publishing-videos-social-media-platforms.html">Publicación de videos en plataformas de redes sociales</a>.
+       </p>
+  </section>
+  <section class="bcls-section">
+    <h2 id="Keyboard_shortcuts">Atajos de teclado</h2>
+    <p>Los atajos de teclado también se pueden usar para reproducir y crear un clip a partir del video. Están disponibles los siguientes atajos de teclado.</p>
+    <h3>Controles de reproducción</h3>
+    <table class="bcls-table">
+      <thead class="bcls-table__head">
+        <tr>
+          <th width="177">Presiona esta tecla</th>
+          <th width="781">Para hacer esto</th>
+        </tr>
+      </thead>
+      <tbody class="bcls-table__body">
+        <tr>
+          <td><code translate="No">space, k, down</code></td>
+          <td>Reproducir pausar</td>
+        </tr>
+        <tr>
+          <td><code translate="No">I</code></td>
+          <td>Ir a cue-in</td>
+        </tr>
+        <tr>
+          <td><code translate="No">O</code></td>
+          <td>Ir a cue-out</td>
+        </tr>
+        <tr>
+          <td><code translate="No">p</code></td>
+          <td>Reproducir vista previa</td>
+        </tr>
+        <tr>
+          <td><code translate="No">j, left</code></td>
+          <td>Saltar 1 fotograma hacia atrás</td>
+        </tr>
+        <tr>
+          <td><code translate="No">J, shift + left</code></td>
+          <td>Salta 1 segundo hacia atrás</td>
+        </tr>
+        <tr>
+          <td><code translate="No">l, right</code></td>
+          <td>Saltar 1 fotograma hacia adelante</td>
+        </tr>
+        <tr>
+          <td><code translate="No">L, shift + right</code></td>
+          <td>Salta 1 segundo hacia adelante</td>
+        </tr>
+        <tr>
+          <td><code translate="No">s</code></td>
+          <td>Saltar para empezar</td>
+        </tr>
+        <tr>
+          <td><code translate="No">e</code></td>
+          <td>Saltar al final / en vivo</td>
+        </tr>
+      </tbody>
+    </table>
+    <h3>Controles de la línea de tiempo</h3>
+    <table class="bcls-table">
+      <thead class="bcls-table__head">
+        <tr>
+          <th width="177">Presiona esta tecla</th>
+          <th width="781">Para hacer esto</th>
+        </tr>
+      </thead>
+      <tbody class="bcls-table__body">
+        <tr>
+          <td><code translate="No">i</code></td>
+          <td>Establecer cue-in</td>
+        </tr>
+        <tr>
+          <td><code translate="No">o</code></td>
+          <td>Establecer salida de señal</td>
+        </tr>
+        <tr>
+          <td><code translate="No">+</code></td>
+          <td>Acercarse</td>
+        </tr>
+        <tr>
+          <td><code translate="No">-</code></td>
+          <td>Disminuir el zoom</td>
+        </tr>
+        <tr>
+          <td><code translate="No">u</code></td>
+          <td>Desplazar la línea de tiempo al cabezal de reproducción</td>
+        </tr>
+        <tr>
+          <td><code translate="No">?</code></td>
+          <td>Abrir modal de ayuda</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+  <script src="https://players.brightcove.net/20318290001/experience_5a73630f7afd7a00101bc1b5/live.js"></script> 
+</article>
+
+<!-- <div class="col-sm-2 right-side-bar" style="display: inline-block;max-width: 20%;"> -->
+  
+  <nav class="right-side-nav" id="right_side_nav">
+    <h6 class="toc">Contenido de la página</h6>
+    <ul id="in_page_nav" class="list-none"></ul>
+  </nav>
+  
+<!-- </div> -->
+</div>
+</div>
+</div>
+<div class="page-content" style="background-color: rgb(1, 5, 14);">
+  <div class="container" style="width: 50%;">
+    <footer class="py-5">
+      <div class="row">
+        <div class="col-6 col-md">
+          <h5 class="h5-text">Soporte de Brightcove</h5>
+          <ul class="list-unstyled text-small" style="color: white ;">
+            <li><a class="a-text" href="https://status.brightcove.com">Estado del sistema</a></li>
+            <li><a class="a-text" href="https://supportportal.brightcove.com">Contactar con el soporte</a></li>
+            <li><a class="a-text" href="https://support.brightcove.com/search.html">Buscar toda la documentación</a></li>
+          </ul>
+        </div>
+      
+        <div class="col-6 col-md">
+          <h5 class="h5-text">Capacitación</h5>
+          <ul class="list-unstyled text-small">
+            <li><a class="a-text" href="https://studio.support.brightcove.com/get-started/training/online-training-courses.html">Cursos online</a></li>
+            <li><a class="a-text" href="https://studio.support.brightcove.com/get-started/training/register-training.html">Regístrese para un curso</a></li>
+            <li><a class="a-text" href="https://academy.brightcove.com/">Academia Brightcove</a></li>
+          </ul>
+        </div>
+      
+        <div class="col-6 col-md">
+          <h5 class="h5-text">Brightcove</h5>
+          <ul class="list-unstyled text-small">
+            <li><a class="a-text" href="https://www.brightcove.com">Brightcove.com</a></li>
+            <li><a class="a-text" href="https://community.brightcove.com/s/">Foro de la comunidad de Bright Spot</a></li>
+            <li><a class="a-text" href="https://support.brightcove.com/product-updates.html">Notas de lanzamiento del producto</a></li>
+            <li><a class="a-text" href="https://support.brightcove.com/doc-updates.html">Actualizaciones de documentación</a></li>
+          </ul>
+        </div>
+      </div>
+    
+      <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
+      <p>© Brightcove Inc. Todos los derechos reservados.</p>
+      <a class="a-text" href="https://www.brightcove.com/en/legal/privacy">Privacidad</a> <a class="a-text" href="https://www.brightcove.com/en/terms-and-conditions">Términos y condiciones</a>
+
+      <ul class="list-unstyled d-flex">
+        <li class="ms-3"><a href="https://www.linkedin.com/company/16439" title="LinkedIn" target="_blank" class="gf-social-linkedin" style="margin-right: 1rem;"><i data-feather="linkedin" style="color:#8E9093;height: 1.25rem;"></i></a></li>
+
+        <li class="ms-3"><a href="https://twitter.com/brightcove" title="Gorjeo" target="_blank" class="gf-social-twitter" style="margin-right: 1rem;"><i data-feather="twitter" style="color:#8E9093;height: 1.25rem;"></i></a></li>
+
+        <li class="ms-3"><a href="https://www.facebook.com/Brightcove" title="Facebook" target="_blank" class="gf-social-facebook"><i data-feather="facebook" style="color:#8E9093;height: 1.25rem;"></i></a></li>
+      </ul>
+      </div>
+    </footer>
+  </div>
+</div>
+
+
+<script translate="no">
   var searchBox = sajari.init({
     mode: "search-box",
     project: "1588255093746585379", // Set this to your project.
-    collection: "brightcove-documenation", // Set this to your collection.
+    collection: "brightcove-documentation", // Set this to your collection.
     instantPipeline: "autocomplete", // Pipeline used as you type
-    inputPlaceholder: "Search", // Input element placeholder
+    inputPlaceholder: "Search", // Input element placeholder,
+    styling: {
+      components: {
+        
+        input: {
+          container: {
+          backgroundColor: 'white',
+          }
+        
+        }
+      }
+    },
     maxSuggestions: 5, // Maximum number of suggestions to show
-    attachSearchBox: document.getElementById("nav-search-box") // DOM element to attach to
+      attachSearchBox: document.getElementById("nav-search-box") // DOM element to attach to
   });
-  
-    searchBox("sub", "pipeline.search-sent", function (_, query) {
-      window.location = "/search.html?q=" + encodeURIComponent(query.q);
-    });
+
   
 
-</script>
+
+    searchBox("sub", "pipeline.search-sent", function (_, query) {
+    window.location = "/search.html?q=" + encodeURIComponent(query.q);
+    });
+  
+  </script>
+  
+  <!-- Javascript -->          
+  <script src="/assets/s-site-assets-template-stylesheets/plugins/popper.min.js"></script>
+  <script src="/assets/s-site-assets-template-stylesheets/plugins/bootstrap/js/bootstrap.min.js"></script>  
+
+
+  <!-- Page Specific JS -->
+  <script src="/assets/s-site-assets-template-stylesheets/plugins/smoothscroll.min.js"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.8/highlight.min.js"></script> -->
+  <!-- <script src="/assets/s-site-assets-template-stylesheets/js/highlight-custom.js"></script>  -->
+  <script src="/assets/s-site-assets-template-stylesheets/plugins/simplelightbox/simple-lightbox.min.js"></script>      
+  <script src="/assets/s-site-assets-template-stylesheets/plugins/gumshoe/gumshoe.polyfills.min.js"></script> 
+  <script src="/assets/s-site-assets-template-stylesheets/js/docs.js"></script> 
+
+  <!-- original footer components -->
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  <script src="https://support.brightcove.com/site-assets/js/site/https-fix.js"></script>
-  <script src="https://support.brightcove.com/site-assets/js/site/setDate.js"></script>
+
+  <script src="/assets/s-site-assets-scripts/https-fix.js"></script>
+  <script src="/assets/s-site-assets-scripts/setDate.js"></script>
+  <script src="/assets/s-site-assets-scripts/selector.js"></script>
   
-  <script src="https://support.brightcove.com/site-assets/js/site/prism.js"></script>
+  <script src="/assets/s-site-assets-scripts/prism.js"></script>
+  <script src="/assets/s-site-assets-scripts/prism-normalize.js"></script>
   
-  <script src="https://support.brightcove.com/site-assets/js/site/site.js"></script>
-  <script src="https://support.brightcove.com/site-assets/js/site/tabs.js"></script>
-  <script src="https://support.brightcove.com/site-assets/js/site/toc.js"></script>
+  <script src="/assets/s-site-assets-scripts/site.js"></script>
+  <script src="https://support.brightcove.com/site-assets/js/learning-paths/learning-paths.js"></script>
+  <!-- <script src="/assets/s-site-assets-scripts/site.js"></script> -->
+  <script src="/assets/s-site-assets-scripts/tabs.js"></script>
+  
+  <script src="/assets/s-site-assets-scripts/toc-new-template.js"></script>
+  
   <script src="/assets/js/sites_nav.js"></script>
-  <script src="https://support.brightcove.com/site-assets/js/site/bcls-utils.js"></script>
-  <script src="https://support.brightcove.com/site-assets/js/site/local-link-fix.js"></script>
+  <script src="/assets/s-site-assets-scripts/bcls-utils.js"></script>
+  <script src="/assets/s-site-assets-scripts/local-link-fix.js"></script>
+  <script src="/assets/s-site-assets-scripts/sajari-reindex.js"></script>
   <script src="/assets/js/feedback.js"></script>
   
-  <script src="/assets/js/sajari-search-foot.js"></script>
+  <script src="/assets/s-site-assets-scripts/sajari-search-foot.js"></script>
   
+  <script translate="no">
+    feather.replace()
+  </script>
   <!-- <script src="/assets/js/sajari-index.js"></script> -->
-  <style>
+  <script src="/assets/s-site-assets-scripts/in-app.js"></script>
+  <style translate="no">
     a.sj-paginator__page-number.sj-paginator__page-number--current.css-so0ov7 {
       background-color: lightblue;
     }
@@ -951,6 +1329,5 @@ function doGTranslate(lang_pair) {if(lang_pair.value)lang_pair=lang_pair.value;i
     }
     </style>
 
-</body>
-
-</html>
+  </body>
+</html> 
